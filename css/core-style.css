@@ -482,83 +482,6 @@ https://templatemo.com/tm-538-digital-trend
 
 
 
-  /*---------------------------------------
-      BLOG            
-  -----------------------------------------*/
-
-  .blog-header {
-    border-radius: var(--border-radius-small);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .blog-header img {
-    border-radius: var(--border-radius-small);
-    display: block;
-  }
-
-  .blog-header-info {
-    background: linear-gradient(transparent,rgba(0,0,0,0.95));
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    padding: 2em;
-  }
-
-  .blog-header-info h3 {
-    max-width: 80%;
-  }
-
-  .blog-header-info a {
-    color: var(--white-color);
-  }
-
-  .blog-header-info a:hover {
-    color: var(--secondary-color);
-  }
-
-  .blog-sidebar img {
-    border-radius: var(--border-radius-small);
-    width: 159px;
-    margin-right: 22px;
-  }
-
-  .blog-sidebar h3 {
-    font-size: 18px;
-  }
-
-
-
-  /*---------------------------------------
-     CONTACT              
-  -----------------------------------------*/
-
-  .newsletter-form .form-control,
-  .contact-form .form-control {
-    box-shadow: none;
-    background: var(--project-bg);
-    border: 0;
-    padding: 1.7em 1.3em;
-    margin: 14px 0;
-  }
-
-  .newsletter-form button,
-  .contact-form #submit-button {
-    background: var(--primary-color);
-    border-radius: var(--border-radius-large);
-    color: var(--white-color);
-    cursor: pointer;
-    font-size: var(--p-font-size);
-    line-height: 0px;
-    padding: 1.5em 1.3em;
-  }
-
-  .newsletter-form button {
-    background: var(--secondary-color);
-  }
-
-
 
   /*---------------------------------------
      FOOTER              
@@ -711,3 +634,6 @@ https://templatemo.com/tm-538-digital-trend
   }
 
 
+ 
+ 
+  
