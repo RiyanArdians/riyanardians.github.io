@@ -1,254 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wedding of Riyan & Amelia</title>
 
-     <title>POWERFUL</title>
-<!--
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-DIGITAL TREND
+  <style>
+    :root {
+      --bg-color: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --primary-color: #1A3C34; /* Emerald Green */
+      --accent-color: #C5A880;  /* Soft Gold */
+      --text-dark: #2B2B2B;
+      --text-muted: #666666;
+    }
 
-https://templatemo.com/tm-538-digital-trend
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-color); color: var(--text-dark); line-height: 1.6; }
+    .font-serif { font-family: 'Cormorant Garamond', serif; }
+    .hidden { display: none !important; }
 
--->
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-     <meta name="description" content="">
-     <meta name="keywords" content="">
-     <meta name="author" content="">
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    /* Cover Section */
+    .cover-container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(26, 60, 52, 0.85)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
+      padding: 20px;
+      text-align: center;
+    }
+    .envelope-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 25px;
+      border-radius: 16px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .guest-name-box {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin: 15px 0 25px;
+      padding: 10px;
+      background: #F0F4F2;
+      border-radius: 8px;
+    }
 
-     <link rel="shortcut icon" href="images/project/powerf.png" type="image/png">
-     <link rel="stylesheet" href="css/bootstrap.min.css">
-     <link rel="stylesheet" href="css/font-awesome.min.css">
-     <link rel="stylesheet" href="css/aos.css">
-     <link rel="stylesheet" href="css/owl.carousel.min.css">
-     <link rel="stylesheet" href="css/owl.theme.default.min.css">
-     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-     <!-- Google fonts-->
-     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #FFF;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { background-color: var(--accent-color); }
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      margin: 5px;
+      font-size: 0.9rem;
+    }
 
-     <!-- MAIN CSS -->
-     <link rel="stylesheet" href="css/core-style.css">
+    /* Music Floating Button */
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
 
-     <!-- POPUP CSS -->
-     <link rel="stylesheet" href="css/popup.css">
+    /* Layout Sections */
+    .section-container { padding: 50px 20px; max-width: 700px; margin: 0 auto; text-align: center; }
+    .bg-light { background-color: #F4F6F5; }
+    .section-title { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 20px; }
 
+    /* Couple Section */
+    .couple-wrapper { margin-top: 30px; }
+    .couple-card { margin: 20px 0; }
+    .couple-card h2 { font-size: 2rem; color: var(--primary-color); }
+    .ampersand { font-size: 2.5rem; color: var(--accent-color); margin: 10px 0; }
 
+    /* Countdown Grid */
+    .countdown-grid { display: flex; justify-content: center; gap: 12px; margin: 25px 0; }
+    .time-box { background: var(--primary-color); color: #FFF; padding: 10px; border-radius: 8px; min-width: 60px; }
+    .time-box span { font-size: 1.4rem; font-weight: bold; display: block; }
+    .time-box p { font-size: 0.7rem; text-transform: uppercase; }
 
+    /* Event Cards */
+    .event-card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+    /* Gallery Grid */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 20px; }
+    .gallery-grid img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; }
+
+    /* Bank Card & RSVP */
+    .bank-card, .rsvp-form { background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; }
+    .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #DDD; border-radius: 8px; font-family: inherit; }
+
+    footer { text-align: center; padding: 30px 20px; background: var(--primary-color); color: #FFF; }
+  </style>
 </head>
 <body>
 
-     <!-- MENU BAR -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-              POWERFUL
-            </a>
+  <!-- Audio Background -->
+  <audio id="bg-music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+  <!-- Control Button Music -->
+  <button id="music-control" class="music-btn hidden">
+    <i class="fa-solid fa-compact-disc"></i>
+  </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link smoothScroll">Poster</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#project" class="nav-link smoothScroll">Improvement</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link contact">About Us</a>
-                    </li>
-                </ul>
-            </div>
+  <!-- FRAME 1: COVER AMPLOP -->
+  <section id="cover-section" class="cover-container">
+    <div class="envelope-card">
+      <p style="color: var(--accent-color); letter-spacing: 2px;">THE WEDDING OF</p>
+      <h1 class="font-serif" style="font-size: 2.5rem; color: var(--primary-color); margin: 10px 0;">Riyan & Amelia</h1>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+      <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
+      <button id="btn-open" class="btn-primary">
+        <i class="fa-solid fa-envelope-open"></i> Buka Undangan
+      </button>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content" class="hidden">
+
+    <!-- FRAME 2: PASANGAN PENGANTIN -->
+    <section class="section-container">
+      <p style="font-style: italic; color: var(--text-muted); font-size: 0.95rem;">
+        "Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga berkenan mempertemukan kami dalam ikatan suci."
+      </p>
+
+      <div class="couple-wrapper">
+        <div class="couple-card">
+          <h2 class="font-serif">Riyan Ardiansyah</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Putra dari Bapak Nama Ayah & Ibu Nama Ibu</p>
         </div>
-    </nav>
-
-
-     <!-- HERO -->
-     <section class="hero hero-bg d-flex justify-content-center align-items-center">
-               <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-6 col-md-10 col-12 d-flex flex-column justify-content-center align-items-center">
-                              <div class="hero-text">
-
-                                   <h1 class="text-white" data-aos="fade-up">Full Action, Full Innovation, Full Senyum Sayang</h1>
-
-                              </div>
-                        </div>
-
-                        <div class="col-lg-6 col-12">
-                          <div class="hero-image" data-aos="fade-up" data-aos-delay="300">
-
-                            <img src="images/project/about/logop.png" class="img-fluid" alt="logob">
-                          </div>
-                        </div>
-
-                    </div>
-               </div>
-     </section>
-
-
-     <!-- ABOUT -->
-     <section class="about section-padding pb-0" id="about">
-          <div class="container">
-               <div class="row">
-
-                    <div class="col-lg-7 mx-auto col-md-10 col-12">
-                         <div class="about-info">
-
-                              <h2 class="mb-4" data-aos="fade-up">We are <strong>POWERFUL</strong> From Quality Improvement Team</h2>
-                              <img src="images/project/about/posterpow.png" class="img-fluid" alt="POSTER">
-                              <p class="mb-0" data-aos="fade-up">
-                              <br></p>
-                         </div> 
-                    </div>
-
-               </div>
-          </div>
-     </section>
-
-
-     <!-- PROJECT -->
-     <section class="project section-padding" id="project">
-          <div class="container-fluid">
-               <div class="row">
-
-                    <div class="col-lg-12 col-12">
-
-                        <h2 class="mb-5 text-center" data-aos="fade-up">
-                            <strong>IMPROVEMENT</strong>
-                        </h2>
-
-                         <div class="owl-carousel owl-theme" id="project-slide">
-                              <div class="item project-wrapper" data-aos="fade-up" data-aos-delay="100">
-                                   <img src="images/project/motor.png" class="img-fluid" alt="project image">
-
-                                   <div class="project-info">
-                                        <small>Mesin</small>
-
-                                        <h3>
-                                             <a href="motor.html">
-                                                  <span>Motor Bottle Separator</span>
-                                                  <i class="fa fa-angle-right project-icon"></i>
-                                             </a>
-                                        </h3>
-                                   </div>
-                              </div>
-
-                              <div class="item project-wrapper" data-aos="fade-up">
-                                   <img src="images/project/jembatan.png" class="img-fluid" alt="project image">
-
-                                   <div class="project-info">
-                                        <small>Mesin</small>
-
-                                        <h3>
-                                             <a href="jembatan.html">
-                                                  <span>Jembatan Penghubung Conveyor</span>
-                                                  <i class="fa fa-angle-right project-icon"></i>
-                                             </a>
-                                        </h3>
-                                   </div>
-                              </div>
-
-                              <div class="item project-wrapper" data-aos="fade-up">
-                                   <img src="images/project/jigmar.png" class="img-fluid" alt="project image">
-
-                                   <div class="project-info">
-                                        <small>Mesin</small>
-
-                                        <h3>
-                                             <a href="jig.html">
-                                                  <span>Jig Mesin Labeling</span>
-                                                  <i class="fa fa-angle-right project-icon"></i>
-                                             </a>
-                                        </h3>
-                                   </div>
-                              </div>
-
-                              <div class="item project-wrapper" data-aos="fade-up">
-                                   <img src="images/project/ppm.png" class="img-fluid" alt="project image">
-
-                                   <div class="project-info">
-                                        <small>mesin</small>
-
-                                        <h3>
-                                             <a href="ppm.html">
-                                                  <span>Display PPM</span>
-                                                  <i class="fa fa-angle-right project-icon"></i>
-                                             </a>
-                                        </h3>
-                                   </div>
-                              </div>
-                         
-                              <div class="item project-wrapper" data-aos="fade-up">
-                                   <img src="images/project/newrep rev.jpg" class="img-fluid" alt="project image">
-
-                                   <div class="project-info">
-                                        <small>Hasil Improvement</small>
-
-                                        <h3>
-                                             <a href="hasil.html">
-                                                  <span>Periksa Hasil</span>
-                                                  <i class="fa fa-angle-right project-icon"></i>
-                                             </a>
-                                        </h3>
-                                   </div>
-                              </div>
-                        
-
-                              <!-- <div class="item project-wrapper" data-aos="fade-up">
-                                   <img src="images/project/pk.jpg" class="img-fluid" alt="project image">
-
-                                   <div class="project-info">
-                                        <small>Mesin</small>
-
-                                        <h3>
-                                             <a href="postkerja.html">
-                                                  <span>Pos Kerja</span>
-                                                  <i class="fa fa-angle-right project-icon"></i>
-                                             </a>
-                                        </h3>
-                                   </div>
-                              </div> -->
-
-
-                         </div>
-                    </div>
-
-               </div>
-          </div>
-     </section>
-
-
-     <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-50 mx-lg-auto col-md-15 col-20">
-            <h2 class="text-white" data-aos="fade-up" data-aos-delay="100">Full <strong>Action</strong>, Full<strong> Innovation</strong>, <strong>Full</strong> Senyum Sayang</h2>
-          </div>
-          <div class="col-lg-4 mx-lg-auto text-center col-md-8 col-12" data-aos="fade-up" data-aos-delay="400">
-            <p class="copyright-text">Copyright &copy; 2024 POWERFUL
-            <br>
-            <a rel="nofollow noopener" href="https://www.instagram.com/ardian.ryn">Created by Riyan Ardiansyah</a></p>
-          </div>
+        <div class="ampersand font-serif">&</div>
+        <div class="couple-card">
+          <h2 class="font-serif">Amelia Dita Yanti</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Putri dari Bapak Nama Ayah & Ibu Nama Ibu</p>
         </div>
       </div>
+    </section>
+
+    <!-- FRAME 3: EVENT & MAPS -->
+    <section class="section-container bg-light">
+      <h2 class="section-title font-serif">Waktu & Lokasi Acara</h2>
+      
+      <!-- Countdown -->
+      <div id="countdown" class="countdown-grid">
+        <div class="time-box"><span id="days">00</span><p>Hari</p></div>
+        <div class="time-box"><span id="hours">00</span><p>Jam</p></div>
+        <div class="time-box"><span id="minutes">00</span><p>Menit</p></div>
+        <div class="time-box"><span id="seconds">00</span><p>Detik</p></div>
+      </div>
+
+      <!-- Detail Card -->
+      <div class="event-card">
+        <h3 class="font-serif" style="color: var(--primary-color); font-size: 1.5rem;">Akad Nikah & Resepsi</h3>
+        <p style="margin-top: 10px;"><i class="fa-regular fa-calendar"></i> Sabtu, 12 Desember 2026</p>
+        <p><i class="fa-regular fa-clock"></i> 08.00 WIB - Selesai</p>
+        <p><i class="fa-solid fa-location-dot"></i> Lokasi Gedung / Kediaman Mempelai</p>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <a href="https://calendar.google.com" target="_blank" class="btn-outline">
+          <i class="fa-solid fa-calendar-plus"></i> Simpan ke Kalender
+        </a>
+        <a href="https://maps.google.com" target="_blank" class="btn-outline">
+          <i class="fa-solid fa-map-location-dot"></i> Petunjuk Arah (Maps)
+        </a>
+      </div>
+    </section>
+
+    <!-- FRAME 4: GALERI FOTO -->
+    <section class="section-container">
+      <h2 class="section-title font-serif">Momen Bahagia</h2>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80" alt="Prewedding 1">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80" alt="Prewedding 2">
+        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=500&q=80" alt="Prewedding 3">
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=500&q=80" alt="Prewedding 4">
+      </div>
+    </section>
+
+    <!-- FRAME 5: AMPLOP DIGITAL -->
+    <section class="section-container bg-light">
+      <h2 class="section-title font-serif">Tanda Kasih</h2>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Doa restu Anda merupakan karunia terindah. Namun jika ingin memberi hadiah, dapat melalui rekening berikut:</p>
+      
+      <div class="bank-card">
+        <h3 style="color: var(--primary-color);">Bank BCA</h3>
+        <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-bca">1234567890</p>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">a.n. Riyan Ardiansyah</p>
+        <button onclick="copyText('rekening-bca')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
+          <i class="fa-regular fa-copy"></i> Salin Nomor Rekening
+        </button>
+      </div>
+    </section>
+
+    <!-- FRAME 6: RSVP & UCAPAN -->
+    <section class="section-container">
+      <h2 class="section-title font-serif">Buku Tamu & RSVP</h2>
+      <form id="rsvp-form" class="rsvp-form" onsubmit="event.preventDefault(); alert('Terima kasih atas konfirmasi dan ucapan Anda!');">
+        <input type="text" id="input-nama" placeholder="Nama Anda" required>
+        <select required>
+          <option value="">-- Konfirmasi Kehadiran --</option>
+          <option value="hadir">Hadir</option>
+          <option value="tidak">Tidak Dapat Hadir</option>
+        </select>
+        <textarea rows="4" placeholder="Ucapan & Doa Restu"></textarea>
+        <button type="submit" class="btn-primary">Kirim Ucapan</button>
+      </form>
+    </section>
+
+    <footer>
+      <p class="font-serif" style="font-size: 1.5rem;">Riyan & Amelia</p>
+      <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.8;">Terima Kasih Atas Doa & Restu Anda</p>
     </footer>
 
+  </main>
 
-     <!-- SCRIPTS -->
-     <script src="js/jquery.min.js"></script>
-     <script src="js/bootstrap.min.js"></script>
-     <script src="js/aos.js"></script>
-     <script src="js/owl.carousel.min.js"></script>
-     <script src="js/smoothscroll.js"></script>
-     <script src="js/custom.js"></script>
+  <script>
+    // 1. Ambil Nama Tamu dari URL (?to=Nama+Tamu)
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('to');
+    if (guestName) {
+      document.getElementById('guest-name').innerText = guestName;
+      document.getElementById('input-nama').value = guestName;
+    }
 
+    // 2. Buka Undangan & Play Music
+    const btnOpen = document.getElementById('btn-open');
+    const coverSection = document.getElementById('cover-section');
+    const mainContent = document.getElementById('main-content');
+    const bgMusic = document.getElementById('bg-music');
+    const musicControl = document.getElementById('music-control');
+
+    btnOpen.addEventListener('click', () => {
+      coverSection.classList.add('hidden');
+      mainContent.classList.remove('hidden');
+      musicControl.classList.remove('hidden');
+      bgMusic.play();
+    });
+
+    // Toggle Music
+    let isPlaying = true;
+    musicControl.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicControl.innerHTML = '<i class="fa-solid fa-play"></i>';
+      } else {
+        bgMusic.play();
+        musicControl.innerHTML = '<i class="fa-solid fa-compact-disc"></i>';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // 3. Countdown Timer (12 Desember 2026)
+    const eventDate = new Date("Dec 12, 2026 08:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance > 0) {
+        document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+      }
+    }, 1000);
+
+    // 4. Salin Rekening
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Nomor rekening berhasil disalin: " + text);
+      });
+    }
+  </script>
 </body>
 </html>
