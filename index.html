@@ -598,36 +598,23 @@
     }
   }
 
-  // =========================================================
-  // 7. PUBLIC CLOUD DATABASE (SINKRON DI HP & LAPTOP BEDA URL)
-  // =========================================================
-  const CLOUD_API_URL = 'https://api.keyvalue.xyz/riyan_amelia_wedding_wishes_db_2026/wishes';
+// Tempelkan URL Google Web App Anda di bawah ini:
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbycF4BPPtW_P0LCh2e9sBJoxCnPX-PuW1ZlIsXmuBdW1n8fLWz12V_ocNW73D0sRLPs/exec';
+
   const rsvpForm = document.getElementById('rsvp-form');
   const wishesList = document.getElementById('wishes-list');
   const wishesCount = document.getElementById('wishes-count');
   const btnSubmit = document.getElementById('btn-submit-ucapan');
 
-  // Load Data dari Cloud Publik
-  async function fetchCloudWishes() {
+  // Ambil data ucapan secara terpusat dari Google Sheet
+  async function loadWishesFromGoogleSheet() {
     try {
-      const response = await fetch('https://dummyjson.com/c/riyan-amelia-wishes');
-      let wishes = await getLocalWishes();
+      const res = await fetch(GOOGLE_SCRIPT_URL);
+      const wishes = await res.json();
       renderWishesUI(wishes);
     } catch (e) {
-      renderWishesUI(getLocalWishes());
+      wishesCount.innerText = "💬 Gagal memuat data ucapan.";
     }
-  }
-
-  function getLocalWishes() {
-    try {
-      return JSON.parse(localStorage.getItem('local_wishes_backup') || '[]');
-    } catch(e) {
-      return [];
-    }
-  }
-
-  function saveLocalWishes(wishes) {
-    localStorage.setItem('local_wishes_backup', JSON.stringify(wishes));
   }
 
   function renderWishesUI(wishes) {
@@ -643,7 +630,6 @@
       const box = document.createElement('div');
       box.className = 'wish-box';
       box.innerHTML = `
-        <button class="btn-delete-wish" title="Hapus ucapan ini" onclick="deleteWish(${item.id})">✖</button>
         <div class="wish-header">
           <span class="wish-author">${item.name}</span>
           <span class="wish-status">${item.status}</span>
@@ -654,43 +640,38 @@
     });
   }
 
-  // Kirim Ucapan
-  rsvpForm.addEventListener('submit', (e) => {
+  // Kirim ucapan dari HP/Laptop ke Google Sheet
+  rsvpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     btnSubmit.innerText = 'Mengirim...';
+    btnSubmit.disabled = true;
 
     const name = document.getElementById('input-nama').value;
     const status = document.getElementById('input-kehadiran').value;
     const text = document.getElementById('input-ucapan').value;
 
-    const newWish = {
-      id: Date.now(),
-      name: name,
-      status: status,
-      text: text
-    };
+    const payload = { name, status, text };
 
-    let wishes = getLocalWishes();
-    wishes.unshift(newWish);
-    saveLocalWishes(wishes);
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+      
+      document.getElementById('input-ucapan').value = '';
+      alert('Terima kasih! Ucapan Anda telah tersimpan.');
+      loadWishesFromGoogleSheet();
+    } catch (e) {
+      alert('Gagal mengirim ucapan, coba lagi nanti.');
+    }
 
-    renderWishesUI(wishes);
-    document.getElementById('input-ucapan').value = '';
     btnSubmit.innerText = 'Kirim Ucapan';
-    alert('Terima kasih! Ucapan Anda telah berhasil terikirim.');
+    btnSubmit.disabled = false;
   });
 
-  // Hapus Ucapan
-  window.deleteWish = function(id) {
-    if (confirm('Apakah Anda yakin ingin menghapus ucapan ini?')) {
-      let wishes = getLocalWishes().filter(item => item.id !== id);
-      saveLocalWishes(wishes);
-      renderWishesUI(wishes);
-    }
-  };
-
-  // Panggil Data Saat Pertama Kali Dibuka
-  fetchCloudWishes();
+  // Muat data saat halaman dibuka & otomatis update setiap 10 detik
+  loadWishesFromGoogleSheet();
+  setInterval(loadWishesFromGoogleSheet, 10000);
 </script>
 
 </body>
