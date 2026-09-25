@@ -25,7 +25,7 @@
     .hidden { display: none !important; }
 
     /* ========================================================= */
-    /* STRUKTUR AMPLOP & KERTAS UNDANGAN                         */
+    /* STRUKTUR & ANIMASI POP-UP SURAT TERBUKA                   */
     /* ========================================================= */
     .cover-overlay {
       position: fixed;
@@ -33,7 +33,7 @@
       background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(26, 60, 52, 0.85)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       z-index: 9999;
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
       padding: 20px;
     }
 
@@ -42,11 +42,10 @@
       position: relative;
       width: 320px;
       height: 200px;
-      background-color: #112d27;
+      background-color: #112d27; /* Kantong Dalam Amplop */
       border-radius: 0 0 10px 10px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
       margin-bottom: 25px;
-      pointer-events: none; /* Mencegah blokir klik */
     }
 
     /* Flap Atas Terbuka */
@@ -78,7 +77,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+      /* Transisi Smooth untuk Efek Pop-up Naik */
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Kantong Depan Amplop */
@@ -103,12 +103,8 @@
       border-radius: 6px;
     }
 
-    /* Tombol Buka Undangan (Dipastikan selalu di posisi paling atas) */
-    .btn-open-container {
-      position: relative;
-      z-index: 999;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
+    /* Tombol Aksi */
+    .btn-open-container { z-index: 10; }
 
     .btn-primary {
       background-color: var(--accent-color);
@@ -131,34 +127,17 @@
       transform: translateY(-2px);
     }
 
-    /* ========================================================= */
-    /* URUTAN TAHAP ANIMASI CINEMATIC                            */
-    /* ========================================================= */
-    
-    .btn-open-container.fade-btn {
-      opacity: 0;
-      transform: translateY(20px);
-      pointer-events: none;
-    }
-
-    .envelope-card-insert.step-1-up {
-      transform: translateY(-120px);
+    /* --- CLASS ANIMASI AKTIF --- */
+    /* 1. Kartu terangkat naik keluar dari amplop */
+    .envelope-card-insert.popup-active {
+      transform: translateY(-100px) scale(1.05);
       z-index: 5;
     }
 
-    .envelope-card-insert.step-2-center {
-      transform: translateY(15px);
-      z-index: 10;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-
-    .envelope-card-insert.step-3-zoom {
-      transform: translateY(15px) scale(3.5);
-      opacity: 0;
-    }
-
+    /* 2. Layar cover memudar & bergeser ke atas */
     .cover-overlay.fade-out {
       opacity: 0;
+      transform: translateY(-100%);
       pointer-events: none;
     }
 
@@ -174,6 +153,13 @@
       text-decoration: none;
       margin: 5px;
       font-size: 0.9rem;
+    }
+
+    .music-btn {
+      position: fixed; top: 20px; right: 20px; z-index: 999;
+      width: 45px; height: 45px; border-radius: 50%;
+      background: var(--primary-color); color: #FFF; border: none;
+      cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .section-container { padding: 50px 20px; max-width: 700px; margin: 0 auto; text-align: center; }
@@ -202,12 +188,24 @@
 </head>
 <body>
 
+  <!-- Audio Background -->
+  <audio id="bg-music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Control Button Music -->
+  <button id="music-control" class="music-btn hidden">
+    <i class="fa-solid fa-compact-disc"></i>
+  </button>
+
   <!-- FRAME 1: AMPLOP TERBUKA OVERLAY -->
   <div id="cover-overlay" class="cover-overlay">
     
-    <div id="envelope-box" class="envelope-box">
+    <div class="envelope-box">
+      <!-- Flap Atas Terbuka -->
       <div class="envelope-top-flap"></div>
       
+      <!-- Kartu di Dalam Undangan -->
       <div id="card-insert" class="envelope-card-insert">
         <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING OF</p>
         <h1 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color); margin: 4px 0;">Riyan & Amelia</h1>
@@ -215,10 +213,12 @@
         <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
       </div>
 
+      <!-- Kantong Depan Amplop -->
       <div class="envelope-pocket"></div>
     </div>
 
-    <div id="btn-container" class="btn-open-container">
+    <!-- Tombol Buka Undangan -->
+    <div class="btn-open-container">
       <button id="btn-open" class="btn-primary">
         <i class="fa-solid fa-envelope-open"></i> Buka Undangan
       </button>
@@ -238,12 +238,12 @@
       <div class="couple-wrapper">
         <div class="couple-card">
           <h2 class="font-serif">Riyan Ardiansyah</h2>
-          <p style="font-size: 0.9rem; color: var(--text-muted);">Putra dari Bapak Sunarya & Ibu Huriyah</p>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Putra dari Bapak Nama Ayah & Ibu Nama Ibu</p>
         </div>
         <div class="ampersand font-serif">&</div>
         <div class="couple-card">
           <h2 class="font-serif">Amelia Dita Yanti</h2>
-          <p style="font-size: 0.9rem; color: var(--text-muted);">Putri dari Bapak Tarmidi & Ibu Triyanti</p>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Putri dari Bapak Nama Ayah & Ibu Nama Ibu</p>
         </div>
       </div>
     </section>
@@ -252,6 +252,7 @@
     <section class="section-container bg-light">
       <h2 class="section-title font-serif">Waktu & Lokasi Acara</h2>
       
+      <!-- Countdown -->
       <div id="countdown" class="countdown-grid">
         <div class="time-box"><span id="days">00</span><p>Hari</p></div>
         <div class="time-box"><span id="hours">00</span><p>Jam</p></div>
@@ -259,18 +260,19 @@
         <div class="time-box"><span id="seconds">00</span><p>Detik</p></div>
       </div>
 
+      <!-- Detail Card -->
       <div class="event-card">
         <h3 class="font-serif" style="color: var(--primary-color); font-size: 1.5rem;">Akad Nikah & Resepsi</h3>
-        <p style="margin-top: 10px;"><i class="fa-regular fa-calendar"></i> Minggu, 06 Desember 2026</p>
-        <p><i class="fa-regular fa-clock"></i> 08.00 WIB - 12.00</p>
-        <p><i class="fa-solid fa-location-dot"></i> Warung D Empang</p>
+        <p style="margin-top: 10px;"><i class="fa-regular fa-calendar"></i> Sabtu, 12 Desember 2026</p>
+        <p><i class="fa-regular fa-clock"></i> 08.00 WIB - Selesai</p>
+        <p><i class="fa-solid fa-location-dot"></i> Lokasi Gedung / Kediaman Mempelai</p>
       </div>
 
       <div style="margin-top: 20px;">
         <a href="https://calendar.google.com" target="_blank" class="btn-outline">
           <i class="fa-solid fa-calendar-plus"></i> Simpan ke Kalender
         </a>
-        <a href="https://share.google/yrbQ9B28duVQf9wQB" target="_blank" class="btn-outline">
+        <a href="https://maps.google.com" target="_blank" class="btn-outline">
           <i class="fa-solid fa-map-location-dot"></i> Petunjuk Arah (Maps)
         </a>
       </div>
@@ -292,22 +294,11 @@
       <h2 class="section-title font-serif">Tanda Kasih</h2>
       <p style="font-size: 0.9rem; color: var(--text-muted);">Doa restu Anda merupakan karunia terindah. Namun jika ingin memberi hadiah, dapat melalui rekening berikut:</p>
       
-      <!-- Bank Card Riyan -->
       <div class="bank-card">
-        <h3 style="color: var(--primary-color);">Bank Mandiri</h3>
-        <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-riyan">1760001646239</p>
+        <h3 style="color: var(--primary-color);">Bank BCA</h3>
+        <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-bca">1234567890</p>
         <p style="font-size: 0.85rem; color: var(--text-muted);">a.n. Riyan Ardiansyah</p>
-        <button onclick="copyText('rekening-riyan')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
-          <i class="fa-regular fa-copy"></i> Salin Nomor Rekening
-        </button>
-      </div>
-
-      <!-- Bank Card Amelia -->
-      <div class="bank-card">
-        <h3 style="color: var(--primary-color);">Bank Mandiri</h3>
-        <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-amelia">1550013683548</p>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">a.n. Amelia Dita Yanti</p>
-        <button onclick="copyText('rekening-amelia')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
+        <button onclick="copyText('rekening-bca')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
           <i class="fa-regular fa-copy"></i> Salin Nomor Rekening
         </button>
       </div>
@@ -344,34 +335,29 @@
       document.getElementById('input-nama').value = guestName;
     }
 
-    // 2. TIMELINE ANIMASI CINEMATIC 3 TAHAP
+    // 2. Animasi Pop-Up Surat Terbuka & Play Music
     const btnOpen = document.getElementById('btn-open');
-    const btnContainer = document.getElementById('btn-container');
     const cardInsert = document.getElementById('card-insert');
     const coverOverlay = document.getElementById('cover-overlay');
+    const bgMusic = document.getElementById('bg-music');
+    const musicControl = document.getElementById('music-control');
 
     btnOpen.addEventListener('click', () => {
-      // Hilangkan tombol Buka Undangan
-      btnContainer.classList.add('fade-btn');
+      // Putar musik latar
+      bgMusic.play();
+      musicControl.classList.remove('hidden');
 
-      // TAHAP 1 (0ms): Kertas ditarik NAIK ke atas keluar dari kantong amplop
-      cardInsert.classList.add('step-1-up');
+      // Step 1: Kartu terangkat naik keluar dari kantong amplop
+      cardInsert.classList.add('popup-active');
 
-      // TAHAP 2 (600ms): Kertas turun ke TENGAH menutupi bagian depan amplop
+      // Step 2: Beri jeda 800ms agar mata melihat kartu naik, baru overlay memudar
       setTimeout(() => {
-        cardInsert.classList.remove('step-1-up');
-        cardInsert.classList.add('step-2-center');
-      }, 600);
-
-      // TAHAP 3 (1200ms): Kertas MEMBESAR (Zoom-In) ke layar & sampul memudar
-      setTimeout(() => {
-        cardInsert.classList.add('step-3-zoom');
         coverOverlay.classList.add('fade-out');
-      }, 1200);
+      }, 800);
     });
 
-    // 3. Countdown Timer (06 Desember 2026)
-    const eventDate = new Date("Dec 6, 2026 08:00:00").getTime();
+    // 3. Countdown Timer (12 Desember 2026)
+    const eventDate = new Date("Dec 12, 2026 08:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
       const distance = eventDate - now;
