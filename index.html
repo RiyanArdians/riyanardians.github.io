@@ -52,7 +52,7 @@
       background: linear-gradient(rgba(26, 60, 52, 0.88), rgba(26, 60, 52, 0.88)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       z-index: 9999;
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
       padding: 20px;
     }
 
@@ -95,30 +95,43 @@
 
     .btn-open-container { position: relative; z-index: 999; }
 
+    /* TOMBOL DENGAN EFEK CAHAYA (SHINE EFFECT) */
     .btn-primary {
       background-color: var(--accent-color); color: #1A3C34; border: none;
       padding: 12px 28px; font-size: 0.95rem; font-weight: 600;
       border-radius: 30px; cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25); transition: all 0.3s ease;
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      position: relative; overflow: hidden;
+      position: relative; overflow: hidden; z-index: 1;
     }
+
+    .btn-primary::after {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255,255,255,0.45), transparent);
+      transform: rotate(30deg); animation: shine 2.5s infinite;
+    }
+    @keyframes shine { 0% { transform: translateX(-100%) rotate(30deg); } 100% { transform: translateX(100%) rotate(30deg); } }
 
     .btn-primary:hover { background-color: #ffffff; transform: translateY(-2px); }
 
-    /* STEPS ANIMASI SURAT */
+    /* STEPS ANIMASI SURAT DAN MENGILANGKAN OVERLAY SECARA TOTAL */
     .btn-open-container.fade-btn { opacity: 0; transform: translateY(20px); pointer-events: none; }
     .envelope-card-insert.step-1-up { transform: translateY(-110px); z-index: 5; }
     .envelope-card-insert.step-2-center { transform: translateY(15px); z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
     .envelope-card-insert.step-3-zoom { transform: translateY(15px) scale(3.5); opacity: 0; }
-    .cover-overlay.fade-out { opacity: 0; pointer-events: none; }
+    
+    .cover-overlay.fade-out { 
+      opacity: 0; 
+      visibility: hidden; 
+      pointer-events: none !important; 
+    }
 
     /* ========================================================= */
-    /* ANIMASI POP-UP SMOOTH KETIKA SCROLL KHUSUS HP              */
+    /* ANIMASI POP-UP SMOOTH KETIKA SCROLL                       */
     /* ========================================================= */
     .reveal-section {
       opacity: 0;
-      transform: translateY(35px);
+      transform: translateY(30px);
       transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: opacity, transform;
     }
@@ -186,9 +199,7 @@
     .lightbox-modal img { max-width: 100%; max-height: 80vh; border-radius: 12px; }
     .lightbox-close { position: absolute; top: 20px; right: 25px; color: #FFF; font-size: 2rem; cursor: pointer; }
 
-    /* ========================================================= */
-    /* LOVE STORY 4 BAGIAN DENGAN FOTO                           */
-    /* ========================================================= */
+    /* LOVE STORY 4 BAGIAN DENGAN FOTO */
     .story-timeline-wrapper {
       position: relative; margin: 30px 10px 10px; text-align: center;
     }
@@ -225,9 +236,11 @@
     /* Buku Tamu / Wishes List */
     .rsvp-form-card {
       background: #FFF; padding: 20px; border-radius: 16px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      position: relative; z-index: 10;
     }
     .rsvp-form-card input, .rsvp-form-card select, .rsvp-form-card textarea {
       width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #DDD; border-radius: 8px; font-family: inherit; font-size: 0.9rem;
+      background-color: #FFF; color: #333;
     }
 
     .wishes-list { margin: 20px; text-align: left; max-height: 350px; overflow-y: auto; }
@@ -354,7 +367,7 @@
       </div>
     </section>
 
-    <!-- FRAME 6: GALERI FOTO MASONRY INTERAKTIF -->
+    <!-- FRAME 6: GALERI FOTO MASONRY -->
     <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Gallery</h2>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Klik foto untuk memperbesar</p>
@@ -389,7 +402,7 @@
       <div class="story-timeline-wrapper">
         <div class="story-curved-line"></div>
 
-        <!-- Bagian 1: Awal Pertemuan -->
+        <!-- Bagian 1 -->
         <div class="story-node reveal-section">
           <div class="story-img-container">
             <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=500&q=80" alt="Awal Pertemuan">
@@ -401,7 +414,7 @@
           </p>
         </div>
 
-        <!-- Bagian 2: Menjadi Kita -->
+        <!-- Bagian 2 -->
         <div class="story-node reveal-section">
           <div class="story-img-container">
             <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80" alt="Menjadi Kita">
@@ -413,7 +426,7 @@
           </p>
         </div>
 
-        <!-- Bagian 3: Sebuah Komitmen -->
+        <!-- Bagian 3 -->
         <div class="story-node reveal-section">
           <div class="story-img-container">
             <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80" alt="Sebuah Komitmen">
@@ -425,7 +438,7 @@
           </p>
         </div>
 
-        <!-- Bagian 4: Awal Selamanya -->
+        <!-- Bagian 4 -->
         <div class="story-node reveal-section">
           <div class="story-img-container">
             <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=500&q=80" alt="Awal Selamanya">
@@ -463,10 +476,10 @@
       </div>
     </section>
 
-    <!-- FRAME 9: UCAPAN & DOA (ONLINE CLOUD SYNC BEDA DEVICE) -->
+    <!-- FRAME 9: UCAPAN & DOA -->
     <section class="section-card bg-light reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Ucapan & Doa</h2>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;" id="wishes-count">💬 Memuat ucapan...</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;" id="wishes-count">💬 Loading ucapan...</p>
 
       <div class="rsvp-form-card">
         <form id="rsvp-form">
@@ -516,7 +529,6 @@
   const coverOverlay = document.getElementById('cover-overlay');
 
   btnOpen.addEventListener('click', () => {
-    // Paksa Scroll Kembali ke Paling Atas Layar HP
     window.scrollTo({ top: 0, behavior: 'instant' });
 
     btnContainer.classList.add('fade-btn');
@@ -572,36 +584,45 @@
     }
   }, 1000);
 
-  // 6. Salin Rekening
+  // 6. Salin Rekening (Dengan Notifikasi Visual Lengkap)
   function copyText(elementId) {
     const text = document.getElementById(elementId).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      alert("Nomor rekening berhasil disalin: " + text);
-    });
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Nomor rekening berhasil disalin: " + text);
+      }).catch(() => {
+        prompt("Salin nomor rekening secara manual:", text);
+      });
+    } else {
+      prompt("Salin nomor rekening secara manual:", text);
+    }
   }
 
   // =========================================================
-  // 7. PUBLIC STORAGE REALTIME SYNC (HP & LAPTOP SINKRON)
+  // 7. SISTEM BUKU TAMU & DOA (INTERAKTIF & BISA DIKLIK)
   // =========================================================
-  const STORAGE_KEY = 'riyan_amelia_wishes_db_v2';
+  const STORAGE_KEY = 'riyan_amelia_wedding_wishes_db';
   const rsvpForm = document.getElementById('rsvp-form');
   const wishesList = document.getElementById('wishes-list');
   const wishesCount = document.getElementById('wishes-count');
   const btnSubmit = document.getElementById('btn-submit-ucapan');
 
-  // Load Data Ucapan (Dengan Fallback Cepat)
   function loadWishes() {
-    const localData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    if (localData.length === 0) {
-      // Data Awal Testing Default
-      const defaultWishes = [
-        { id: 1, name: 'Budi Setiawan', status: 'Hadir', text: 'Selamat Riyan & Amelia! Semoga sakinah mawaddah warahmah.' }
-      ];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultWishes));
-      renderWishesUI(defaultWishes);
-    } else {
-      renderWishesUI(localData);
+    let data = [];
+    try {
+      data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch(e) {
+      data = [];
     }
+
+    if (data.length === 0) {
+      data = [
+        { id: 1, name: 'Budi Setiawan', status: 'Hadir', text: 'Selamat Riyan & Amelia! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.' },
+        { id: 2, name: 'Keluarga Mess Laes', status: 'Hadir', text: 'Selamat menempuh hidup baru sahabatku, berkah selalu kebahagiaannya!' }
+      ];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+    renderWishesUI(data);
   }
 
   function renderWishesUI(wishes) {
@@ -628,7 +649,6 @@
     });
   }
 
-  // Kirim Ucapan Baru
   rsvpForm.addEventListener('submit', (e) => {
     e.preventDefault();
     btnSubmit.innerText = 'Mengirim...';
@@ -644,7 +664,13 @@
       text: text
     };
 
-    const wishes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    let wishes = [];
+    try {
+      wishes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch(e) {
+      wishes = [];
+    }
+
     wishes.unshift(newWish);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
 
@@ -654,7 +680,6 @@
     alert('Terima kasih! Ucapan Anda telah berhasil dipublikasikan.');
   });
 
-  // Hapus Ucapan (Untuk Testing)
   window.deleteWish = function(id) {
     if (confirm('Apakah Anda yakin ingin menghapus ucapan ini?')) {
       let wishes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -664,7 +689,7 @@
     }
   };
 
-  // Panggil Data Saat Pertama Kali Dibuka
+  // Jalankan saat pertama kali dimuat
   loadWishes();
 </script>
 
