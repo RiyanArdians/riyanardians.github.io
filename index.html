@@ -20,50 +20,105 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-color); color: var(--text-dark); line-height: 1.6; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-color); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
     .font-serif { font-family: 'Cormorant Garamond', serif; }
     .hidden { display: none !important; }
 
-    /* Cover Section */
-    .cover-container {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(26, 60, 52, 0.85)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
-      padding: 20px;
-      text-align: center;
-    }
-    .envelope-card {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 40px 25px;
-      border-radius: 16px;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    .guest-name-box {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--primary-color);
-      margin: 15px 0 25px;
-      padding: 10px;
-      background: #F0F4F2;
-      border-radius: 8px;
+    /* ========================================================= */
+    /* ANIMASI POP-UP SURAT / ENVELOPE OPENING EFFECT           */
+    /* ========================================================= */
+    .cover-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background: linear-gradient(rgba(26, 60, 52, 0.9), rgba(26, 60, 52, 0.9)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999;
+      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
     }
 
-    /* Buttons */
+    .envelope-wrapper {
+      position: relative;
+      width: 320px;
+      height: 220px;
+      background-color: #0d2822; /* Darker Emerald */
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      display: flex; justify-content: center; align-items: flex-end;
+    }
+
+    /* Flap atas surat */
+    .envelope-flap {
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 130px solid #14352d;
+      transform-origin: top;
+      transition: transform 0.6s ease-in-out;
+      z-index: 4;
+    }
+
+    /* Kartu di dalam surat */
+    .letter-card {
+      position: absolute;
+      bottom: 10px;
+      width: 290px;
+      height: 250px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 20px 15px;
+      text-align: center;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.8s ease-in-out 0.4s;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .guest-name-box {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin: 8px 0;
+      padding: 6px;
+      background: #F0F4F2;
+      border-radius: 6px;
+    }
+
+    /* State ketika tombol Buka Undangan di-klik */
+    .envelope-wrapper.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-wrapper.open .letter-card {
+      transform: translateY(-130px);
+      z-index: 5;
+    }
+
+    .cover-overlay.fade-out {
+      opacity: 0;
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    /* ========================================================= */
+    /* KONTEN UTAMA WEB                                          */
+    /* ========================================================= */
     .btn-primary {
       background-color: var(--primary-color);
       color: #FFF;
       border: none;
-      padding: 12px 28px;
-      font-size: 1rem;
+      padding: 10px 22px;
+      font-size: 0.9rem;
       border-radius: 30px;
       cursor: pointer;
       transition: all 0.3s;
     }
     .btn-primary:hover { background-color: var(--accent-color); }
+    
     .btn-outline {
       display: inline-block;
       border: 1px solid var(--primary-color);
@@ -75,47 +130,31 @@
       font-size: 0.9rem;
     }
 
-    /* Music Floating Button */
     .music-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 999;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: var(--primary-color);
-      color: #FFF;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: fixed; top: 20px; right: 20px; z-index: 999;
+      width: 45px; height: 45px; border-radius: 50%;
+      background: var(--primary-color); color: #FFF; border: none;
+      cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
-    /* Layout Sections */
     .section-container { padding: 50px 20px; max-width: 700px; margin: 0 auto; text-align: center; }
     .bg-light { background-color: #F4F6F5; }
     .section-title { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 20px; }
 
-    /* Couple Section */
     .couple-wrapper { margin-top: 30px; }
     .couple-card { margin: 20px 0; }
     .couple-card h2 { font-size: 2rem; color: var(--primary-color); }
     .ampersand { font-size: 2.5rem; color: var(--accent-color); margin: 10px 0; }
 
-    /* Countdown Grid */
     .countdown-grid { display: flex; justify-content: center; gap: 12px; margin: 25px 0; }
     .time-box { background: var(--primary-color); color: #FFF; padding: 10px; border-radius: 8px; min-width: 60px; }
     .time-box span { font-size: 1.4rem; font-weight: bold; display: block; }
     .time-box p { font-size: 0.7rem; text-transform: uppercase; }
 
-    /* Event Cards */
     .event-card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-
-    /* Gallery Grid */
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 20px; }
     .gallery-grid img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; }
 
-    /* Bank Card & RSVP */
     .bank-card, .rsvp-form { background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; }
     .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #DDD; border-radius: 8px; font-family: inherit; }
 
@@ -134,21 +173,28 @@
     <i class="fa-solid fa-compact-disc"></i>
   </button>
 
-  <!-- FRAME 1: COVER AMPLOP -->
-  <section id="cover-section" class="cover-container">
-    <div class="envelope-card">
-      <p style="color: var(--accent-color); letter-spacing: 2px;">THE WEDDING OF</p>
-      <h1 class="font-serif" style="font-size: 2.5rem; color: var(--primary-color); margin: 10px 0;">Riyan & Amelia</h1>
-      <p style="font-size: 0.9rem; color: var(--text-muted);">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-      <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
-      <button id="btn-open" class="btn-primary">
-        <i class="fa-solid fa-envelope-open"></i> Buka Undangan
-      </button>
-    </div>
-  </section>
+  <!-- FRAME 1: AMPLOP POP-UP OVERLAY -->
+  <div id="cover-overlay" class="cover-overlay">
+    <div id="envelope" class="envelope-wrapper">
+      <div class="envelope-flap"></div>
+      
+      <div class="letter-card">
+        <div>
+          <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING OF</p>
+          <h1 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color); margin: 5px 0;">Riyan & Amelia</h1>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Kepada Yth:</p>
+          <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
+        </div>
 
-  <!-- MAIN CONTENT -->
-  <main id="main-content" class="hidden">
+        <button id="btn-open" class="btn-primary">
+          <i class="fa-solid fa-envelope-open"></i> Buka Undangan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT UTAMA -->
+  <main id="main-content">
 
     <!-- FRAME 2: PASANGAN PENGANTIN -->
     <section class="section-container">
@@ -248,7 +294,7 @@
   </main>
 
   <script>
-    // 1. Ambil Nama Tamu dari URL (?to=Nama+Tamu)
+    // 1. Ambil Nama Tamu dari URL Parameter (?to=Nama+Tamu)
     const urlParams = new URLSearchParams(window.location.search);
     const guestName = urlParams.get('to');
     if (guestName) {
@@ -256,21 +302,28 @@
       document.getElementById('input-nama').value = guestName;
     }
 
-    // 2. Buka Undangan & Play Music
+    // 2. Animasi Buka Surat & Play Music
     const btnOpen = document.getElementById('btn-open');
-    const coverSection = document.getElementById('cover-section');
-    const mainContent = document.getElementById('main-content');
+    const envelope = document.getElementById('envelope');
+    const coverOverlay = document.getElementById('cover-overlay');
     const bgMusic = document.getElementById('bg-music');
     const musicControl = document.getElementById('music-control');
 
     btnOpen.addEventListener('click', () => {
-      coverSection.classList.add('hidden');
-      mainContent.classList.remove('hidden');
-      musicControl.classList.remove('hidden');
+      // Buka flap amplop & naikkan surat
+      envelope.classList.add('open');
+
+      // Putar musik
       bgMusic.play();
+      musicControl.classList.remove('hidden');
+
+      // Setelah animasi surat selesai, hilangkan overlay cover
+      setTimeout(() => {
+        coverOverlay.classList.add('fade-out');
+      }, 1200);
     });
 
-    // Toggle Music
+    // Toggle Music Play/Pause
     let isPlaying = true;
     musicControl.addEventListener('click', () => {
       if (isPlaying) {
