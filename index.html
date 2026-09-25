@@ -77,7 +77,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      /* Transisi Smooth untuk pergerakan posisi dan skala */
       transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
     }
 
@@ -134,33 +133,28 @@
     /* URUTAN TAHAP ANIMASI CINEMATIC                            */
     /* ========================================================= */
     
-    /* Hilangkan Tombol */
     .btn-open-container.fade-btn {
       opacity: 0;
       transform: translateY(20px);
       pointer-events: none;
     }
 
-    /* TAHAP 1: Kertas Naik Ke Atas Keluar Kantong Amplop */
     .envelope-card-insert.step-1-up {
       transform: translateY(-120px);
       z-index: 5;
     }
 
-    /* TAHAP 2: Kertas Bergeser ke Tengah Menutupi Amplop */
     .envelope-card-insert.step-2-center {
       transform: translateY(15px);
       z-index: 10;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
-    /* TAHAP 3: Kertas Membesar (Zoom-In) Memenuhi Layar */
     .envelope-card-insert.step-3-zoom {
       transform: translateY(15px) scale(3.5);
       opacity: 0;
     }
 
-    /* Hilangkan Overlay Utama */
     .cover-overlay.fade-out {
       opacity: 0;
       pointer-events: none;
@@ -213,13 +207,13 @@
 </head>
 <body>
 
-  <!-- Audio Background -->
-  <audio id="bg-music" loop>
-    <source src="https://youtu.be/WNw2yH_waVc?si=Np3sR2c5OgwIyHUp" type="audio/mpeg">
+  <!-- Audio Background (Gunakan file MP3 langsung) -->
+ <!-- <audio id="bg-music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Control Button Music -->
-  <button id="music-control" class="music-btn hidden">
+  <!--<button id="music-control" class="music-btn hidden">
     <i class="fa-solid fa-compact-disc"></i>
   </button>
 
@@ -227,10 +221,8 @@
   <div id="cover-overlay" class="cover-overlay">
     
     <div id="envelope-box" class="envelope-box">
-      <!-- Flap Atas Terbuka -->
       <div class="envelope-top-flap"></div>
       
-      <!-- Kartu di Dalam Undangan -->
       <div id="card-insert" class="envelope-card-insert">
         <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING OF</p>
         <h1 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color); margin: 4px 0;">Riyan & Amelia</h1>
@@ -238,11 +230,9 @@
         <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
       </div>
 
-      <!-- Kantong Depan Amplop -->
       <div class="envelope-pocket"></div>
     </div>
 
-    <!-- Tombol Buka Undangan -->
     <div id="btn-container" class="btn-open-container">
       <button id="btn-open" class="btn-primary">
         <i class="fa-solid fa-envelope-open"></i> Buka Undangan
@@ -277,7 +267,6 @@
     <section class="section-container bg-light">
       <h2 class="section-title font-serif">Waktu & Lokasi Acara</h2>
       
-      <!-- Countdown -->
       <div id="countdown" class="countdown-grid">
         <div class="time-box"><span id="days">00</span><p>Hari</p></div>
         <div class="time-box"><span id="hours">00</span><p>Jam</p></div>
@@ -285,7 +274,6 @@
         <div class="time-box"><span id="seconds">00</span><p>Detik</p></div>
       </div>
 
-      <!-- Detail Card -->
       <div class="event-card">
         <h3 class="font-serif" style="color: var(--primary-color); font-size: 1.5rem;">Akad Nikah & Resepsi</h3>
         <p style="margin-top: 10px;"><i class="fa-regular fa-calendar"></i> Minggu, 06 Desember 2026</p>
@@ -319,19 +307,22 @@
       <h2 class="section-title font-serif">Tanda Kasih</h2>
       <p style="font-size: 0.9rem; color: var(--text-muted);">Doa restu Anda merupakan karunia terindah. Namun jika ingin memberi hadiah, dapat melalui rekening berikut:</p>
       
+      <!-- Bank Card Riyan -->
       <div class="bank-card">
         <h3 style="color: var(--primary-color);">Bank Mandiri</h3>
-        <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-mandiri">1760001646239</p>
+        <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-riyan">1760001646239</p>
         <p style="font-size: 0.85rem; color: var(--text-muted);">a.n. Riyan Ardiansyah</p>
-        <button onclick="copyText('rekening-mandiri')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
+        <button onclick="copyText('rekening-riyan')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
           <i class="fa-regular fa-copy"></i> Salin Nomor Rekening
         </button>
       </div>
+
+      <!-- Bank Card Amelia -->
       <div class="bank-card">
         <h3 style="color: var(--primary-color);">Bank Mandiri</h3>
-        <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-mandiri">1550013683548</p>
+        <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-amelia">1550013683548</p>
         <p style="font-size: 0.85rem; color: var(--text-muted);">a.n. Amelia Dita Yanti</p>
-        <button onclick="copyText('rekening-mandiri')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
+        <button onclick="copyText('rekening-amelia')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
           <i class="fa-regular fa-copy"></i> Salin Nomor Rekening
         </button>
       </div>
@@ -378,7 +369,7 @@
 
     btnOpen.addEventListener('click', () => {
       // Play Audio
-      bgMusic.play();
+      bgMusic.play().catch(e => console.log("Audio autoplay prevented"));
       musicControl.classList.remove('hidden');
 
       // Hilangkan tombol Buka Undangan
@@ -413,8 +404,8 @@
       isPlaying = !isPlaying;
     });
 
-    // 3. Countdown Timer (12 Desember 2026)
-    const eventDate = new Date("Dec 12, 2026 08:00:00").getTime();
+    // 3. Countdown Timer (06 Desember 2026)
+    const eventDate = new Date("Dec 6, 2026 08:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
       const distance = eventDate - now;
