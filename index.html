@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Wedding of Riyan & Amelia</title>
 
+  <!-- Google Fonts & Font Awesome Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -111,7 +112,22 @@
     .cover-overlay.fade-out { opacity: 0; pointer-events: none; }
 
     /* ========================================================= */
-    /* STRUKTUR ISI UNDANGAN FRAME BY FRAME (SESUAI VIDEO)       */
+    /* ANIMASI POP-UP SMOOTH KETIKA SCROLL (REVEAL ANIMATION)     */
+    /* ========================================================= */
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(35px) scale(0.97);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-section.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ========================================================= */
+    /* STRUKTUR ISI UNDANGAN FRAME BY FRAME                      */
     /* ========================================================= */
     .section-card {
       padding: 40px 20px;
@@ -241,7 +257,7 @@
     .wish-status { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: #E8F0EC; color: var(--primary-color); font-weight: 600; }
     .wish-content { font-size: 0.88rem; color: #444; }
 
-    /* Tombol Hapus Ucapan (Modrasi Testing) */
+    /* Tombol Hapus Ucapan */
     .btn-delete-wish {
       position: absolute;
       top: 10px; right: 10px;
@@ -269,6 +285,9 @@
 
 <div class="app-viewport">
 
+  <!-- ========================================================= -->
+  <!-- FRAME 1: AMPLOP POP-UP OVERLAY                            -->
+  <!-- ========================================================= -->
   <div id="cover-overlay" class="cover-overlay">
     <div id="envelope-box" class="envelope-box">
       <div class="envelope-top-flap"></div>
@@ -290,26 +309,33 @@
     </div>
   </div>
 
+  <!-- ========================================================= -->
+  <!-- MAIN CONTENT FRAME BY FRAME DENGAN ANIMASI SCROLL REVEAL  -->
+  <!-- ========================================================= -->
   <main id="main-content">
 
-    <section class="hero-header text-center">
+    <!-- FRAME 2: HERO HEADER -->
+    <section class="hero-header text-center reveal-section">
       <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=500&q=80" alt="Riyan & Amelia" class="couple-avatar">
       <p style="color: var(--accent-color); font-size: 0.8rem; letter-spacing: 2px; font-weight: 600;">PERNIKAHAN KAMI</p>
       <h1 class="font-serif" style="font-size: 2.5rem; color: var(--primary-color); margin: 5px 0;">Riyan & Amelia</h1>
       <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">Minggu, 06 Desember 2026</p>
     </section>
 
-    <section class="quote-card text-center">
+    <!-- FRAME 3: AYAT AL-QURAN -->
+    <section class="quote-card text-center reveal-section">
       <p class="font-serif" style="font-size: 1.2rem; color: var(--primary-color); font-weight: 700; margin-bottom: 8px;">Q.S. Ar-Rum Ayat 21</p>
       <p style="font-style: italic; line-height: 1.5; font-size: 0.85rem;">
         "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari mejelismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
       </p>
     </section>
 
-    <section class="section-card">
+    <!-- FRAME 4: MEMPELAI (THE GROOM & THE BRIDE) -->
+    <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">We Are Getting Married!</h2>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 25px;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
 
+      <!-- Mempelai Pria -->
       <div class="mempelai-card">
         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Riyan Ardiansyah" class="mempelai-img">
         <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;">THE GROOM</p>
@@ -319,6 +345,7 @@
 
       <div class="font-serif" style="font-size: 2.2rem; color: var(--accent-color); margin: 15px 0;">&</div>
 
+      <!-- Mempelai Wanita -->
       <div class="mempelai-card">
         <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Amelia Dita Yanti" class="mempelai-img">
         <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;">THE BRIDE</p>
@@ -327,9 +354,11 @@
       </div>
     </section>
 
-    <section class="section-card bg-light">
+    <!-- FRAME 5: COUNTDOWN & SAVED THE DATE -->
+    <section class="section-card bg-light reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Save The Date</h2>
       
+      <!-- Countdown Boxes -->
       <div id="countdown" style="display: flex; gap: 8px; margin: 20px 0;">
         <div class="time-box"><span id="days">00</span><p>Hari</p></div>
         <div class="time-box"><span id="hours">00</span><p>Jam</p></div>
@@ -341,6 +370,7 @@
         <i class="fa-solid fa-calendar-plus"></i> SIMPAN DI KALENDER
       </a>
 
+      <!-- Detail Akad & Resepsi -->
       <div style="margin-top: 30px;">
         <div class="mempelai-card">
           <h3 class="font-serif" style="font-size: 1.6rem; color: var(--primary-color);">Akad Nikah & Resepsi</h3>
@@ -348,14 +378,15 @@
           <p style="font-size: 0.85rem; color: var(--text-muted);">08.00 WIB s/d 12.00 WIB</p>
           <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;"><i class="fa-solid fa-location-dot"></i> Warung D Empang</p>
           
-          <a href="http://googleusercontent.com/maps.google.com/4" target="_blank" class="btn-primary" style="margin-top: 15px; width: 100%; font-size: 0.85rem;">
+          <a href="https://www.google.com/maps/search/?api=1&query=Warung+D+Empang" target="_blank" class="btn-primary" style="margin-top: 15px; width: 100%; font-size: 0.85rem;">
             <i class="fa-solid fa-map-location-dot"></i> GOOGLE MAPS
           </a>
         </div>
       </div>
     </section>
 
-    <section class="section-card">
+    <!-- FRAME 6: GALERI FOTO -->
+    <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 20px;">Gallery</h2>
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
         <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80" style="width:100%; height:160px; object-fit:cover; border-radius:10px;" alt="G1">
@@ -365,7 +396,8 @@
       </div>
     </section>
 
-    <section class="section-card bg-light">
+    <!-- FRAME 7: LOVE STORY -->
+    <section class="section-card bg-light reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 15px;">Love Story</h2>
       
       <div class="story-card">
@@ -381,10 +413,12 @@
       </div>
     </section>
 
-    <section class="section-card">
+    <!-- FRAME 8: WEDDING GIFT (TANDA KASIH) -->
+    <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Wedding Gift</h2>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika ingin memberi kado secara cashless:</p>
 
+      <!-- Bank Card Riyan -->
       <div class="bank-card">
         <h3 class="font-serif" style="color: var(--primary-color); font-size: 1.5rem;">Bank Mandiri</h3>
         <p style="font-size: 1.3rem; font-weight: bold; margin: 8px 0; letter-spacing: 1px;" id="rekening-riyan">1760001646239</p>
@@ -394,6 +428,7 @@
         </button>
       </div>
 
+      <!-- Bank Card Amelia -->
       <div class="bank-card">
         <h3 class="font-serif" style="color: var(--primary-color); font-size: 1.5rem;">Bank Mandiri</h3>
         <p style="font-size: 1.3rem; font-weight: bold; margin: 8px 0; letter-spacing: 1px;" id="rekening-amelia">1550013683548</p>
@@ -404,10 +439,12 @@
       </div>
     </section>
 
-    <section class="section-card bg-light">
+    <!-- FRAME 9: UCAPAN & DOA (REAL-TIME ONLINE DATABASE) -->
+    <section class="section-card bg-light reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Ucapan & Doa</h2>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;" id="wishes-count">💬 Loading ucapan...</p>
 
+      <!-- Form RSVP -->
       <div class="rsvp-form-card">
         <form id="rsvp-form">
           <input type="text" id="input-nama" placeholder="Nama Anda" required>
@@ -417,14 +454,16 @@
             <option value="Tidak Hadir">Tidak Dapat Hadir</option>
           </select>
           <textarea id="input-ucapan" rows="3" placeholder="Tulis Ucapan & Doa..." required></textarea>
-          <button type="submit" class="btn-primary" style="width: 100%;">Kirim Ucapan</button>
+          <button type="submit" id="btn-submit-ucapan" class="btn-primary" style="width: 100%;">Kirim Ucapan</button>
         </form>
       </div>
 
+      <!-- Feed Ucapan Terhubung Online -->
       <div id="wishes-list" class="wishes-list"></div>
     </section>
 
-    <footer>
+    <!-- FRAME 10: PENUTUP TERIMA KASIH -->
+    <footer class="reveal-section">
       <h2 class="font-serif" style="font-size: 2.2rem; margin-bottom: 10px;">Terima Kasih</h2>
       <p class="font-serif" style="font-size: 1.8rem; color: var(--accent-color);">Riyan & Amelia</p>
       <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">Tiada yang dapat kami ungkapkan selain rasa terima kasih yang tulus apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.</p>
@@ -465,10 +504,25 @@
     setTimeout(() => {
       cardInsert.classList.add('step-3-zoom');
       coverOverlay.classList.add('fade-out');
+      initScrollReveal(); // Aktifkan animasi scroll
     }, 1200);
   });
 
-  // 3. Countdown Timer (06 Desember 2026)
+  // 3. ANIMASI POP-UP SMOOTH SAAT SCROLL (INTERSECTION OBSERVER)
+  function initScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+  }
+
+  // 4. Countdown Timer (06 Desember 2026)
   const eventDate = new Date("Dec 6, 2026 08:00:00").getTime();
   setInterval(() => {
     const now = new Date().getTime();
@@ -482,7 +536,7 @@
     }
   }, 1000);
 
-  // 4. Salin Rekening
+  // 5. Salin Rekening
   function copyText(elementId) {
     const text = document.getElementById(elementId).innerText;
     navigator.clipboard.writeText(text).then(() => {
@@ -490,88 +544,114 @@
     });
   }
 
-  // 5. FITUR BUKU TAMU: PERMANEN (LOCALSTORAGE) + FITUR HAPUS MODERASI
-  const STORAGE_KEY = 'riyan_amelia_wedding_wishes';
+  // =========================================================
+  // 6. ONLINE REALTIME DATABASE (MENGGUNAKAN API CLOUD PUBLIC)
+  // =========================================================
+  const API_ENDPOINT = 'https://crudcrud.com/api/riyan_amelia_wedding_v1/wishes';
   const rsvpForm = document.getElementById('rsvp-form');
   const wishesList = document.getElementById('wishes-list');
   const wishesCount = document.getElementById('wishes-count');
+  const btnSubmit = document.getElementById('btn-submit-ucapan');
 
-  // Ambil data awal dari localStorage
-  function getStoredWishes() {
-    const data = localStorage.getItem(STORAGE_KEY);
-    if (!data) {
-      // Data dummy awal jika belum ada ucapan
-      return [
-        { id: 1, name: 'Budi Setiawan', status: 'Hadir', text: 'Selamat Riyan & Amelia! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.' },
-        { id: 2, name: 'Keluarga Mess Laes', status: 'Hadir', text: 'Selamat menempuh hidup baru sahabatku, berkah selalu kebahagiaannya!' }
-      ];
+  // Ambil Ucapan dari Cloud Online
+  async function loadWishesOnline() {
+    try {
+      const res = await fetch(API_ENDPOINT);
+      if(res.ok) {
+        const data = await res.json();
+        renderWishesUI(data);
+      } else {
+        // Fallback jika API terhubung pertama kali
+        renderWishesUI(getBackupLocal());
+      }
+    } catch (e) {
+      renderWishesUI(getBackupLocal());
     }
-    return JSON.parse(data);
   }
 
-  // Simpan data ke localStorage
-  function saveWishes(wishes) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
+  function getBackupLocal() {
+    return JSON.parse(localStorage.getItem('backup_wishes') || '[]');
   }
 
-  // Tampilkan ucapan di layar
-  function renderWishes() {
-    const wishes = getStoredWishes();
+  function saveBackupLocal(data) {
+    localStorage.setItem('backup_wishes', JSON.stringify(data));
+  }
+
+  // Render UI Ucapan
+  function renderWishesUI(wishes) {
     wishesCount.innerText = `💬 ${wishes.length} Ucapan`;
     wishesList.innerHTML = '';
 
+    if(wishes.length === 0) {
+      wishesList.innerHTML = '<p style="text-align:center; color:#888; font-size:0.85rem;">Belum ada ucapan. Jadilah yang pertama memberikan doa!</p>';
+      return;
+    }
+
     wishes.forEach((item) => {
+      const id = item._id || item.id;
       const box = document.createElement('div');
       box.className = 'wish-box';
       box.innerHTML = `
-        <button class="btn-delete-wish" title="Hapus ucapan ini" onclick="deleteWish(${item.id})">✖</button>
+        <button class="btn-delete-wish" title="Hapus ucapan ini" onclick="deleteWishOnline('${id}')">✖</button>
         <div class="wish-header">
           <span class="wish-author">${item.name}</span>
           <span class="wish-status">${item.status}</span>
         </div>
-        <p class="wish-content">${item.text}</p>
+        <p class="wish-text">${item.text}</p>
       `;
       wishesList.appendChild(box);
     });
   }
 
-  // Fungsi Tambah Ucapan
-  rsvpForm.addEventListener('submit', (e) => {
+  // Submit Ucapan ke Cloud Online
+  rsvpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    btnSubmit.innerText = 'Mengirim...';
+    btnSubmit.disabled = true;
 
     const name = document.getElementById('input-nama').value;
     const status = document.getElementById('input-kehadiran').value;
     const text = document.getElementById('input-ucapan').value;
 
-    const newWish = {
-      id: Date.now(),
-      name: name,
-      status: status,
-      text: text
-    };
+    const payload = { id: Date.now().toString(), name, status, text };
 
-    const currentWishes = getStoredWishes();
-    currentWishes.unshift(newWish); // Tambah di paling atas
+    try {
+      const res = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
 
-    saveWishes(currentWishes);
-    renderWishes();
+      if(!res.ok) throw new Error("Gagal simpan ke cloud");
+    } catch (e) {
+      // Simpan di backup lokal jika offline
+      let local = getBackupLocal();
+      local.unshift(payload);
+      saveBackupLocal(local);
+    }
 
     document.getElementById('input-ucapan').value = '';
-    alert('Terima kasih! Ucapan Anda telah tersimpan.');
+    btnSubmit.innerText = 'Kirim Ucapan';
+    btnSubmit.disabled = false;
+    alert('Terima kasih! Ucapan Anda telah berhasil dikirim.');
+    loadWishesOnline();
   });
 
-  // Fungsi Hapus Ucapan (Untuk Moderasi / Testing)
-  window.deleteWish = function(id) {
+  // Hapus Ucapan dari Cloud
+  window.deleteWishOnline = async function(id) {
     if (confirm('Apakah Anda yakin ingin menghapus ucapan ini?')) {
-      let wishes = getStoredWishes();
-      wishes = wishes.filter(item => item.id !== id);
-      saveWishes(wishes);
-      renderWishes();
+      try {
+        await fetch(`${API_ENDPOINT}/${id}`, { method: 'DELETE' });
+      } catch (e) {
+        let local = getBackupLocal().filter(x => (x._id !== id && x.id !== id));
+        saveBackupLocal(local);
+      }
+      loadWishesOnline();
     }
   };
 
-  // Render saat halaman pertama kali dimuat
-  renderWishes();
+  // Muat data saat pertama kali buka
+  loadWishesOnline();
 </script>
 
 </body>
