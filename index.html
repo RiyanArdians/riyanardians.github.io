@@ -25,7 +25,7 @@
     .hidden { display: none !important; }
 
     /* ========================================================= */
-    /* STRUKTUR & ANIMASI POP-UP SURAT TERBUKA                   */
+    /* STRUKTUR & ANIMASI 3D POP-UP & ZOOM AMPLOP                */
     /* ========================================================= */
     .cover-overlay {
       position: fixed;
@@ -33,19 +33,21 @@
       background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(26, 60, 52, 0.85)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       z-index: 9999;
-      transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+      perspective: 1000px; /* Perspektif 3D */
+      transition: opacity 0.8s ease-in-out;
       padding: 20px;
     }
 
-    /* Pembungkus Amplop */
+    /* Pembungkus Amplop Utama */
     .envelope-box {
       position: relative;
       width: 320px;
       height: 200px;
-      background-color: #112d27; /* Kantong Dalam Amplop */
+      background-color: #112d27;
       border-radius: 0 0 10px 10px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
       margin-bottom: 25px;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Flap Atas Terbuka */
@@ -77,8 +79,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      /* Transisi Smooth untuk Efek Pop-up Naik */
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     /* Kantong Depan Amplop */
@@ -103,8 +104,11 @@
       border-radius: 6px;
     }
 
-    /* Tombol Aksi */
-    .btn-open-container { z-index: 10; }
+    /* Tombol Buka Undangan */
+    .btn-open-container {
+      z-index: 10;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
 
     .btn-primary {
       background-color: var(--accent-color);
@@ -127,17 +131,32 @@
       transform: translateY(-2px);
     }
 
-    /* --- CLASS ANIMASI AKTIF --- */
-    /* 1. Kartu terangkat naik keluar dari amplop */
-    .envelope-card-insert.popup-active {
-      transform: translateY(-100px) scale(1.05);
+    /* ========================================================= */
+    /* STAGE ANIMASI STEP BY STEP                                */
+    /* ========================================================= */
+    
+    /* Step 1: Kartu Ditarik Naik Ke Atas Out of Envelope */
+    .envelope-card-insert.pull-up {
+      transform: translateY(-110px);
       z-index: 5;
     }
 
-    /* 2. Layar cover memudar & bergeser ke atas */
+    /* Step 2: Seluruh Amplop + Kartu Membesar (Zoom-In 3D) Ke Depan Layar */
+    .envelope-box.zoom-forward {
+      transform: scale(2.2) translateY(20px);
+      z-index: 20;
+    }
+
+    /* Hilangkan Tombol Saat Animasi Berjalan */
+    .btn-open-container.fade-btn {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
+
+    /* Step 3: Fade-Out Memudar Menuju Halaman Utama */
     .cover-overlay.fade-out {
       opacity: 0;
-      transform: translateY(-100%);
       pointer-events: none;
     }
 
@@ -201,7 +220,7 @@
   <!-- FRAME 1: AMPLOP TERBUKA OVERLAY -->
   <div id="cover-overlay" class="cover-overlay">
     
-    <div class="envelope-box">
+    <div id="envelope-box" class="envelope-box">
       <!-- Flap Atas Terbuka -->
       <div class="envelope-top-flap"></div>
       
@@ -218,7 +237,7 @@
     </div>
 
     <!-- Tombol Buka Undangan -->
-    <div class="btn-open-container">
+    <div id="btn-container" class="btn-open-container">
       <button id="btn-open" class="btn-primary">
         <i class="fa-solid fa-envelope-open"></i> Buka Undangan
       </button>
@@ -335,25 +354,35 @@
       document.getElementById('input-nama').value = guestName;
     }
 
-    // 2. Animasi Pop-Up Surat Terbuka & Play Music
+    // 2. Rangkaian Sequential Animasi 3D (Pull Up -> Zoom In -> Fade Out)
     const btnOpen = document.getElementById('btn-open');
+    const btnContainer = document.getElementById('btn-container');
     const cardInsert = document.getElementById('card-insert');
+    const envelopeBox = document.getElementById('envelope-box');
     const coverOverlay = document.getElementById('cover-overlay');
     const bgMusic = document.getElementById('bg-music');
     const musicControl = document.getElementById('music-control');
 
     btnOpen.addEventListener('click', () => {
-      // Putar musik latar
+      // Putar musik & munculkan tombol audio
       bgMusic.play();
       musicControl.classList.remove('hidden');
 
-      // Step 1: Kartu terangkat naik keluar dari kantong amplop
-      cardInsert.classList.add('popup-active');
+      // TAHAP 1: Hilangkan tombol buka undangan secara halus
+      btnContainer.classList.add('fade-btn');
 
-      // Step 2: Beri jeda 800ms agar mata melihat kartu naik, baru overlay memudar
+      // TAHAP 2: Kartu ditarik keluar ke atas dari dalam kantong amplop
+      cardInsert.classList.add('pull-up');
+
+      // TAHAP 3: Setelah 600ms, seluruh amplop membesar (zoom-in 3D) ke depan mendekati layar
+      setTimeout(() => {
+        envelopeBox.classList.add('zoom-forward');
+      }, 600);
+
+      // TAHAP 4: Setelah 1200ms, sampul memudar (fade-out) membuka halaman utama
       setTimeout(() => {
         coverOverlay.classList.add('fade-out');
-      }, 800);
+      }, 1200);
     });
 
     // Toggle Music Play/Pause
