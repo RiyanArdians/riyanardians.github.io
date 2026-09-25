@@ -25,79 +25,110 @@
     .hidden { display: none !important; }
 
     /* ========================================================= */
-    /* ANIMASI POP-UP SURAT / ENVELOPE OPENING EFFECT           */
+    /* STRUKTUR AMPLOP TERBUKA ELEGAN (REALISTIC ENVELOPE)       */
     /* ========================================================= */
     .cover-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100vh;
-      background: linear-gradient(rgba(26, 60, 52, 0.9), rgba(26, 60, 52, 0.9)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
-      display: flex; justify-content: center; align-items: center;
+      background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(26, 60, 52, 0.85)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
       z-index: 9999;
-      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+      transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+      padding: 20px;
     }
 
-    .envelope-wrapper {
+    /* Pembungkus Amplop */
+    .envelope-box {
       position: relative;
       width: 320px;
-      height: 220px;
-      background-color: #0d2822; /* Darker Emerald */
+      height: 200px;
+      background-color: #112d27; /* Kantong Dalam Amplop */
       border-radius: 0 0 10px 10px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-      display: flex; justify-content: center; align-items: flex-end;
+      margin-bottom: 25px;
     }
 
-    /* Flap atas surat */
-    .envelope-flap {
+    /* Flap Atas Terbuka Ke Atas */
+    .envelope-top-flap {
       position: absolute;
-      top: 0; left: 0;
-      width: 0; height: 0;
+      top: -100px;
+      left: 0;
+      width: 0;
+      height: 0;
       border-left: 160px solid transparent;
       border-right: 160px solid transparent;
-      border-top: 130px solid #14352d;
-      transform-origin: top;
-      transition: transform 0.6s ease-in-out;
-      z-index: 4;
+      border-bottom: 100px solid #1a3c34; /* Lipatan Atas Terbuka */
+      z-index: 1;
     }
 
-    /* Kartu di dalam surat */
-    .letter-card {
+    /* Kartu Undangan Menyembul Keluar */
+    .envelope-card-insert {
       position: absolute;
-      bottom: 10px;
-      width: 290px;
-      height: 250px;
+      top: -60px;
+      left: 20px;
+      width: 280px;
+      height: 210px;
       background: #FFFFFF;
-      border-radius: 8px;
+      border-radius: 12px;
       padding: 20px 15px;
       text-align: center;
-      box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-      transition: transform 0.8s ease-in-out 0.4s;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
       z-index: 2;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      transition: transform 0.6s ease;
+    }
+
+    /* Sisi Kantong Depan Amplop */
+    .envelope-pocket {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 0;
+      border-left: 160px solid #14332c;
+      border-right: 160px solid #14332c;
+      border-top: 100px solid transparent;
+      border-radius: 0 0 10px 10px;
+      z-index: 3;
     }
 
     .guest-name-box {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--primary-color);
-      margin: 8px 0;
-      padding: 6px;
+      margin: 10px 0 0;
+      padding: 8px;
       background: #F0F4F2;
       border-radius: 6px;
     }
 
-    /* State ketika tombol Buka Undangan di-klik */
-    .envelope-wrapper.open .envelope-flap {
-      transform: rotateX(180deg);
-      z-index: 1;
+    /* Tombol Aksi Di Bawah Amplop */
+    .btn-open-container {
+      z-index: 10;
     }
 
-    .envelope-wrapper.open .letter-card {
-      transform: translateY(-130px);
-      z-index: 5;
+    .btn-primary {
+      background-color: var(--accent-color);
+      color: #1A3C34;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
+    .btn-primary:hover {
+      background-color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* Animation State saat diklik */
     .cover-overlay.fade-out {
       opacity: 0;
       transform: translateY(-100%);
@@ -105,20 +136,8 @@
     }
 
     /* ========================================================= */
-    /* KONTEN UTAMA WEB                                          */
+    /* KONTEN UTAMA WEB UNDANGAN                                */
     /* ========================================================= */
-    .btn-primary {
-      background-color: var(--primary-color);
-      color: #FFF;
-      border: none;
-      padding: 10px 22px;
-      font-size: 0.9rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .btn-primary:hover { background-color: var(--accent-color); }
-    
     .btn-outline {
       display: inline-block;
       border: 1px solid var(--primary-color);
@@ -173,24 +192,32 @@
     <i class="fa-solid fa-compact-disc"></i>
   </button>
 
-  <!-- FRAME 1: AMPLOP POP-UP OVERLAY -->
+  <!-- FRAME 1: AMPLOP TERBUKA & TOMBOL DI LUAR -->
   <div id="cover-overlay" class="cover-overlay">
-    <div id="envelope" class="envelope-wrapper">
-      <div class="envelope-flap"></div>
+    
+    <div class="envelope-box">
+      <!-- Flap Atas Terbuka -->
+      <div class="envelope-top-flap"></div>
       
-      <div class="letter-card">
-        <div>
-          <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING OF</p>
-          <h1 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color); margin: 5px 0;">Riyan & Amelia</h1>
-          <p style="font-size: 0.8rem; color: var(--text-muted);">Kepada Yth:</p>
-          <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
-        </div>
-
-        <button id="btn-open" class="btn-primary">
-          <i class="fa-solid fa-envelope-open"></i> Buka Undangan
-        </button>
+      <!-- Kartu di Dalam Undangan -->
+      <div class="envelope-card-insert">
+        <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING OF</p>
+        <h1 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color); margin: 4px 0;">Riyan & Amelia</h1>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">Kepada Yth:</p>
+        <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
       </div>
+
+      <!-- Kantong Depan Amplop -->
+      <div class="envelope-pocket"></div>
     </div>
+
+    <!-- Tombol Buka Undangan Terpisah Di Bawah Amplop -->
+    <div class="btn-open-container">
+      <button id="btn-open" class="btn-primary">
+        <i class="fa-solid fa-envelope-open"></i> Buka Undangan
+      </button>
+    </div>
+
   </div>
 
   <!-- MAIN CONTENT UTAMA -->
@@ -302,25 +329,16 @@
       document.getElementById('input-nama').value = guestName;
     }
 
-    // 2. Animasi Buka Surat & Play Music
+    // 2. Animasi Hilang Cover Overlay & Play Music
     const btnOpen = document.getElementById('btn-open');
-    const envelope = document.getElementById('envelope');
     const coverOverlay = document.getElementById('cover-overlay');
     const bgMusic = document.getElementById('bg-music');
     const musicControl = document.getElementById('music-control');
 
     btnOpen.addEventListener('click', () => {
-      // Buka flap amplop & naikkan surat
-      envelope.classList.add('open');
-
-      // Putar musik
       bgMusic.play();
       musicControl.classList.remove('hidden');
-
-      // Setelah animasi surat selesai, hilangkan overlay cover
-      setTimeout(() => {
-        coverOverlay.classList.add('fade-out');
-      }, 1200);
+      coverOverlay.classList.add('fade-out');
     });
 
     // Toggle Music Play/Pause
