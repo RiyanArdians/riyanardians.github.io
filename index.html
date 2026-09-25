@@ -25,7 +25,7 @@
     .hidden { display: none !important; }
 
     /* ========================================================= */
-    /* STRUKTUR & ANIMASI 3D POP-UP & ZOOM AMPLOP                */
+    /* STRUKTUR AMPLOP & KERTAS UNDANGAN                         */
     /* ========================================================= */
     .cover-overlay {
       position: fixed;
@@ -33,12 +33,11 @@
       background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(26, 60, 52, 0.85)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       z-index: 9999;
-      perspective: 1000px; /* Perspektif 3D */
       transition: opacity 0.8s ease-in-out;
       padding: 20px;
     }
 
-    /* Pembungkus Amplop Utama */
+    /* Pembungkus Amplop */
     .envelope-box {
       position: relative;
       width: 320px;
@@ -47,7 +46,6 @@
       border-radius: 0 0 10px 10px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
       margin-bottom: 25px;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Flap Atas Terbuka */
@@ -79,7 +77,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+      /* Transisi Smooth untuk pergerakan posisi dan skala */
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
     }
 
     /* Kantong Depan Amplop */
@@ -132,29 +131,36 @@
     }
 
     /* ========================================================= */
-    /* STAGE ANIMASI STEP BY STEP                                */
+    /* URUTAN TAHAP ANIMASI CINEMATIC                            */
     /* ========================================================= */
     
-    /* Step 1: Kartu Ditarik Naik Ke Atas Out of Envelope */
-    .envelope-card-insert.pull-up {
-      transform: translateY(-110px);
-      z-index: 5;
-    }
-
-    /* Step 2: Seluruh Amplop + Kartu Membesar (Zoom-In 3D) Ke Depan Layar */
-    .envelope-box.zoom-forward {
-      transform: scale(2.2) translateY(20px);
-      z-index: 20;
-    }
-
-    /* Hilangkan Tombol Saat Animasi Berjalan */
+    /* Hilangkan Tombol */
     .btn-open-container.fade-btn {
       opacity: 0;
       transform: translateY(20px);
       pointer-events: none;
     }
 
-    /* Step 3: Fade-Out Memudar Menuju Halaman Utama */
+    /* TAHAP 1: Kertas Naik Ke Atas Keluar Kantong Amplop */
+    .envelope-card-insert.step-1-up {
+      transform: translateY(-120px);
+      z-index: 5;
+    }
+
+    /* TAHAP 2: Kertas Bergeser ke Tengah Menutupi Amplop */
+    .envelope-card-insert.step-2-center {
+      transform: translateY(15px);
+      z-index: 10;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    /* TAHAP 3: Kertas Membesar (Zoom-In) Memenuhi Layar */
+    .envelope-card-insert.step-3-zoom {
+      transform: translateY(15px) scale(3.5);
+      opacity: 0;
+    }
+
+    /* Hilangkan Overlay Utama */
     .cover-overlay.fade-out {
       opacity: 0;
       pointer-events: none;
@@ -354,33 +360,34 @@
       document.getElementById('input-nama').value = guestName;
     }
 
-    // 2. Rangkaian Sequential Animasi 3D (Pull Up -> Zoom In -> Fade Out)
+    // 2. TIMELINE ANIMASI CINEMATIC 3 TAHAP
     const btnOpen = document.getElementById('btn-open');
     const btnContainer = document.getElementById('btn-container');
     const cardInsert = document.getElementById('card-insert');
-    const envelopeBox = document.getElementById('envelope-box');
     const coverOverlay = document.getElementById('cover-overlay');
     const bgMusic = document.getElementById('bg-music');
     const musicControl = document.getElementById('music-control');
 
     btnOpen.addEventListener('click', () => {
-      // Putar musik & munculkan tombol audio
+      // Play Audio
       bgMusic.play();
       musicControl.classList.remove('hidden');
 
-      // TAHAP 1: Hilangkan tombol buka undangan secara halus
+      // Hilangkan tombol Buka Undangan
       btnContainer.classList.add('fade-btn');
 
-      // TAHAP 2: Kartu ditarik keluar ke atas dari dalam kantong amplop
-      cardInsert.classList.add('pull-up');
+      // TAHAP 1 (0ms): Kertas ditarik NAIK ke atas keluar dari kantong amplop
+      cardInsert.classList.add('step-1-up');
 
-      // TAHAP 3: Setelah 600ms, seluruh amplop membesar (zoom-in 3D) ke depan mendekati layar
+      // TAHAP 2 (600ms): Kertas turun ke TENGAH menutupi bagian depan amplop
       setTimeout(() => {
-        envelopeBox.classList.add('zoom-forward');
+        cardInsert.classList.remove('step-1-up');
+        cardInsert.classList.add('step-2-center');
       }, 600);
 
-      // TAHAP 4: Setelah 1200ms, sampul memudar (fade-out) membuka halaman utama
+      // TAHAP 3 (1200ms): Kertas MEMBESAR (Zoom-In) ke layar & sampul memudar
       setTimeout(() => {
+        cardInsert.classList.add('step-3-zoom');
         coverOverlay.classList.add('fade-out');
       }, 1200);
     });
