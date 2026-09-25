@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- MENCEGAH FORCE DARK MODE DI HP SAMSUNG & CHROME MOBILE -->
+  <!-- META TAG MENCEGAH FORCE DARK MODE -->
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
   <meta name="theme-color" content="#F4F6F5">
@@ -16,11 +16,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* MEMAKSA WEB BROWSER TETAP MODE TERANG */
+    /* VARIABLES & DEFAULT STYLES */
     :root {
       color-scheme: light only !important;
       supported-color-schemes: light !important;
-      forced-color-adjust: none !important;
       --bg-color: #F4F6F5;
       --card-bg: #FFFFFF;
       --primary-color: #1A3C34; /* Emerald Green */
@@ -34,30 +33,47 @@
       margin: 0; 
       padding: 0;
       -webkit-tap-highlight-color: transparent;
-      forced-color-adjust: none !important;
     }
 
-    /* Kunci Warna Latar Belakang & Teks Utama */
-    html, body {
-      color-scheme: light only !important;
+    /* KUNCI UTAMA: ANTI SAMSUNG FORCE DARK MODE INVERSION */
+    html {
       background-color: #E2E8E5 !important;
-      background-image: linear-gradient(#E2E8E5, #E2E8E5) !important;
       color: #2B2B2B !important;
+    }
+
+    body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
       scroll-behavior: smooth;
+      background-color: #E2E8E5 !important;
+      color: #2B2B2B !important;
     }
 
-    /* TRIK KHUSUS LUKIS WAKTU DARK MODE TERDETEKSI (Samsung Browser Inversion Fix) */
+    /* Trik mengunci warna putih di Samsung Browser agar tidak berubah hitam */
+    .envelope-card-insert, 
+    .quote-card, 
+    .mempelai-card, 
+    .rsvp-form-card, 
+    .bank-card, 
+    .wish-box, 
+    .story-node {
+      background: #FFFFFF !important;
+      color: #2B2B2B !important;
+      -webkit-box-decoration-break: clone;
+    }
+
+    /* DETEKSI KHUSUS BROWSER SAMSUNG DENGAN AUTO-DARK MODE ON */
     @media (prefers-color-scheme: dark) {
-      html, body {
-        background-color: #E2E8E5 !important;
-        color: #2B2B2B !important;
-      }
-      .app-viewport, .section-card, .mempelai-card, .quote-card, .hero-header-custom, .hero-arch-frame, .envelope-card-insert, .rsvp-form-card, .bank-card, .wish-box {
+      /* Membatalkan pemutaran warna gambar & foto agar foto tidak klise/negatif */
+      img, iframe, video {
         filter: none !important;
         -webkit-filter: none !important;
+      }
+      
+      /* Memaksa elemen wadah tetap pada tingkat kontras terang */
+      .app-viewport {
+        background-color: #F4F6F5 !important;
       }
     }
 
@@ -69,7 +85,6 @@
       max-width: 480px;
       margin: 0 auto;
       background-color: #F4F6F5 !important;
-      background-image: linear-gradient(#F4F6F5, #F4F6F5) !important;
       min-height: 100vh;
       position: relative;
       box-shadow: 0 0 30px rgba(0,0,0,0.15);
@@ -93,7 +108,6 @@
     .envelope-box {
       position: relative; width: 310px; height: 190px;
       background-color: #112d27 !important; 
-      background-image: linear-gradient(#112d27, #112d27) !important;
       border-radius: 0 0 10px 10px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin-bottom: 25px;
       pointer-events: auto;
@@ -106,12 +120,11 @@
       border-bottom: 95px solid #1a3c34; z-index: 1;
     }
 
-    /* KERTAS AMPLOP KITA KUNCI TERANG DENGAN LIN-GRADIENT */
+    /* KERTAS KARTU DI DALAM AMPLOP */
     .envelope-card-insert {
       position: absolute; top: -55px; left: 18px;
       width: 274px; height: 200px;
-      background-color: #FFFFFF !important; 
-      background-image: linear-gradient(#FFFFFF, #FFFFFF) !important;
+      background-color: #FFFFFF !important;
       border-radius: 12px;
       padding: 18px 12px; text-align: center;
       box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
@@ -130,17 +143,15 @@
     .guest-name-box {
       font-size: 1rem; font-weight: 600; color: #1A3C34 !important;
       margin: 8px 0 0; padding: 6px; 
-      background-color: #F0F4F2 !important; 
-      background-image: linear-gradient(#F0F4F2, #F0F4F2) !important;
+      background-color: #F0F4F2 !important;
       border-radius: 6px;
     }
 
     .btn-open-container { position: relative; z-index: 999; }
 
-    /* TOMBOL DENGAN EFEK CAHAYA (SHINE EFFECT) */
+    /* TOMBOL BUKA UNDANGAN */
     .btn-primary {
       background-color: #C5A880 !important; 
-      background-image: linear-gradient(#C5A880, #C5A880) !important;
       color: #1A3C34 !important; border: none;
       padding: 12px 28px; font-size: 0.95rem; font-weight: 600;
       border-radius: 30px; cursor: pointer;
@@ -158,7 +169,6 @@
 
     .btn-primary:hover { 
       background-color: #ffffff !important; 
-      background-image: linear-gradient(#ffffff, #ffffff) !important;
       transform: translateY(-2px); 
     }
 
@@ -206,7 +216,6 @@
       overflow: hidden;
     }
 
-    /* Frame Ornamen Lengkung (Arch Frame) Klasik */
     .hero-arch-frame {
       width: 88%;
       height: 90%;
@@ -219,12 +228,10 @@
       justify-content: center;
       box-shadow: inset 0 0 0 4px rgba(197, 168, 128, 0.2);
       position: relative;
-      background-color: rgba(255, 255, 255, 0.5) !important;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)) !important;
+      background-color: rgba(255, 255, 255, 0.7) !important;
       backdrop-filter: blur(2px);
     }
 
-    /* Foto Kapsul Pasangan (Capsule Frame) */
     .hero-capsule-photo {
       width: 140px;
       height: 210px;
@@ -276,21 +283,18 @@
 
     .quote-card {
       background-color: #FFFFFF !important; 
-      background-image: linear-gradient(#FFFFFF, #FFFFFF) !important;
       padding: 25px 20px; border-radius: 16px; margin: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04); font-size: 0.9rem; color: #444 !important; border: 1px solid #EAEAEA;
     }
 
     .mempelai-card {
       background-color: #FFFFFF !important; 
-      background-image: linear-gradient(#FFFFFF, #FFFFFF) !important;
       border-radius: 16px; padding: 20px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     }
     .mempelai-img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
 
     .time-box { 
       background-color: #1A3C34 !important; 
-      background-image: linear-gradient(#1A3C34, #1A3C34) !important;
       color: #FFF !important; padding: 10px; border-radius: 8px; flex: 1; 
     }
     .time-box span { font-size: 1.3rem; font-weight: 700; display: block; color: #FFF !important; }
@@ -300,7 +304,6 @@
       display: inline-block; border: 1px solid #1A3C34; color: #1A3C34 !important;
       padding: 10px 22px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 600; 
       background-color: #FFF !important; 
-      background-image: linear-gradient(#FFF, #FFF) !important;
       margin-top: 10px;
     }
 
@@ -341,7 +344,6 @@
     .story-node {
       position: relative; z-index: 2; margin-bottom: 35px; width: 90%;
       background-color: #FFF !important; 
-      background-image: linear-gradient(#FFF, #FFF) !important;
       padding: 18px; border-radius: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-left: auto; margin-right: auto;
     }
@@ -354,7 +356,6 @@
     .story-icon {
       width: 42px; height: 42px; 
       background-color: #F8F4EE !important; 
-      background-image: linear-gradient(#F8F4EE, #F8F4EE) !important;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       margin: -30px auto 10px; color: #C5A880 !important; font-size: 1.2rem;
@@ -364,7 +365,6 @@
     /* Bank Cards */
     .bank-card {
       background-color: #FFF !important; 
-      background-image: linear-gradient(#FFF, #FFF) !important;
       padding: 20px; border-radius: 16px; margin: 15px 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04); text-align: center;
     }
@@ -372,7 +372,6 @@
     /* Buku Tamu / Wishes List */
     .rsvp-form-card {
       background-color: #FFF !important; 
-      background-image: linear-gradient(#FFF, #FFF) !important;
       padding: 20px; border-radius: 16px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
       position: relative; z-index: 10;
     }
@@ -384,7 +383,6 @@
     .wishes-list { margin: 20px; text-align: left; max-height: 350px; overflow-y: auto; }
     .wish-box {
       background-color: #FFF !important; 
-      background-image: linear-gradient(#FFF, #FFF) !important;
       padding: 14px 16px; border-radius: 12px; margin-bottom: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid #1A3C34; position: relative;
     }
@@ -401,7 +399,6 @@
 
     footer {
       background-color: #1A3C34 !important; 
-      background-image: linear-gradient(#1A3C34, #1A3C34) !important;
       color: #FFF !important; padding: 40px 20px 25px;
       text-align: center; border-top-left-radius: 30px; border-top-right-radius: 30px;
     }
@@ -654,7 +651,7 @@
       
       <!-- FOOTER KOLABORASI -->
       <div class="footer-collab">
-        Made with ❤️ by <b>Riyan Ardiansyah</b>
+        Made with ❤️ by <b>Riyan Ardiansyah</b> in collaboration with <b>Gemini AI</b>
       </div>
     </footer>
 
@@ -663,6 +660,11 @@
 </div>
 
 <script>
+  // Dynamic Anti-Dark Mode Script Khusus Samsung Internet
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+
   // 1. URL Parameter Nama Tamu
   const urlParams = new URLSearchParams(window.location.search);
   const guestName = urlParams.get('to');
