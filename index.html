@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" style="color-scheme: light !important; supported-color-schemes: light !important;">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- MENCEGAH MIKRO-SERANGAN DARK MODE BROWSER MOBILE -->
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light">
+  <meta name="theme-color" content="#F4F6F5">
+
   <title>The Wedding of Riyan & Amelia</title>
 
   <!-- Google Fonts & Font Awesome Icons -->
@@ -11,23 +17,31 @@
 
   <style>
     :root {
+      color-scheme: light only !important;
+      supported-color-schemes: light !important;
+      forced-color-adjust: none !important;
       --primary-color: #1A3C34; /* Emerald Green */
       --accent-color: #C5A880;  /* Soft Gold */
       --text-dark: #2B2B2B;
       --text-muted: #666666;
-      /* GAMBAR TEKSTUR KERTAS PUTIH BERSIH POLOS (ANTI-DARK MODE SPREAD) */
-      --paper-white-img: url('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=800&q=80');
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    
-    body { 
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0;
+      forced-color-adjust: none !important;
+    }
+
+    html, body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
-      background: var(--paper-white-img) center/cover repeat !important; 
-      color: var(--text-dark) !important; 
+      /* SVG DATA-URI PUTIH MURNI DENGAN BORDER MENGELIRUKAN ALGORITMA INVERSI SAMSUNG */
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23F4F6F5"/></svg>') !important;
+      background-color: #F4F6F5 !important;
+      color: #2B2B2B !important; 
       line-height: 1.6; 
       overflow-x: hidden; 
+      scroll-behavior: smooth;
     }
 
     .font-serif { font-family: 'Cormorant Garamond', serif; }
@@ -37,7 +51,8 @@
     .app-viewport {
       max-width: 480px;
       margin: 0 auto;
-      background: var(--paper-white-img) center/cover repeat !important;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23F4F6F5"/></svg>') !important;
+      background-color: #F4F6F5 !important;
       min-height: 100vh;
       position: relative;
       box-shadow: 0 0 30px rgba(0,0,0,0.15);
@@ -72,11 +87,12 @@
       border-bottom: 95px solid #1a3c34; z-index: 1;
     }
 
-    /* KERTAS AMPLOP KITA PAKAI TEKSTUR PUTIH POLOS */
+    /* KERTAS KARTU AMPLOP DENGAN TEKSTUR SVG TERISOLASI ANTI-DARK MODE */
     .envelope-card-insert {
       position: absolute; top: -55px; left: 18px;
       width: 274px; height: 200px;
-      background: var(--paper-white-img) center/cover repeat !important;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important;
       border-radius: 12px;
       padding: 18px 12px; text-align: center;
       box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
@@ -93,9 +109,9 @@
     }
 
     .guest-name-box {
-      font-size: 1rem; font-weight: 600; color: var(--primary-color) !important;
+      font-size: 1rem; font-weight: 600; color: #1A3C34 !important;
       margin: 8px 0 0; padding: 6px; 
-      background: rgba(26, 60, 52, 0.08) !important;
+      background-color: #F0F4F2 !important;
       border-radius: 6px;
     }
 
@@ -103,7 +119,7 @@
 
     /* TOMBOL DENGAN EFEK CAHAYA (SHINE EFFECT) */
     .btn-primary {
-      background-color: var(--accent-color) !important; color: #1A3C34 !important; border: none;
+      background-color: #C5A880 !important; color: #1A3C34 !important; border: none;
       padding: 12px 28px; font-size: 0.95rem; font-weight: 600;
       border-radius: 30px; cursor: pointer;
       box-shadow: 0 4px 15px rgba(0,0,0,0.25); transition: all 0.3s ease;
@@ -148,7 +164,7 @@
     }
 
     /* ========================================================= */
-    /* DESAIN HERO HEADER BARU                                   */
+    /* DESAIN HERO HEADER                                       */
     /* ========================================================= */
     .hero-header-custom {
       position: relative;
@@ -168,7 +184,7 @@
     .hero-arch-frame {
       width: 88%;
       height: 90%;
-      border: 2px solid var(--accent-color);
+      border: 2px solid #C5A880;
       border-radius: 120px 120px 0 0;
       padding: 40px 15px 30px;
       display: flex;
@@ -177,7 +193,8 @@
       justify-content: center;
       box-shadow: inset 0 0 0 4px rgba(197, 168, 128, 0.2);
       position: relative;
-      background: var(--paper-white-img) center/cover repeat !important;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important;
       backdrop-filter: blur(2px);
     }
 
@@ -194,7 +211,7 @@
 
     .hero-subtitle {
       font-size: 0.9rem;
-      color: var(--text-muted) !important;
+      color: #666666 !important;
       letter-spacing: 1px;
       margin-bottom: 8px;
       font-weight: 400;
@@ -202,7 +219,7 @@
 
     .hero-title-names {
       font-size: 2.6rem;
-      color: var(--primary-color) !important;
+      color: #1A3C34 !important;
       font-weight: 600;
       line-height: 1.2;
       margin-bottom: 18px;
@@ -210,18 +227,18 @@
 
     .hero-title-names span {
       font-style: italic;
-      color: var(--accent-color) !important;
+      color: #C5A880 !important;
       font-weight: 400;
     }
 
     .hero-date-badge {
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--primary-color) !important;
+      color: #1A3C34 !important;
       letter-spacing: 3px;
       text-transform: uppercase;
-      border-top: 1px solid var(--accent-color);
-      border-bottom: 1px solid var(--accent-color);
+      border-top: 1px solid #C5A880;
+      border-bottom: 1px solid #C5A880;
       padding: 6px 16px;
       margin-top: 5px;
     }
@@ -232,25 +249,28 @@
     .section-card { padding: 40px 20px; text-align: center; position: relative; }
 
     .quote-card {
-      background: var(--paper-white-img) center/cover repeat !important; 
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important; 
       padding: 25px 20px; border-radius: 16px; margin: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06); font-size: 0.9rem; color: #444 !important; border: 1px solid rgba(0,0,0,0.08);
     }
 
     .mempelai-card {
-      background: var(--paper-white-img) center/cover repeat !important; 
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important; 
       border-radius: 16px; padding: 20px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     }
     .mempelai-img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
 
-    .time-box { background: var(--primary-color) !important; color: #FFF !important; padding: 10px; border-radius: 8px; flex: 1; }
+    .time-box { background-color: #1A3C34 !important; color: #FFF !important; padding: 10px; border-radius: 8px; flex: 1; }
     .time-box span { font-size: 1.3rem; font-weight: 700; display: block; color: #FFF !important; }
     .time-box p { font-size: 0.65rem; text-transform: uppercase; color: #FFF !important; }
 
     .btn-outline {
-      display: inline-block; border: 1px solid var(--primary-color); color: var(--primary-color) !important;
+      display: inline-block; border: 1px solid #1A3C34; color: #1A3C34 !important;
       padding: 10px 22px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 600; 
-      background: var(--paper-white-img) center/cover repeat !important; margin-top: 10px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important; margin-top: 10px;
     }
 
     /* GALERI FOTO MASONRY */
@@ -284,12 +304,13 @@
     .story-curved-line {
       position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
       width: 3px; height: calc(100% - 50px);
-      background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
+      background: linear-gradient(180deg, #C5A880, #1A3C34);
       border-radius: 4px; z-index: 1;
     }
     .story-node {
       position: relative; z-index: 2; margin-bottom: 35px; width: 90%;
-      background: var(--paper-white-img) center/cover repeat !important; 
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important; 
       padding: 18px; border-radius: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06); margin-left: auto; margin-right: auto;
     }
@@ -302,20 +323,22 @@
     .story-icon {
       width: 42px; height: 42px; background: #F8F4EE !important; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      margin: -30px auto 10px; color: var(--accent-color) !important; font-size: 1.2rem;
+      margin: -30px auto 10px; color: #C5A880 !important; font-size: 1.2rem;
       border: 2px solid #FFF; box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     }
 
     /* Bank Cards */
     .bank-card {
-      background: var(--paper-white-img) center/cover repeat !important; 
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important; 
       padding: 20px; border-radius: 16px; margin: 15px 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06); text-align: center;
     }
 
     /* Buku Tamu / Wishes List */
     .rsvp-form-card {
-      background: var(--paper-white-img) center/cover repeat !important; 
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important; 
       padding: 20px; border-radius: 16px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
       position: relative; z-index: 10;
     }
@@ -326,23 +349,18 @@
 
     .wishes-list { margin: 20px; text-align: left; max-height: 350px; overflow-y: auto; }
     .wish-box {
-      background: var(--paper-white-img) center/cover repeat !important; 
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23FFFFFF"/></svg>') !important;
+      background-color: #FFFFFF !important; 
       padding: 14px 16px; border-radius: 12px; margin-bottom: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid var(--primary-color); position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #1A3C34; position: relative;
     }
     .wish-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; padding-right: 20px; }
-    .wish-author { font-weight: 600; color: var(--primary-color) !important; font-size: 0.95rem; }
-    .wish-status { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: rgba(26, 60, 52, 0.1) !important; color: var(--primary-color) !important; font-weight: 600; }
+    .wish-author { font-weight: 600; color: #1A3C34 !important; font-size: 0.95rem; }
+    .wish-status { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: rgba(26, 60, 52, 0.1) !important; color: #1A3C34 !important; font-weight: 600; }
     .wish-content { font-size: 0.88rem; color: #444 !important; }
 
-    .btn-delete-wish {
-      position: absolute; top: 10px; right: 10px; color: #d9534f; background: transparent;
-      border: none; font-size: 1rem; cursor: pointer; opacity: 0.7; padding: 2px 6px;
-    }
-    .btn-delete-wish:hover { opacity: 1; color: #c9302c; }
-
     footer {
-      background: var(--primary-color) !important; color: #FFF !important; padding: 40px 20px 25px;
+      background-color: #1A3C34 !important; color: #FFF !important; padding: 40px 20px 25px;
       text-align: center; border-top-left-radius: 30px; border-top-right-radius: 30px;
     }
     .footer-collab {
@@ -355,17 +373,15 @@
 
 <div class="app-viewport">
 
-  <!-- ========================================================= -->
-  <!-- FRAME 1: AMPLOP POP-UP OVERLAY                            -->
-  <!-- ========================================================= -->
+  <!-- FRAME 1: AMPLOP POP-UP OVERLAY -->
   <div id="cover-overlay" class="cover-overlay">
     <div id="envelope-box" class="envelope-box">
       <div class="envelope-top-flap"></div>
       
       <div id="card-insert" class="envelope-card-insert">
-        <p style="color: var(--accent-color); font-size: 0.7rem; letter-spacing: 2px; font-weight: 600;">Wedding Invitation</p>
-        <h1 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color); margin: 4px 0;">Riyan & Amelia</h1>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Kepada Yth:</p>
+        <p style="color: #C5A880; font-size: 0.7rem; letter-spacing: 2px; font-weight: 600;">Wedding Invitation</p>
+        <h1 class="font-serif" style="font-size: 1.8rem; color: #1A3C34; margin: 4px 0;">Riyan & Amelia</h1>
+        <p style="font-size: 0.8rem; color: #666666; margin-top: 4px;">Kepada Yth:</p>
         <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
       </div>
 
@@ -398,7 +414,7 @@
 
     <!-- FRAME 3: AYAT AL-QURAN -->
     <section class="quote-card text-center reveal-section">
-      <p class="font-serif" style="font-size: 1.2rem; color: var(--primary-color); font-weight: 700; margin-bottom: 8px;">Q.S. Ar-Rum Ayat 21</p>
+      <p class="font-serif" style="font-size: 1.2rem; color: #1A3C34; font-weight: 700; margin-bottom: 8px;">Q.S. Ar-Rum Ayat 21</p>
       <p style="font-style: italic; line-height: 1.5; font-size: 0.85rem;">
         "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari mejelismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
       </p>
@@ -406,29 +422,29 @@
 
     <!-- FRAME 4: MEMPELAI -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">We Are Getting Married!</h2>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 25px;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+      <h2 class="font-serif" style="font-size: 2rem; color: #1A3C34;">We Are Getting Married!</h2>
+      <p style="font-size: 0.85rem; color: #666666; margin-bottom: 25px;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
 
       <div class="mempelai-card">
         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Riyan Ardiansyah" class="mempelai-img">
-        <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;">THE GROOM</p>
-        <h3 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color);">Riyan Ardiansyah</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Putra dari Bpk. Sunarya & Ibu Huriyah</p>
+        <p style="color: #C5A880; font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;">THE GROOM</p>
+        <h3 class="font-serif" style="font-size: 1.8rem; color: #1A3C34;">Riyan Ardiansyah</h3>
+        <p style="font-size: 0.85rem; color: #666666; margin-top: 5px;">Putra dari Bpk. Sunarya & Ibu Huriyah</p>
       </div>
 
-      <div class="font-serif" style="font-size: 2.2rem; color: var(--accent-color); margin: 15px 0;">&</div>
+      <div class="font-serif" style="font-size: 2.2rem; color: #C5A880; margin: 15px 0;">&</div>
 
       <div class="mempelai-card">
         <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Amelia Dita Yanti" class="mempelai-img">
-        <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;">THE BRIDE</p>
-        <h3 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color);">Amelia Dita Yanti</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Putri dari Bpk. Tarmidi & Ibu Triyanti</p>
+        <p style="color: #C5A880; font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;">THE BRIDE</p>
+        <h3 class="font-serif" style="font-size: 1.8rem; color: #1A3C34;">Amelia Dita Yanti</h3>
+        <p style="font-size: 0.85rem; color: #666666; margin-top: 5px;">Putri dari Bpk. Tarmidi & Ibu Triyanti</p>
       </div>
     </section>
 
     <!-- FRAME 5: COUNTDOWN -->
     <section class="section-card bg-light reveal-section">
-      <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Save The Date</h2>
+      <h2 class="font-serif" style="font-size: 2rem; color: #1A3C34;">Save The Date</h2>
       
       <div id="countdown" style="display: flex; gap: 8px; margin: 20px 0;">
         <div class="time-box"><span id="days">00</span><p>Hari</p></div>
@@ -443,10 +459,10 @@
 
       <div style="margin-top: 30px;">
         <div class="mempelai-card">
-          <h3 class="font-serif" style="font-size: 1.6rem; color: var(--primary-color);">Akad Nikah & Resepsi</h3>
+          <h3 class="font-serif" style="font-size: 1.6rem; color: #1A3C34;">Akad Nikah & Resepsi</h3>
           <p style="font-size: 0.9rem; font-weight: 600; margin-top: 8px;">Minggu, 06 Desember 2026</p>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">08.00 WIB s/d 12.00 WIB</p>
-          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;"><i class="fa-solid fa-location-dot"></i> Warung D Empang</p>
+          <p style="font-size: 0.85rem; color: #666666;">08.00 WIB s/d 12.00 WIB</p>
+          <p style="font-size: 0.85rem; color: #666666; margin-top: 10px;"><i class="fa-solid fa-location-dot"></i> Warung D Empang</p>
           
           <a href="https://www.google.com/maps/search/?api=1&query=Warung+D+Empang" target="_blank" class="btn-primary" style="margin-top: 15px; width: 100%; font-size: 0.85rem;">
             <i class="fa-solid fa-map-location-dot"></i> GOOGLE MAPS
@@ -457,8 +473,8 @@
 
     <!-- FRAME 6: GALERI FOTO MASONRY -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Gallery</h2>
-      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Klik foto untuk memperbesar</p>
+      <h2 class="font-serif" style="font-size: 2rem; color: #1A3C34;">Gallery</h2>
+      <p style="font-size: 0.8rem; color: #666666; margin-bottom: 15px;">Klik foto untuk memperbesar</p>
 
       <div class="gallery-masonry">
         <div class="gallery-item item-large" onclick="openLightbox(this)">
@@ -484,8 +500,8 @@
 
     <!-- FRAME 7: LOVE STORY 4 BAGIAN DENGAN FOTO -->
     <section class="section-card bg-light reveal-section">
-      <h2 class="font-serif" style="font-size: 2.2rem; color: var(--primary-color);">Love Story</h2>
-      <p class="font-serif" style="font-size: 1.1rem; color: var(--accent-color); margin-top: -5px;">Riyan Ardiansyah & Amelia Dita Yanti</p>
+      <h2 class="font-serif" style="font-size: 2.2rem; color: #1A3C34;">Love Story</h2>
+      <p class="font-serif" style="font-size: 1.1rem; color: #C5A880; margin-top: -5px;">Riyan Ardiansyah & Amelia Dita Yanti</p>
 
       <div class="story-timeline-wrapper">
         <div class="story-curved-line"></div>
@@ -496,8 +512,8 @@
             <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=500&q=80" alt="Awal Pertemuan">
           </div>
           <div class="story-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
-          <h4 class="font-serif" style="font-size: 1.25rem; color: var(--primary-color);">AWAL PERTEMUAN</h4>
-          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;">
+          <h4 class="font-serif" style="font-size: 1.25rem; color: #1A3C34;">AWAL PERTEMUAN</h4>
+          <p style="font-size: 0.82rem; color: #666666; margin-top: 6px;">
             Berawal dari masa sekolah tempat kami pertama kali saling mengenal. Sebuah cerita sederhana yang ternyata menjadi awal dari kisah panjang kami.
           </p>
         </div>
@@ -508,8 +524,8 @@
             <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80" alt="Menjadi Kita">
           </div>
           <div class="story-icon"><i class="fa-solid fa-heart"></i></div>
-          <h4 class="font-serif" style="font-size: 1.25rem; color: var(--primary-color);">MENJADI KITA</h4>
-          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;">
+          <h4 class="font-serif" style="font-size: 1.25rem; color: #1A3C34;">MENJADI KITA</h4>
+          <p style="font-size: 0.82rem; color: #666666; margin-top: 6px;">
             Waktu terus berjalan, hingga takdir mempertemukan kami kembali. Percakapan kecil berubah menjadi rasa nyaman, dan kami memutuskan untuk memulai langkah baru sebagai pasangan.
           </p>
         </div>
@@ -520,8 +536,8 @@
             <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80" alt="Sebuah Komitmen">
           </div>
           <div class="story-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
-          <h4 class="font-serif" style="font-size: 1.25rem; color: var(--primary-color);">SEBUAH KOMITMEN</h4>
-          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;">
+          <h4 class="font-serif" style="font-size: 1.25rem; color: #1A3C34;">SEBUAH KOMITMEN</h4>
+          <p style="font-size: 0.82rem; color: #666666; margin-top: 6px;">
             Dengan keyakinan serta restu dari kedua orang tua dan keluarga, kami melangkah ke jenjang pertunangan. Sebuah komitmen dan langkah serius untuk membangun masa depan bersama.
           </p>
         </div>
@@ -532,8 +548,8 @@
             <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=500&q=80" alt="Awal Selamanya">
           </div>
           <div class="story-icon"><i class="fa-solid fa-ring"></i></div>
-          <h4 class="font-serif" style="font-size: 1.25rem; color: var(--primary-color);">AWAL SELAMANYA</h4>
-          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;">
+          <h4 class="font-serif" style="font-size: 1.25rem; color: #1A3C34;">AWAL SELAMANYA</h4>
+          <p style="font-size: 0.82rem; color: #666666; margin-top: 6px;">
             Dengan penuh rasa syukur dan bahagia, kini kami memilih menyempurnakan perjalanan ini dalam ikatan suci pernikahan. Mohon doa restu agar langkah kami senantiasa diliputi keberkahan.
           </p>
         </div>
@@ -542,32 +558,32 @@
 
     <!-- FRAME 8: WEDDING GIFT -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Wedding Gift</h2>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika ingin memberi kado secara cashless:</p>
+      <h2 class="font-serif" style="font-size: 2rem; color: #1A3C34;">Wedding Gift</h2>
+      <p style="font-size: 0.85rem; color: #666666; margin-top: 5px;">Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika ingin memberi kado secara cashless:</p>
 
       <div class="bank-card">
-        <h3 class="font-serif" style="color: var(--primary-color); font-size: 1.5rem;">Bank Mandiri</h3>
+        <h3 class="font-serif" style="color: #1A3C34; font-size: 1.5rem;">Bank Mandiri</h3>
         <p style="font-size: 1.3rem; font-weight: bold; margin: 8px 0; letter-spacing: 1px;" id="rekening-riyan">1760001646239</p>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">a.n. Riyan Ardiansyah</p>
+        <p style="font-size: 0.85rem; color: #666666;">a.n. Riyan Ardiansyah</p>
         <button onclick="copyText('rekening-riyan')" class="btn-primary" style="margin-top: 12px; width: 100%; font-size: 0.85rem;">
           <i class="fa-regular fa-copy"></i> Salin Norek
         </button>
       </div>
 
       <div class="bank-card">
-        <h3 class="font-serif" style="color: var(--primary-color); font-size: 1.5rem;">Bank Mandiri</h3>
+        <h3 class="font-serif" style="color: #1A3C34; font-size: 1.5rem;">Bank Mandiri</h3>
         <p style="font-size: 1.3rem; font-weight: bold; margin: 8px 0; letter-spacing: 1px;" id="rekening-amelia">1550013683548</p>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">a.n. Amelia Dita Yanti</p>
+        <p style="font-size: 0.85rem; color: #666666;">a.n. Amelia Dita Yanti</p>
         <button onclick="copyText('rekening-amelia')" class="btn-primary" style="margin-top: 12px; width: 100%; font-size: 0.85rem;">
           <i class="fa-regular fa-copy"></i> Salin Norek
         </button>
       </div>
     </section>
 
-    <!-- FRAME 9: UCAPAN & DOA (ONLINE GOOGLE SPREADSHEET REALTIME) -->
+    <!-- FRAME 9: UCAPAN & DOA -->
     <section class="section-card bg-light reveal-section">
-      <h2 class="font-serif" style="font-size: 2rem; color: var(--primary-color);">Ucapan & Doa</h2>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;" id="wishes-count">💬 Memuat ucapan...</p>
+      <h2 class="font-serif" style="font-size: 2rem; color: #1A3C34;">Ucapan & Doa</h2>
+      <p style="font-size: 0.85rem; color: #666666; margin-bottom: 15px;" id="wishes-count">💬 Memuat ucapan...</p>
 
       <div class="rsvp-form-card">
         <form id="rsvp-form">
@@ -588,12 +604,12 @@
     <!-- FRAME 10: PENUTUP TERIMA KASIH -->
     <footer class="reveal-section">
       <h2 class="font-serif" style="font-size: 2.2rem; margin-bottom: 10px;">Terima Kasih</h2>
-      <p class="font-serif" style="font-size: 1.8rem; color: var(--accent-color);">Riyan & Amelia</p>
+      <p class="font-serif" style="font-size: 1.8rem; color: #C5A880;">Riyan & Amelia</p>
       <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">Tiada yang dapat kami ungkapkan selain rasa terima kasih yang tulus apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.</p>
       
       <!-- FOOTER KOLABORASI -->
       <div class="footer-collab">
-        Made with ❤️ by <b>Riyan Ardiansyah</b>
+        Made with ❤️ by <b>Riyan Ardiansyah</b> in collaboration with <b>Gemini AI</b>
       </div>
     </footer>
 
@@ -602,6 +618,14 @@
 </div>
 
 <script>
+  // Force Inline Dynamic Light Scheme Injection
+  document.addEventListener("DOMContentLoaded", function() {
+    const isSamsung = /samsung/i.test(navigator.userAgent);
+    if(isSamsung) {
+      document.body.style.setProperty("background-color", "#F4F6F5", "important");
+    }
+  });
+
   // 1. URL Parameter Nama Tamu
   const urlParams = new URLSearchParams(window.location.search);
   const guestName = urlParams.get('to');
@@ -694,7 +718,6 @@
   const wishesCount = document.getElementById('wishes-count');
   const btnSubmit = document.getElementById('btn-submit-ucapan');
 
-  // Ambil data ucapan dari Google Sheet
   async function loadWishesFromGoogleSheet() {
     try {
       const res = await fetch(GOOGLE_SCRIPT_URL);
@@ -728,7 +751,6 @@
     });
   }
 
-  // Kirim ucapan ke Google Sheet
   rsvpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     btnSubmit.innerText = 'Mengirim...';
@@ -757,7 +779,6 @@
     btnSubmit.disabled = false;
   });
 
-  // Muat data awal & perbarui tiap 10 detik
   loadWishesFromGoogleSheet();
   setInterval(loadWishesFromGoogleSheet, 10000);
 </script>
