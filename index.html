@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- MENCEGAH FORCE DARK MODE DI HP SAMSUNG / BROWSER MOBILE -->
+  <!-- MENCEGAH FORCE DARK MODE DI HP SAMSUNG & CHROME MOBILE -->
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
   <meta name="theme-color" content="#F4F6F5">
@@ -18,8 +18,9 @@
   <style>
     /* MEMAKSA WEB BROWSER TETAP MODE TERANG */
     :root {
-      color-scheme: light only;
-      supported-color-schemes: light;
+      color-scheme: light only !important;
+      supported-color-schemes: light !important;
+      forced-color-adjust: none !important;
       --bg-color: #F4F6F5;
       --card-bg: #FFFFFF;
       --primary-color: #1A3C34; /* Emerald Green */
@@ -33,12 +34,14 @@
       margin: 0; 
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      forced-color-adjust: none !important;
     }
 
-    /* Kunci Warna Latar Belakang & Teks */
+    /* Kunci Warna Latar Belakang & Teks Utama */
     html, body {
       color-scheme: light only !important;
       background-color: #E2E8E5 !important;
+      background-image: linear-gradient(#E2E8E5, #E2E8E5) !important;
       color: #2B2B2B !important;
       font-family: 'Plus Jakarta Sans', sans-serif;
       line-height: 1.6;
@@ -46,11 +49,13 @@
       scroll-behavior: smooth;
     }
 
-    /* Mencegah inversi warna otomatis oleh browser Android/Samsung */
+    /* TRIK KHUSUS LUKIS WAKTU DARK MODE TERDETEKSI (Samsung Browser Inversion Fix) */
     @media (prefers-color-scheme: dark) {
-      html, body, .app-viewport, .section-card, .mempelai-card, .quote-card, .hero-header-custom, .hero-arch-frame, .envelope-card-insert, .rsvp-form-card, .bank-card, .wish-box {
-        background-color: inherit;
-        color: inherit;
+      html, body {
+        background-color: #E2E8E5 !important;
+        color: #2B2B2B !important;
+      }
+      .app-viewport, .section-card, .mempelai-card, .quote-card, .hero-header-custom, .hero-arch-frame, .envelope-card-insert, .rsvp-form-card, .bank-card, .wish-box {
         filter: none !important;
         -webkit-filter: none !important;
       }
@@ -64,6 +69,7 @@
       max-width: 480px;
       margin: 0 auto;
       background-color: #F4F6F5 !important;
+      background-image: linear-gradient(#F4F6F5, #F4F6F5) !important;
       min-height: 100vh;
       position: relative;
       box-shadow: 0 0 30px rgba(0,0,0,0.15);
@@ -86,7 +92,9 @@
 
     .envelope-box {
       position: relative; width: 310px; height: 190px;
-      background-color: #112d27; border-radius: 0 0 10px 10px;
+      background-color: #112d27 !important; 
+      background-image: linear-gradient(#112d27, #112d27) !important;
+      border-radius: 0 0 10px 10px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin-bottom: 25px;
       pointer-events: auto;
     }
@@ -98,10 +106,13 @@
       border-bottom: 95px solid #1a3c34; z-index: 1;
     }
 
+    /* KERTAS AMPLOP KITA KUNCI TERANG DENGAN LIN-GRADIENT */
     .envelope-card-insert {
       position: absolute; top: -55px; left: 18px;
       width: 274px; height: 200px;
-      background: #FFFFFF !important; border-radius: 12px;
+      background-color: #FFFFFF !important; 
+      background-image: linear-gradient(#FFFFFF, #FFFFFF) !important;
+      border-radius: 12px;
       padding: 18px 12px; text-align: center;
       box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
       z-index: 2; display: flex; flex-direction: column; justify-content: center;
@@ -118,14 +129,19 @@
 
     .guest-name-box {
       font-size: 1rem; font-weight: 600; color: #1A3C34 !important;
-      margin: 8px 0 0; padding: 6px; background: #F0F4F2 !important; border-radius: 6px;
+      margin: 8px 0 0; padding: 6px; 
+      background-color: #F0F4F2 !important; 
+      background-image: linear-gradient(#F0F4F2, #F0F4F2) !important;
+      border-radius: 6px;
     }
 
     .btn-open-container { position: relative; z-index: 999; }
 
     /* TOMBOL DENGAN EFEK CAHAYA (SHINE EFFECT) */
     .btn-primary {
-      background-color: #C5A880 !important; color: #1A3C34 !important; border: none;
+      background-color: #C5A880 !important; 
+      background-image: linear-gradient(#C5A880, #C5A880) !important;
+      color: #1A3C34 !important; border: none;
       padding: 12px 28px; font-size: 0.95rem; font-weight: 600;
       border-radius: 30px; cursor: pointer;
       box-shadow: 0 4px 15px rgba(0,0,0,0.25); transition: all 0.3s ease;
@@ -140,7 +156,11 @@
     }
     @keyframes shine { 0% { transform: translateX(-100%) rotate(30deg); } 100% { transform: translateX(100%) rotate(30deg); } }
 
-    .btn-primary:hover { background-color: #ffffff !important; transform: translateY(-2px); }
+    .btn-primary:hover { 
+      background-color: #ffffff !important; 
+      background-image: linear-gradient(#ffffff, #ffffff) !important;
+      transform: translateY(-2px); 
+    }
 
     /* MENGILANGKAN OVERLAY SECARA TOTAL SETELAH BUKA UNDANGAN */
     .btn-open-container.fade-btn { opacity: 0; transform: translateY(20px); pointer-events: none; }
@@ -199,7 +219,8 @@
       justify-content: center;
       box-shadow: inset 0 0 0 4px rgba(197, 168, 128, 0.2);
       position: relative;
-      background: rgba(255, 255, 255, 0.5) !important;
+      background-color: rgba(255, 255, 255, 0.5) !important;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)) !important;
       backdrop-filter: blur(2px);
     }
 
@@ -254,22 +275,33 @@
     .section-card { padding: 40px 20px; text-align: center; position: relative; }
 
     .quote-card {
-      background: #FFFFFF !important; padding: 25px 20px; border-radius: 16px; margin: 20px;
+      background-color: #FFFFFF !important; 
+      background-image: linear-gradient(#FFFFFF, #FFFFFF) !important;
+      padding: 25px 20px; border-radius: 16px; margin: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04); font-size: 0.9rem; color: #444 !important; border: 1px solid #EAEAEA;
     }
 
     .mempelai-card {
-      background: #FFFFFF !important; border-radius: 16px; padding: 20px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      background-color: #FFFFFF !important; 
+      background-image: linear-gradient(#FFFFFF, #FFFFFF) !important;
+      border-radius: 16px; padding: 20px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     }
     .mempelai-img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
 
-    .time-box { background: #1A3C34 !important; color: #FFF !important; padding: 10px; border-radius: 8px; flex: 1; }
+    .time-box { 
+      background-color: #1A3C34 !important; 
+      background-image: linear-gradient(#1A3C34, #1A3C34) !important;
+      color: #FFF !important; padding: 10px; border-radius: 8px; flex: 1; 
+    }
     .time-box span { font-size: 1.3rem; font-weight: 700; display: block; color: #FFF !important; }
     .time-box p { font-size: 0.65rem; text-transform: uppercase; color: #FFF !important; }
 
     .btn-outline {
       display: inline-block; border: 1px solid #1A3C34; color: #1A3C34 !important;
-      padding: 10px 22px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 600; background: #FFF !important; margin-top: 10px;
+      padding: 10px 22px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; font-weight: 600; 
+      background-color: #FFF !important; 
+      background-image: linear-gradient(#FFF, #FFF) !important;
+      margin-top: 10px;
     }
 
     /* GALERI FOTO MASONRY */
@@ -308,7 +340,9 @@
     }
     .story-node {
       position: relative; z-index: 2; margin-bottom: 35px; width: 90%;
-      background: #FFF !important; padding: 18px; border-radius: 16px;
+      background-color: #FFF !important; 
+      background-image: linear-gradient(#FFF, #FFF) !important;
+      padding: 18px; border-radius: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-left: auto; margin-right: auto;
     }
     .story-img-container {
@@ -318,7 +352,10 @@
       width: 100%; height: 100%; object-fit: cover;
     }
     .story-icon {
-      width: 42px; height: 42px; background: #F8F4EE !important; border-radius: 50%;
+      width: 42px; height: 42px; 
+      background-color: #F8F4EE !important; 
+      background-image: linear-gradient(#F8F4EE, #F8F4EE) !important;
+      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       margin: -30px auto 10px; color: #C5A880 !important; font-size: 1.2rem;
       border: 2px solid #FFF; box-shadow: 0 3px 8px rgba(0,0,0,0.1);
@@ -326,13 +363,17 @@
 
     /* Bank Cards */
     .bank-card {
-      background: #FFF !important; padding: 20px; border-radius: 16px; margin: 15px 20px;
+      background-color: #FFF !important; 
+      background-image: linear-gradient(#FFF, #FFF) !important;
+      padding: 20px; border-radius: 16px; margin: 15px 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04); text-align: center;
     }
 
     /* Buku Tamu / Wishes List */
     .rsvp-form-card {
-      background: #FFF !important; padding: 20px; border-radius: 16px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      background-color: #FFF !important; 
+      background-image: linear-gradient(#FFF, #FFF) !important;
+      padding: 20px; border-radius: 16px; margin: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
       position: relative; z-index: 10;
     }
     .rsvp-form-card input, .rsvp-form-card select, .rsvp-form-card textarea {
@@ -342,12 +383,14 @@
 
     .wishes-list { margin: 20px; text-align: left; max-height: 350px; overflow-y: auto; }
     .wish-box {
-      background: #FFF !important; padding: 14px 16px; border-radius: 12px; margin-bottom: 12px;
+      background-color: #FFF !important; 
+      background-image: linear-gradient(#FFF, #FFF) !important;
+      padding: 14px 16px; border-radius: 12px; margin-bottom: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid #1A3C34; position: relative;
     }
     .wish-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; padding-right: 20px; }
     .wish-author { font-weight: 600; color: #1A3C34 !important; font-size: 0.95rem; }
-    .wish-status { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: #E8F0EC !important; color: #1A3C34 !important; font-weight: 600; }
+    .wish-status { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background-color: #E8F0EC !important; color: #1A3C34 !important; font-weight: 600; }
     .wish-content { font-size: 0.88rem; color: #444 !important; }
 
     .btn-delete-wish {
@@ -357,7 +400,9 @@
     .btn-delete-wish:hover { opacity: 1; color: #c9302c; }
 
     footer {
-      background: #1A3C34 !important; color: #FFF !important; padding: 40px 20px 25px;
+      background-color: #1A3C34 !important; 
+      background-image: linear-gradient(#1A3C34, #1A3C34) !important;
+      color: #FFF !important; padding: 40px 20px 25px;
       text-align: center; border-top-left-radius: 30px; border-top-right-radius: 30px;
     }
     .footer-collab {
