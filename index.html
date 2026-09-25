@@ -25,7 +25,7 @@
     .hidden { display: none !important; }
 
     /* ========================================================= */
-    /* STRUKTUR & ANIMASI POP-UP SURAT TERBUKA                   */
+    /* STRUKTUR AMPLOP TERBUKA ELEGAN (REALISTIC ENVELOPE)       */
     /* ========================================================= */
     .cover-overlay {
       position: fixed;
@@ -33,7 +33,7 @@
       background: linear-gradient(rgba(26, 60, 52, 0.85), rgba(26, 60, 52, 0.85)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       z-index: 9999;
-      transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+      transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
       padding: 20px;
     }
 
@@ -48,7 +48,7 @@
       margin-bottom: 25px;
     }
 
-    /* Flap Atas Terbuka */
+    /* Flap Atas Terbuka Ke Atas */
     .envelope-top-flap {
       position: absolute;
       top: -100px;
@@ -57,11 +57,11 @@
       height: 0;
       border-left: 160px solid transparent;
       border-right: 160px solid transparent;
-      border-bottom: 100px solid #1a3c34;
+      border-bottom: 100px solid #1a3c34; /* Lipatan Atas Terbuka */
       z-index: 1;
     }
 
-    /* Kartu Undangan di Dalam Amplop */
+    /* Kartu Undangan Menyembul Keluar */
     .envelope-card-insert {
       position: absolute;
       top: -60px;
@@ -77,11 +77,10 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      /* Transisi Smooth untuk Efek Pop-up Naik */
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.6s ease;
     }
 
-    /* Kantong Depan Amplop */
+    /* Sisi Kantong Depan Amplop */
     .envelope-pocket {
       position: absolute;
       bottom: 0; left: 0;
@@ -103,8 +102,10 @@
       border-radius: 6px;
     }
 
-    /* Tombol Aksi */
-    .btn-open-container { z-index: 10; }
+    /* Tombol Aksi Di Bawah Amplop */
+    .btn-open-container {
+      z-index: 10;
+    }
 
     .btn-primary {
       background-color: var(--accent-color);
@@ -127,14 +128,7 @@
       transform: translateY(-2px);
     }
 
-    /* --- CLASS ANIMASI AKTIF --- */
-    /* 1. Kartu terangkat naik keluar dari amplop */
-    .envelope-card-insert.popup-active {
-      transform: translateY(-100px) scale(1.05);
-      z-index: 5;
-    }
-
-    /* 2. Layar cover memudar & bergeser ke atas */
+    /* Animation State saat diklik */
     .cover-overlay.fade-out {
       opacity: 0;
       transform: translateY(-100%);
@@ -180,8 +174,34 @@
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 20px; }
     .gallery-grid img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; }
 
+    /* PERBAIKAN: Tombol Kartu Bank dibuat persis di Tengah (Center) */
     .bank-card, .rsvp-form { background: var(--card-bg); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; }
+    .bank-card .btn-primary { 
+      margin: 15px auto 0; 
+      justify-content: center;
+    }
+
     .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #DDD; border-radius: 8px; font-family: inherit; }
+
+    /* Wadah Daftar Ucapan Tamu (Baru muncul saat disubmit) */
+    .wishes-container {
+      margin-top: 20px;
+      text-align: left;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .wish-item {
+      background: #FFFFFF;
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-left: 4px solid var(--primary-color);
+    }
+    .wish-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+    .wish-name { font-weight: 600; color: var(--primary-color); font-size: 0.95rem; }
+    .wish-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 12px; background: #E8F0EC; color: var(--primary-color); }
+    .wish-text { font-size: 0.88rem; color: #444; }
 
     footer { text-align: center; padding: 30px 20px; background: var(--primary-color); color: #FFF; }
   </style>
@@ -198,7 +218,7 @@
     <i class="fa-solid fa-compact-disc"></i>
   </button>
 
-  <!-- FRAME 1: AMPLOP TERBUKA OVERLAY -->
+  <!-- FRAME 1: AMPLOP TERBUKA & TOMBOL DI LUAR -->
   <div id="cover-overlay" class="cover-overlay">
     
     <div class="envelope-box">
@@ -206,7 +226,7 @@
       <div class="envelope-top-flap"></div>
       
       <!-- Kartu di Dalam Undangan -->
-      <div id="card-insert" class="envelope-card-insert">
+      <div class="envelope-card-insert">
         <p style="color: var(--accent-color); font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING OF</p>
         <h1 class="font-serif" style="font-size: 1.8rem; color: var(--primary-color); margin: 4px 0;">Riyan & Amelia</h1>
         <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">Kepada Yth:</p>
@@ -217,7 +237,7 @@
       <div class="envelope-pocket"></div>
     </div>
 
-    <!-- Tombol Buka Undangan -->
+    <!-- Tombol Buka Undangan Terpisah Di Bawah Amplop -->
     <div class="btn-open-container">
       <button id="btn-open" class="btn-primary">
         <i class="fa-solid fa-envelope-open"></i> Buka Undangan
@@ -298,7 +318,7 @@
         <h3 style="color: var(--primary-color);">Bank BCA</h3>
         <p style="font-size: 1.3rem; font-weight: bold; margin: 10px 0;" id="rekening-bca">1234567890</p>
         <p style="font-size: 0.85rem; color: var(--text-muted);">a.n. Riyan Ardiansyah</p>
-        <button onclick="copyText('rekening-bca')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 15px;">
+        <button onclick="copyText('rekening-bca')" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">
           <i class="fa-regular fa-copy"></i> Salin Nomor Rekening
         </button>
       </div>
@@ -307,16 +327,19 @@
     <!-- FRAME 6: RSVP & UCAPAN -->
     <section class="section-container">
       <h2 class="section-title font-serif">Buku Tamu & RSVP</h2>
-      <form id="rsvp-form" class="rsvp-form" onsubmit="event.preventDefault(); alert('Terima kasih atas konfirmasi dan ucapan Anda!');">
+      <form id="rsvp-form" class="rsvp-form">
         <input type="text" id="input-nama" placeholder="Nama Anda" required>
-        <select required>
+        <select id="input-kehadiran" required>
           <option value="">-- Konfirmasi Kehadiran --</option>
-          <option value="hadir">Hadir</option>
-          <option value="tidak">Tidak Dapat Hadir</option>
+          <option value="Hadir">Hadir</option>
+          <option value="Tidak Hadir">Tidak Dapat Hadir</option>
         </select>
-        <textarea rows="4" placeholder="Ucapan & Doa Restu"></textarea>
-        <button type="submit" class="btn-primary">Kirim Ucapan</button>
+        <textarea id="input-ucapan" rows="4" placeholder="Ucapan & Doa Restu" required></textarea>
+        <button type="submit" class="btn-primary" style="width: 100%;">Kirim Ucapan</button>
       </form>
+
+      <!-- PERBAIKAN: Wadah tempat ucapan langsung muncul di bawah form setelah di-submit -->
+      <div id="wishes-container" class="wishes-container"></div>
     </section>
 
     <footer>
@@ -335,25 +358,29 @@
       document.getElementById('input-nama').value = guestName;
     }
 
-    // 2. Animasi Pop-Up Surat Terbuka & Play Music
+    // 2. Animasi Hilang Cover Overlay & Play Music
     const btnOpen = document.getElementById('btn-open');
-    const cardInsert = document.getElementById('card-insert');
     const coverOverlay = document.getElementById('cover-overlay');
     const bgMusic = document.getElementById('bg-music');
     const musicControl = document.getElementById('music-control');
 
     btnOpen.addEventListener('click', () => {
-      // Putar musik latar
       bgMusic.play();
       musicControl.classList.remove('hidden');
+      coverOverlay.classList.add('fade-out');
+    });
 
-      // Step 1: Kartu terangkat naik keluar dari kantong amplop
-      cardInsert.classList.add('popup-active');
-
-      // Step 2: Beri jeda 800ms agar mata melihat kartu naik, baru overlay memudar
-      setTimeout(() => {
-        coverOverlay.classList.add('fade-out');
-      }, 800);
+    // Toggle Music Play/Pause
+    let isPlaying = true;
+    musicControl.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicControl.innerHTML = '<i class="fa-solid fa-play"></i>';
+      } else {
+        bgMusic.play();
+        musicControl.innerHTML = '<i class="fa-solid fa-compact-disc"></i>';
+      }
+      isPlaying = !isPlaying;
     });
 
     // 3. Countdown Timer (12 Desember 2026)
@@ -377,6 +404,36 @@
         alert("Nomor rekening berhasil disalin: " + text);
       });
     }
+
+    // PERBAIKAN: Fungsi untuk menampilkan Ucapan di bawah form saat tombol submit di-klik
+    const rsvpForm = document.getElementById('rsvp-form');
+    const wishesContainer = document.getElementById('wishes-container');
+
+    rsvpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nama = document.getElementById('input-nama').value;
+      const kehadiran = document.getElementById('input-kehadiran').value;
+      const ucapan = document.getElementById('input-ucapan').value;
+
+      // Membuat elemen kartu ucapan baru
+      const wishItem = document.createElement('div');
+      wishItem.className = 'wish-item';
+      wishItem.innerHTML = `
+        <div class="wish-header">
+          <span class="wish-name">${nama}</span>
+          <span class="wish-badge">${kehadiran}</span>
+        </div>
+        <p class="wish-text">${ucapan}</p>
+      `;
+
+      // Menambahkan ucapan terbaru di paling atas daftar ucapan
+      wishesContainer.prepend(wishItem);
+
+      // Reset isi textarea & beri pesan sukses
+      document.getElementById('input-ucapan').value = '';
+      alert('Terima kasih! Ucapan dan konfirmasi Anda telah tersimpan.');
+    });
   </script>
 </body>
 </html>
