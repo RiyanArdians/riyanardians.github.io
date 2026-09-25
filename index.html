@@ -46,6 +46,7 @@
       border-radius: 0 0 10px 10px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
       margin-bottom: 25px;
+      pointer-events: none; /* Mencegah blokir klik */
     }
 
     /* Flap Atas Terbuka */
@@ -102,9 +103,10 @@
       border-radius: 6px;
     }
 
-    /* Tombol Buka Undangan */
+    /* Tombol Buka Undangan (Dipastikan selalu di posisi paling atas) */
     .btn-open-container {
-      z-index: 10;
+      position: relative;
+      z-index: 999;
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
@@ -174,13 +176,6 @@
       font-size: 0.9rem;
     }
 
-    .music-btn {
-      position: fixed; top: 20px; right: 20px; z-index: 999;
-      width: 45px; height: 45px; border-radius: 50%;
-      background: var(--primary-color); color: #FFF; border: none;
-      cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
     .section-container { padding: 50px 20px; max-width: 700px; margin: 0 auto; text-align: center; }
     .bg-light { background-color: #F4F6F5; }
     .section-title { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 20px; }
@@ -206,16 +201,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Audio Background (Gunakan file MP3 langsung) -->
-  <audio id="bg-music" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Control Button Music -->
-  <button id="music-control" class="music-btn hidden">
-    <i class="fa-solid fa-compact-disc"></i>
-  </button>
 
   <!-- FRAME 1: AMPLOP TERBUKA OVERLAY -->
   <div id="cover-overlay" class="cover-overlay">
@@ -364,14 +349,8 @@
     const btnContainer = document.getElementById('btn-container');
     const cardInsert = document.getElementById('card-insert');
     const coverOverlay = document.getElementById('cover-overlay');
-    const bgMusic = document.getElementById('bg-music');
-    const musicControl = document.getElementById('music-control');
 
     btnOpen.addEventListener('click', () => {
-      // Play Audio
-      bgMusic.play().catch(e => console.log("Audio autoplay prevented"));
-      musicControl.classList.remove('hidden');
-
       // Hilangkan tombol Buka Undangan
       btnContainer.classList.add('fade-btn');
 
@@ -389,19 +368,6 @@
         cardInsert.classList.add('step-3-zoom');
         coverOverlay.classList.add('fade-out');
       }, 1200);
-    });
-
-    // Toggle Music Play/Pause
-    let isPlaying = true;
-    musicControl.addEventListener('click', () => {
-      if (isPlaying) {
-        bgMusic.pause();
-        musicControl.innerHTML = '<i class="fa-solid fa-play"></i>';
-      } else {
-        bgMusic.play();
-        musicControl.innerHTML = '<i class="fa-solid fa-compact-disc"></i>';
-      }
-      isPlaying = !isPlaying;
     });
 
     // 3. Countdown Timer (06 Desember 2026)
