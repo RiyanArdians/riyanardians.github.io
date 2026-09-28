@@ -53,6 +53,40 @@
     }
 
     /* ========================================================= */
+    /* FLOATING MUSIC CONTROL BUTTON                             */
+    /* ========================================================= */
+    .music-btn-floating {
+      position: fixed;
+      bottom: 25px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      background-color: var(--dusty-rose-dark);
+      color: #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      z-index: 9998;
+      cursor: pointer;
+      border: 2px solid #FFFFFF;
+      transition: transform 0.3s ease;
+    }
+
+    .music-btn-floating i {
+      font-size: 1.2rem;
+    }
+
+    .music-spin {
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ========================================================= */
     /* FRAME 1: AMPLOP POP-UP OVERLAY                            */
     /* ========================================================= */
     .cover-overlay {
@@ -368,6 +402,16 @@
 </head>
 <body>
 
+<!-- AUDIO PLAYER LATAR: NADIN AMIZAH - KEKAL -->
+<audio id="bg-music" loop preload="auto">
+  <source src="https://raw.githubusercontent.com/yogasip/music-repo/main/Nadin%20Amizah%20-%20Kekal.mp3" type="audio/mpeg">
+</audio>
+
+<!-- TOMBOL KONTROL MUSIK MELAYANG (FLOATING) -->
+<div id="music-control-btn" class="music-btn-floating hidden" onclick="toggleMusic()">
+  <i id="music-icon" class="fa-solid fa-compact-disc"></i>
+</div>
+
 <div class="app-viewport">
 
   <!-- FRAME 1: AMPLOP POP-UP OVERLAY -->
@@ -623,7 +667,35 @@
     document.getElementById('input-nama').value = guestName;
   }
 
-  // 2. Timeline Animasi Amplop
+  // 2. KONTROL MUSIK LATAR
+  const bgMusic = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('music-control-btn');
+  const musicIcon = document.getElementById('music-icon');
+  let isPlaying = false;
+
+  function playMusic() {
+    bgMusic.play().then(() => {
+      isPlaying = true;
+      musicBtn.classList.remove('hidden');
+      musicIcon.classList.add('music-spin');
+    }).catch(e => {
+      console.log("Autoplay blocked:", e);
+    });
+  }
+
+  function toggleMusic() {
+    if (isPlaying) {
+      bgMusic.pause();
+      musicIcon.classList.remove('music-spin');
+      isPlaying = false;
+    } else {
+      bgMusic.play();
+      musicIcon.classList.add('music-spin');
+      isPlaying = true;
+    }
+  }
+
+  // 3. Timeline Animasi Amplop & Auto-Play Musik saat Klik Buka Undangan
   const btnOpen = document.getElementById('btn-open');
   const btnContainer = document.getElementById('btn-container');
   const cardInsert = document.getElementById('card-insert');
@@ -631,6 +703,9 @@
 
   btnOpen.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Putar musik saat tombol diklik
+    playMusic();
 
     btnContainer.classList.add('fade-btn');
     cardInsert.classList.add('step-1-up');
@@ -647,7 +722,7 @@
     }, 1200);
   });
 
-  // 3. Animasi Scroll Reveal Smooth untuk HP
+  // 4. Animasi Scroll Reveal Smooth untuk HP
   function initScrollReveal() {
     const reveals = document.querySelectorAll('.reveal-section');
     const observer = new IntersectionObserver((entries) => {
@@ -661,7 +736,7 @@
     reveals.forEach(el => observer.observe(el));
   }
 
-  // 4. Lightbox Modal Gallery
+  // 5. Lightbox Modal Gallery
   function openLightbox(element) {
     const imgSrc = element.querySelector('img').src;
     document.getElementById('lightbox-img').src = imgSrc;
@@ -671,7 +746,7 @@
     document.getElementById('lightbox').classList.remove('active');
   }
 
-  // 5. Countdown Timer (06 Desember 2026)
+  // 6. Countdown Timer (06 Desember 2026)
   const eventDate = new Date("Dec 6, 2026 08:00:00").getTime();
   setInterval(() => {
     const now = new Date().getTime();
@@ -685,7 +760,7 @@
     }
   }, 1000);
 
-  // 6. Salin Rekening
+  // 7. Salin Rekening
   function copyText(elementId) {
     const text = document.getElementById(elementId).innerText;
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -699,7 +774,7 @@
     }
   }
 
-  // 7. SPREADSHEET DATABASE REALTIME
+  // 8. SPREADSHEET DATABASE REALTIME
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbycF4BPPtW_P0LCh2e9sBJoxCnPX-PuW1ZlIsXmuBdW1n8fLWz12V_ocNW73D0sRLPs/exec';
 
   const rsvpForm = document.getElementById('rsvp-form');
