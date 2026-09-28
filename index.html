@@ -399,10 +399,9 @@
 </head>
 <body>
 
-<!-- AUDIO PLAYER LATAR: NADIN AMIZAH - KEKAL (LOKAL DENGAN FALLBACK ONLINE CDN) -->
+<!-- AUDIO PLAYER LATAR (MEMBACA FILE kekal.mp3 DI GITHUB REPOSITORY) -->
 <audio id="bg-music" loop preload="auto">
   <source src="kekal.mp3" type="audio/mpeg">
-  <source src="https://19228756-nadin-amizah.mp3.pm/song/236974499-kekal/" type="audio/mpeg">
 </audio>
 
 <!-- TOMBOL KONTROL MUSIK MELAYANG -->
@@ -665,7 +664,7 @@
     document.getElementById('input-nama').value = guestName;
   }
 
-  // 2. KONTROL MUSIK LATAR AMAN (ANTI ERROR)
+  // 2. KONTROL MUSIK LATAR
   const bgMusic = document.getElementById('bg-music');
   const musicBtn = document.getElementById('music-control-btn');
   const musicIcon = document.getElementById('music-icon');
@@ -677,7 +676,8 @@
       isPlaying = true;
       musicIcon.classList.add('music-spin');
     }).catch(err => {
-      console.log("Autoplay ditolak browser atau audio error:", err);
+      console.log("Audio play error:", err);
+      alert("Satu langkah lagi: upload file lagu Nadin Amizah ke GitHub dengan nama 'kekal.mp3' agar lagu otomatis berputar.");
     });
   }
 
@@ -691,7 +691,7 @@
         musicIcon.classList.add('music-spin');
         isPlaying = true;
       }).catch(err => {
-        console.log("Gagal memutar audio:", err);
+        alert("File kekal.mp3 belum ditemukan di repository GitHub Anda.");
       });
     }
   }
@@ -705,7 +705,7 @@
   btnOpen.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
 
-    // Langsung putar musik dan tampilkan tombol kontrol
+    // Putar musik dan tampilkan tombol kontrol
     playMusic();
 
     btnContainer.classList.add('fade-btn');
