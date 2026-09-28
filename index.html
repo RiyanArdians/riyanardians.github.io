@@ -399,9 +399,10 @@
 </head>
 <body>
 
-<!-- AUDIO PLAYER LATAR: NADIN AMIZAH - KEKAL -->
+<!-- AUDIO PLAYER LATAR: NADIN AMIZAH - KEKAL (LOKAL DENGAN FALLBACK ONLINE CDN) -->
 <audio id="bg-music" loop preload="auto">
   <source src="kekal.mp3" type="audio/mpeg">
+  <source src="https://19228756-nadin-amizah.mp3.pm/song/236974499-kekal/" type="audio/mpeg">
 </audio>
 
 <!-- TOMBOL KONTROL MUSIK MELAYANG -->
@@ -644,7 +645,7 @@
       <h2 class="font-serif" style="font-size: 2.2rem; margin-bottom: 10px; color: #FFFFFF;">Terima Kasih</h2>
       <p class="font-serif" style="font-size: 1.8rem; color: #F9F1F1;">Riyan & Amelia</p>
       <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.9; color: #F9F1F1;">Tiada yang dapat kami ungkapkan selain rasa terima kasih yang tulus apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.</p>
-      
+
       <!-- FOOTER KOLABORASI -->
       <div class="footer-collab">
         Made with ❤️ by <b>Riyan Ardiansyah</b>
@@ -664,23 +665,19 @@
     document.getElementById('input-nama').value = guestName;
   }
 
-  // 2. KONTROL MUSIK LATAR
+  // 2. KONTROL MUSIK LATAR AMAN (ANTI ERROR)
   const bgMusic = document.getElementById('bg-music');
   const musicBtn = document.getElementById('music-control-btn');
   const musicIcon = document.getElementById('music-icon');
   let isPlaying = false;
 
   function playMusic() {
-    // Tampilkan tombol musik secara pasti
     musicBtn.style.display = 'flex';
-    
     bgMusic.play().then(() => {
       isPlaying = true;
       musicIcon.classList.add('music-spin');
-    }).catch(e => {
-      console.log("Autoplay error / File audio belum di-upload:", e);
-      isPlaying = false;
-      musicIcon.classList.remove('music-spin');
+    }).catch(err => {
+      console.log("Autoplay ditolak browser atau audio error:", err);
     });
   }
 
@@ -693,8 +690,8 @@
       bgMusic.play().then(() => {
         musicIcon.classList.add('music-spin');
         isPlaying = true;
-      }).catch(e => {
-        alert("File lagu 'kekal.mp3' belum ditemukan di repository GitHub. Pastikan Anda sudah meng-upload file lagu Nadin Amizah - Kekal dengan nama kekal.mp3.");
+      }).catch(err => {
+        console.log("Gagal memutar audio:", err);
       });
     }
   }
@@ -708,7 +705,7 @@
   btnOpen.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
 
-    // Langsung putar musik dan munculkan tombol
+    // Langsung putar musik dan tampilkan tombol kontrol
     playMusic();
 
     btnContainer.classList.add('fade-btn');
