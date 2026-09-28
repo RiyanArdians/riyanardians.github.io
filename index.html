@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* KOMBINASI WARNA SOFT DUSTY ROSE & SOFT MOCHA (ANTI SILAU & COCOK DUA MODE) */
+    /* KOMBINASI WARNA SOFT DUSTY ROSE & SOFT MOCHA */
     :root {
       --dusty-rose-main: #D8B4B4;    /* Dusty Rose Lembut / Soft Blush */
       --dusty-rose-dark: #8C6262;    /* Dusty Rose Gelap Elegan untuk Aksen Teks */
@@ -53,29 +53,29 @@
     }
 
     /* ========================================================= */
-    /* FLOATING MUSIC CONTROL BUTTON                             */
+    /* TOMBOL KONTROL MUSIK MELAYANG (FLOATING MUSIC WIDGET)     */
     /* ========================================================= */
     .music-btn-floating {
       position: fixed;
       bottom: 25px;
       right: 20px;
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       background-color: var(--dusty-rose-dark);
       color: #FFFFFF;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      z-index: 9998;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+      z-index: 99999;
       cursor: pointer;
       border: 2px solid #FFFFFF;
       transition: transform 0.3s ease;
     }
 
     .music-btn-floating i {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     .music-spin {
@@ -116,7 +116,6 @@
       border-bottom: 95px solid #8C6262; z-index: 1;
     }
 
-    /* KERTAS AMPLOP KARTU DENGAN WARNA CREAM SOFT */
     .envelope-card-insert {
       position: absolute; top: -55px; left: 18px;
       width: 274px; height: 200px;
@@ -146,7 +145,6 @@
 
     .btn-open-container { position: relative; z-index: 999; }
 
-    /* TOMBOL SOFT MOCHA DENGAN EFEK KILAU */
     .btn-primary {
       background: linear-gradient(135deg, #B3927A 0%, #8C6D57 100%) !important; 
       color: #FFFFFF !important; border: none;
@@ -169,7 +167,6 @@
       box-shadow: 0 6px 22px rgba(140, 109, 87, 0.45);
     }
 
-    /* TRANSISI BUKA AMPLOP */
     .btn-open-container.fade-btn { opacity: 0; transform: translateY(20px); pointer-events: none; }
     .envelope-card-insert.step-1-up { transform: translateY(-110px); z-index: 5; }
     .envelope-card-insert.step-2-center { transform: translateY(15px); z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
@@ -404,11 +401,11 @@
 
 <!-- AUDIO PLAYER LATAR: NADIN AMIZAH - KEKAL -->
 <audio id="bg-music" loop preload="auto">
-  <source src="https://raw.githubusercontent.com/yogasip/music-repo/main/Nadin%20Amizah%20-%20Kekal.mp3" type="audio/mpeg">
+  <source src="kekal.mp3" type="audio/mpeg">
 </audio>
 
-<!-- TOMBOL KONTROL MUSIK MELAYANG (FLOATING) -->
-<div id="music-control-btn" class="music-btn-floating hidden" onclick="toggleMusic()">
+<!-- TOMBOL KONTROL MUSIK MELAYANG -->
+<div id="music-control-btn" class="music-btn-floating" onclick="toggleMusic()" style="display: none;">
   <i id="music-icon" class="fa-solid fa-compact-disc"></i>
 </div>
 
@@ -674,12 +671,16 @@
   let isPlaying = false;
 
   function playMusic() {
+    // Tampilkan tombol musik secara pasti
+    musicBtn.style.display = 'flex';
+    
     bgMusic.play().then(() => {
       isPlaying = true;
-      musicBtn.classList.remove('hidden');
       musicIcon.classList.add('music-spin');
     }).catch(e => {
-      console.log("Autoplay blocked:", e);
+      console.log("Autoplay error / File audio belum di-upload:", e);
+      isPlaying = false;
+      musicIcon.classList.remove('music-spin');
     });
   }
 
@@ -689,9 +690,12 @@
       musicIcon.classList.remove('music-spin');
       isPlaying = false;
     } else {
-      bgMusic.play();
-      musicIcon.classList.add('music-spin');
-      isPlaying = true;
+      bgMusic.play().then(() => {
+        musicIcon.classList.add('music-spin');
+        isPlaying = true;
+      }).catch(e => {
+        alert("File lagu 'kekal.mp3' belum ditemukan di repository GitHub. Pastikan Anda sudah meng-upload file lagu Nadin Amizah - Kekal dengan nama kekal.mp3.");
+      });
     }
   }
 
@@ -704,7 +708,7 @@
   btnOpen.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
 
-    // Putar musik saat tombol diklik
+    // Langsung putar musik dan munculkan tombol
     playMusic();
 
     btnContainer.classList.add('fade-btn');
