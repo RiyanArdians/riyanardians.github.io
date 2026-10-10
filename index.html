@@ -195,16 +195,34 @@
       opacity: 0; visibility: hidden; pointer-events: none !important; 
     }
 
-    /* ANIMASI SCROLL REVEAL */
+    /* ANIMASI SCROLL REVEAL PADA SECTION & TEKS ELEGAN */
     .reveal-section {
       opacity: 0;
       transform: translateY(25px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .reveal-section.revealed {
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ANIMASI TEKS SMOOTH FADE SLIDE UP */
+    .fade-text {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-section.revealed .fade-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* DELAY BERTAHAP AGAR TULISAN MUNCUL SEPERTI GELOMBANG HALUS */
+    .reveal-section.revealed .delay-1 { transition-delay: 0.15s; }
+    .reveal-section.revealed .delay-2 { transition-delay: 0.3s; }
+    .reveal-section.revealed .delay-3 { transition-delay: 0.45s; }
 
     /* HERO HEADER */
     .hero-header-custom {
@@ -449,9 +467,7 @@
       font-size: 0.75rem; opacity: 0.9;
     }
 
-    /* ========================================================= */
-    /* CUSTOM POP-UP MODAL TERSTYLING SESUAI TEMA DUSTY ROSE     */
-    /* ========================================================= */
+    /* CUSTOM POP-UP MODAL TERSTYLING SESUAI TEMA DUSTY ROSE */
     .custom-modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100vh;
@@ -578,10 +594,10 @@
           <img src="images/wed/hero.png" alt="Riyan & Amelia" class="hero-capsule-photo">
         </div>
         
-        <p class="hero-subtitle">Pernikahan Kami</p>
-        <h1 class="font-serif hero-title-names">Riyan <span>&</span> Amelia</h1>
+        <p class="hero-subtitle fade-text delay-1">Pernikahan Kami</p>
+        <h1 class="font-serif hero-title-names fade-text delay-2">Riyan <span>&</span> Amelia</h1>
         
-        <div class="hero-date-badge">
+        <div class="hero-date-badge fade-text delay-3">
           Minggu, 06 Desember 2026
         </div>
       </div>
@@ -589,41 +605,41 @@
 
     <!-- FRAME 3: AYAT AL-QURAN -->
     <section class="quote-card text-center reveal-section">
-      <p class="font-serif" style="font-size: 1.15rem; color: var(--dusty-rose-dark); font-weight: 700; margin-bottom: 6px;">Q.S. Ar-Rum Ayat 21</p>
-      <p style="font-style: italic; line-height: 1.5; font-size: 0.82rem;">
+      <p class="font-serif fade-text delay-1" style="font-size: 1.15rem; color: var(--dusty-rose-dark); font-weight: 700; margin-bottom: 6px;">Q.S. Ar-Rum Ayat 21</p>
+      <p class="fade-text delay-2" style="font-style: italic; line-height: 1.5; font-size: 0.82rem;">
         "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari mejelismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
       </p>
     </section>
 
     <!-- FRAME 4: MEMPELAI -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">We Are Getting Married!</h2>
-      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 18px;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+      <h2 class="font-serif fade-text delay-1" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">We Are Getting Married!</h2>
+      <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 18px;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
 
       <div class="mempelai-card">
         <div class="mempelai-img-wrapper">
           <img src="images/wed/pria.png" alt="Riyan Ardiansyah" class="mempelai-img">
         </div>
         <p style="color: var(--soft-mocha); font-size: 0.7rem; letter-spacing: 1px; font-weight: 600;">THE GROOM</p>
-        <h3 class="font-serif" style="font-size: 1.7rem; color: var(--dusty-rose-dark);">Riyan Ardiansyah</h3>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Putra dari Bpk. Sunarya & Ibu Huriyah</p>
+        <h3 class="font-serif fade-text delay-1" style="font-size: 1.7rem; color: var(--dusty-rose-dark);">Riyan Ardiansyah</h3>
+        <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Putra dari Bpk. Sunarya & Ibu Huriyah</p>
       </div>
 
-      <div class="font-serif" style="font-size: 2rem; color: var(--soft-mocha); margin: 10px 0;">&</div>
+      <div class="font-serif fade-text delay-1" style="font-size: 2rem; color: var(--soft-mocha); margin: 10px 0;">&</div>
 
       <div class="mempelai-card">
         <div class="mempelai-img-wrapper">
           <img src="images/wed/wanita.png" alt="Amelia Dita Yanti" class="mempelai-img">
         </div>
         <p style="color: var(--soft-mocha); font-size: 0.7rem; letter-spacing: 1px; font-weight: 600;">THE BRIDE</p>
-        <h3 class="font-serif" style="font-size: 1.7rem; color: var(--dusty-rose-dark);">Amelia Dita Yanti</h3>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Putri dari Bpk. Tarmidi & Ibu Triyanti</p>
+        <h3 class="font-serif fade-text delay-1" style="font-size: 1.7rem; color: var(--dusty-rose-dark);">Amelia Dita Yanti</h3>
+        <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Putri dari Bpk. Tarmidi & Ibu Triyanti</p>
       </div>
     </section>
 
     <!-- FRAME 5: COUNTDOWN & SESI ACAARA -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Save The Date</h2>
+      <h2 class="font-serif fade-text delay-1" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Save The Date</h2>
       
       <div id="countdown" style="display: flex; gap: 6px; margin: 18px 0;">
         <div class="time-box"><span id="days">00</span><p>Hari</p></div>
@@ -639,10 +655,10 @@
       <!-- KARTU 1: AKAD NIKAH -->
       <div style="margin-top: 25px;">
         <div class="mempelai-card">
-          <h3 class="font-serif" style="font-size: 1.6rem; color: var(--dusty-rose-dark);">Akad Nikah</h3>
-          <p style="font-size: 0.85rem; font-weight: 600; margin-top: 6px; color: var(--text-dark);">Minggu, 06 Desember 2026</p>
-          <p style="font-size: 0.8rem; color: var(--text-muted);">08.00 WIB s/d 09.00 WIB</p>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px;"><i class="fa-solid fa-location-dot"></i> Warung D Empang</p>
+          <h3 class="font-serif fade-text delay-1" style="font-size: 1.6rem; color: var(--dusty-rose-dark);">Akad Nikah</h3>
+          <p class="fade-text delay-2" style="font-size: 0.85rem; font-weight: 600; margin-top: 6px; color: var(--text-dark);">Minggu, 06 Desember 2026</p>
+          <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted);">08.00 WIB s/d 09.00 WIB</p>
+          <p class="fade-text delay-3" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px;"><i class="fa-solid fa-location-dot"></i> Warung D Empang</p>
           
           <a href="https://www.google.com/maps/search/?api=1&query=Warung+D+Empang" target="_blank" class="btn-primary" style="margin-top: 14px; width: 100%; font-size: 0.8rem;">
             <i class="fa-solid fa-map-location-dot"></i> GOOGLE MAPS
@@ -653,10 +669,10 @@
       <!-- KARTU 2: RESEPSI PERNIKAHAN -->
       <div style="margin-top: 10px;">
         <div class="mempelai-card">
-          <h3 class="font-serif" style="font-size: 1.6rem; color: var(--dusty-rose-dark);">Resepsi Pernikahan</h3>
-          <p style="font-size: 0.85rem; font-weight: 600; margin-top: 6px; color: var(--text-dark);">Minggu, 06 Desember 2026</p>
-          <p style="font-size: 0.8rem; color: var(--text-muted);">09.00 WIB s/d 14.00 WIB</p>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px;"><i class="fa-solid fa-location-dot"></i> Warung D Empang</p>
+          <h3 class="font-serif fade-text delay-1" style="font-size: 1.6rem; color: var(--dusty-rose-dark);">Resepsi Pernikahan</h3>
+          <p class="fade-text delay-2" style="font-size: 0.85rem; font-weight: 600; margin-top: 6px; color: var(--text-dark);">Minggu, 06 Desember 2026</p>
+          <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted);">09.00 WIB s/d 14.00 WIB</p>
+          <p class="fade-text delay-3" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px;"><i class="fa-solid fa-location-dot"></i> Warung D Empang</p>
           
           <a href="https://www.google.com/maps/search/?api=1&query=Warung+D+Empang" target="_blank" class="btn-primary" style="margin-top: 14px; width: 100%; font-size: 0.8rem;">
             <i class="fa-solid fa-map-location-dot"></i> GOOGLE MAPS
@@ -667,8 +683,8 @@
 
     <!-- FRAME 6: GALERI FOTO -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Gallery</h2>
-      <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px;">Klik foto untuk memperbesar</p>
+      <h2 class="font-serif fade-text delay-1" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Gallery</h2>
+      <p class="fade-text delay-2" style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px;">Klik foto untuk memperbesar</p>
 
       <div class="gallery-masonry">
         <div class="gallery-item item-large" onclick="openLightbox(this)">
@@ -694,8 +710,8 @@
 
     <!-- FRAME 7: LOVE STORY -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 2rem; color: var(--dusty-rose-dark);">Love Story</h2>
-      <p class="font-serif" style="font-size: 1rem; color: var(--soft-mocha); margin-top: -4px;">Riyan & Amelia</p>
+      <h2 class="font-serif fade-text delay-1" style="font-size: 2rem; color: var(--dusty-rose-dark);">Love Story</h2>
+      <p class="font-serif fade-text delay-2" style="font-size: 1rem; color: var(--soft-mocha); margin-top: -4px;">Riyan & Amelia</p>
 
       <div class="story-timeline-wrapper">
         <div class="story-curved-line"></div>
@@ -706,8 +722,8 @@
             <img src="images/wed/story-1.png" alt="Awal Pertemuan">
           </div>
           <div class="story-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
-          <h4 class="font-serif" style="font-size: 1.2rem; color: var(--dusty-rose-dark);">AWAL PERTEMUAN</h4>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+          <h4 class="font-serif fade-text delay-1" style="font-size: 1.2rem; color: var(--dusty-rose-dark);">AWAL PERTEMUAN</h4>
+          <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
             Berawal dari masa sekolah tempat kami pertama kali saling mengenal. Sebuah cerita sederhana yang ternyata menjadi awal dari kisah panjang kami.
           </p>
         </div>
@@ -718,8 +734,8 @@
             <img src="images/wed/story-2.png" alt="Menjadi Kita">
           </div>
           <div class="story-icon"><i class="fa-solid fa-heart"></i></div>
-          <h4 class="font-serif" style="font-size: 1.2rem; color: var(--dusty-rose-dark);">MENJADI KITA</h4>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+          <h4 class="font-serif fade-text delay-1" style="font-size: 1.2rem; color: var(--dusty-rose-dark);">MENJADI KITA</h4>
+          <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
             Waktu terus berjalan, hingga takdir mempertemukan kami kembali. Percakapan kecil berubah menjadi rasa nyaman, dan kami memutuskan untuk memulai langkah baru sebagai pasangan.
           </p>
         </div>
@@ -730,8 +746,8 @@
             <img src="images/wed/story-3.png" alt="Sebuah Komitmen">
           </div>
           <div class="story-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
-          <h4 class="font-serif" style="font-size: 1.2rem; color: var(--dusty-rose-dark);">SEBUAH KOMITMEN</h4>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+          <h4 class="font-serif fade-text delay-1" style="font-size: 1.2rem; color: var(--dusty-rose-dark);">SEBUAH KOMITMEN</h4>
+          <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
             Dengan keyakinan serta restu dari kedua orang tua dan keluarga, kami melangkah ke jenjang pertunangan. Sebuah komitmen dan langkah serius untuk membangun masa depan bersama.
           </p>
         </div>
@@ -742,8 +758,8 @@
             <img src="images/wed/story-4.png" alt="Awal Selamanya">
           </div>
           <div class="story-icon"><i class="fa-solid fa-ring"></i></div>
-          <h4 class="font-serif" style="font-size: 1.2rem; color: var(--dusty-rose-dark);">AWAL SELAMANYA</h4>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+          <h4 class="font-serif fade-text delay-1" style="font-size: 1.2rem; color: var(--dusty-rose-dark);">AWAL SELAMANYA</h4>
+          <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
             Dengan penuh rasa syukur dan bahagia, kini kami memilih menyempurnakan perjalanan ini dalam ikatan suci pernikahan. Mohon doa restu agar langkah kami senantiasa diliputi keberkahan.
           </p>
         </div>
@@ -752,11 +768,11 @@
 
     <!-- FRAME 8: WEDDING GIFT -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Wedding Gift</h2>
-      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Tanpa mengurangi rasa hormat, bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih dapat melalui:</p>
+      <h2 class="font-serif fade-text delay-1" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Wedding Gift</h2>
+      <p class="fade-text delay-2" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Tanpa mengurangi rasa hormat, bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih dapat melalui:</p>
 
       <div class="bank-card">
-        <h3 class="font-serif" style="color: var(--dusty-rose-dark); font-size: 1.4rem;">Bank Mandiri</h3>
+        <h3 class="font-serif fade-text delay-1" style="color: var(--dusty-rose-dark); font-size: 1.4rem;">Bank Mandiri</h3>
         <p style="font-size: 1.2rem; font-weight: bold; margin: 6px 0; letter-spacing: 1px; color: var(--text-dark);" id="rekening-riyan">1760001646239</p>
         <p style="font-size: 0.8rem; color: var(--text-muted);">a.n. Riyan Ardiansyah</p>
         <button onclick="copyText('rekening-riyan')" class="btn-primary" style="margin-top: 10px; width: 100%; font-size: 0.8rem;">
@@ -765,7 +781,7 @@
       </div>
 
       <div class="bank-card">
-        <h3 class="font-serif" style="color: var(--dusty-rose-dark); font-size: 1.4rem;">Bank Mandiri</h3>
+        <h3 class="font-serif fade-text delay-1" style="color: var(--dusty-rose-dark); font-size: 1.4rem;">Bank Mandiri</h3>
         <p style="font-size: 1.2rem; font-weight: bold; margin: 6px 0; letter-spacing: 1px; color: var(--text-dark);" id="rekening-amelia">1550013683548</p>
         <p style="font-size: 0.8rem; color: var(--text-muted);">a.n. Amelia Dita Yanti</p>
         <button onclick="copyText('rekening-amelia')" class="btn-primary" style="margin-top: 10px; width: 100%; font-size: 0.8rem;">
@@ -776,7 +792,7 @@
 
     <!-- FRAME 9: UCAPAN & DOA -->
     <section class="section-card reveal-section">
-      <h2 class="font-serif" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Ucapan & Doa</h2>
+      <h2 class="font-serif fade-text delay-1" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Ucapan & Doa</h2>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;" id="wishes-count">💬 Memuat ucapan...</p>
 
       <div class="rsvp-form-card">
@@ -797,9 +813,9 @@
 
     <!-- FRAME 10: PENUTUP TERIMA KASIH -->
     <footer class="reveal-section">
-      <h2 class="font-serif" style="font-size: 2rem; margin-bottom: 8px; color: #FFFFFF;">Terima Kasih</h2>
-      <p class="font-serif" style="font-size: 1.6rem; color: #F9F1F1;">Riyan & Amelia</p>
-      <p style="font-size: 0.78rem; margin-top: 8px; opacity: 0.9; color: #F9F1F1;">Tiada yang dapat kami ungkapkan selain rasa terima kasih yang tulus apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.</p>
+      <h2 class="font-serif fade-text delay-1" style="font-size: 2rem; margin-bottom: 8px; color: #FFFFFF;">Terima Kasih</h2>
+      <p class="font-serif fade-text delay-2" style="font-size: 1.6rem; color: #F9F1F1;">Riyan & Amelia</p>
+      <p class="fade-text delay-3" style="font-size: 0.78rem; margin-top: 8px; opacity: 0.9; color: #F9F1F1;">Tiada yang dapat kami ungkapkan selain rasa terima kasih yang tulus apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.</p>
 
       <div class="footer-collab">
         Made with ❤️ by <b>Riyan Ardiansyah</b>
