@@ -17,10 +17,10 @@
       --dusty-rose-main: #D8B4B4;    /* Dusty Rose Lembut / Soft Blush */
       --dusty-rose-dark: #8C6262;    /* Dusty Rose Gelap Elegan untuk Aksen Teks */
       --dusty-rose-soft: #F9F1F1;    /* Latar Belakang Sangat Soft Warm Cream */
-      --card-bg: #FFFFFF;           /* Card Putih Bersih */
-      --soft-mocha: #B3927A;         /* Soft Mocha Warm Gold */
-      --text-dark: #3D2B2B;          /* Deep Brown Mocha untuk Teks Tajam */
-      --text-muted: #735757;         /* Teks Muted */
+      --card-bg: #FFFFFF;            /* Card Putih Bersih */
+      --soft-mocha: #B3927A;          /* Soft Mocha Warm Gold */
+      --text-dark: #3D2B2B;           /* Deep Brown Mocha untuk Teks Tajam */
+      --text-muted: #735757;          /* Teks Muted */
       --border-color: rgba(216, 180, 180, 0.4);
     }
 
@@ -53,7 +53,7 @@
     }
 
     /* ========================================================= */
-    /* TOMBOL KONTROL MUSIK MELAYANG (FLOATING MUSIC WIDGET)     */
+    /* TOMBOL KONTROL MUSIK MELAYANG                             */
     /* ========================================================= */
     .music-btn-floating {
       position: fixed;
@@ -194,7 +194,7 @@
     }
 
     /* ========================================================= */
-    /* DESAIN HERO HEADER                                       */
+    /* DESAIN HERO HEADER (HERO 1 DI-ZOOM SETENGAH BADAN)        */
     /* ========================================================= */
     .hero-header-custom {
       position: relative;
@@ -226,14 +226,24 @@
       backdrop-filter: blur(3px);
     }
 
-    .hero-capsule-photo {
-      width: 140px;
-      height: 210px;
-      border-radius: 80px;
-      object-fit: cover;
+    /* BINGKAI HERO DENGAN EFEK ZOOM SETENGAH BADAN */
+    .hero-capsule-wrapper {
+      width: 150px;
+      height: 220px;
+      border-radius: 85px;
+      overflow: hidden;
       border: 3px solid #FFFFFF;
       box-shadow: 0 10px 25px rgba(216, 180, 180, 0.3);
       margin-bottom: 22px;
+      background-color: #FFFFFF;
+    }
+
+    .hero-capsule-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%; /* Fokus ke dada/wajah (setengah badan) */
+      transform: scale(1.28);        /* Efek Zoom */
     }
 
     .hero-subtitle {
@@ -283,9 +293,27 @@
 
     .mempelai-card {
       background-color: #FFFFFF !important; 
-      border-radius: 16px; padding: 20px; margin: 15px 20px; box-shadow: 0 4px 20px rgba(216, 180, 180, 0.12); border: 1px solid var(--border-color);
+      border-radius: 20px; padding: 24px 20px; margin: 15px 20px; box-shadow: 0 4px 20px rgba(216, 180, 180, 0.12); border: 1px solid var(--border-color);
     }
-    .mempelai-img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+    
+    /* BINGKAI MEMPELAI PRIA & WANITA BENTUK OVAL (SAMA KAYA HERO & TANPA ZOOM) */
+    .mempelai-img-wrapper {
+      width: 170px;
+      height: 230px;
+      border-radius: 85px; /* Bentuk Oval / Kapsul */
+      overflow: hidden;
+      margin: 0 auto 16px;
+      border: 3px solid var(--dusty-rose-soft);
+      box-shadow: 0 8px 20px rgba(216, 180, 180, 0.25);
+      background-color: #FAF6F0;
+    }
+
+    .mempelai-img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      object-position: center; /* Tampil pas proporsional tanpa zoom */
+    }
 
     .time-box { 
       background-color: var(--dusty-rose-main) !important; 
@@ -305,18 +333,43 @@
       color: #FFFFFF !important;
     }
 
-    /* GALERI FOTO MASONRY */
+    /* ========================================================= */
+    /* GALERI FOTO (DIBUAT LEBIH BESAR & TIDAK TERPOTONG)        */
+    /* ========================================================= */
     .gallery-masonry {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px;
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 12px; 
+      margin-top: 18px;
     }
+    
     .gallery-item {
-      position: relative; overflow: hidden; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid var(--border-color);
+      position: relative; 
+      overflow: hidden; 
+      border-radius: 16px; 
+      cursor: pointer; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
+      border: 1px solid var(--border-color);
+      background-color: #FFFFFF;
     }
+    
     .gallery-item img {
-      width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block;
+      width: 100%; 
+      height: 100%; 
+      object-fit: contain; /* Foto utuh tidak akan terpotong */
+      background-color: #FAF6F0;
+      transition: transform 0.4s ease; 
+      display: block;
     }
-    .gallery-item.item-large { grid-column: span 2; height: 220px; }
-    .gallery-item.item-tall { height: 210px; }
+    
+    .gallery-item.item-large { 
+      grid-column: span 2; 
+      height: 260px; /* Ukuran lebih besar */
+    }
+    
+    .gallery-item.item-tall { 
+      height: 240px; /* Ukuran lebih besar */
+    }
 
     /* Lightbox Modal */
     .lightbox-modal {
@@ -329,7 +382,9 @@
     .lightbox-modal img { max-width: 100%; max-height: 80vh; border-radius: 12px; }
     .lightbox-close { position: absolute; top: 20px; right: 25px; color: #FFF; font-size: 2rem; cursor: pointer; }
 
-    /* LOVE STORY TIMELINE */
+    /* ========================================================= */
+    /* LOVE STORY (FOTO DIPANJANGIN PERSEGI PANJANG)             */
+    /* ========================================================= */
     .story-timeline-wrapper {
       position: relative; margin: 30px 10px 10px; text-align: center;
     }
@@ -340,22 +395,35 @@
       z-index: 1;
     }
     .story-node {
-      position: relative; z-index: 2; margin-bottom: 35px; width: 90%;
+      position: relative; z-index: 2; margin-bottom: 35px; width: 100%;
       background-color: #FFFFFF !important; 
       padding: 18px; border-radius: 16px; border: 1px solid var(--border-color);
       box-shadow: 0 4px 20px rgba(216, 180, 180, 0.12); margin-left: auto; margin-right: auto;
     }
+    
+    /* DIMENSI FOTO DIPANJANGIN PERSEGI PANJANG (ASPECT-RATIO 16:9) */
     .story-img-container {
-      width: 100%; height: 160px; border-radius: 10px; overflow: hidden; margin-bottom: 12px;
+      width: 100%; 
+      aspect-ratio: 16 / 9; 
+      border-radius: 12px; 
+      overflow: hidden; 
+      margin-bottom: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
+    
     .story-img-container img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover;
+      object-position: center;
     }
+
     .story-icon {
       width: 42px; height: 42px; background-color: var(--dusty-rose-soft) !important; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      margin: -30px auto 10px; color: var(--dusty-rose-dark) !important; font-size: 1.2rem;
+      margin: -32px auto 10px; color: var(--dusty-rose-dark) !important; font-size: 1.2rem;
       border: 1px solid var(--dusty-rose-main); box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      position: relative; z-index: 3;
     }
 
     /* Bank Cards */
@@ -436,10 +504,12 @@
   <!-- MAIN CONTENT -->
   <main id="main-content">
 
-    <!-- FRAME 2: HERO HEADER -->
+    <!-- FRAME 2: HERO HEADER (HERO 1 ZOOM SETENGAH BADAN) -->
     <section id="hero-section" class="hero-header-custom reveal-section">
       <div class="hero-arch-frame">
-        <img src="images/wed/hero.png" alt="Riyan & Amelia" class="hero-capsule-photo">
+        <div class="hero-capsule-wrapper">
+          <img src="images/wed/hero.png" alt="Riyan & Amelia" class="hero-capsule-photo">
+        </div>
         
         <p class="hero-subtitle">Pernikahan Kami</p>
         <h1 class="font-serif hero-title-names">Riyan <span>&</span> Amelia</h1>
@@ -458,13 +528,15 @@
       </p>
     </section>
 
-    <!-- FRAME 4: MEMPELAI -->
+    <!-- FRAME 4: MEMPELAI (BENTUK OVAL SAMA KAYA HERO & TIDAK DI-ZOOM) -->
     <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--dusty-rose-dark);">We Are Getting Married!</h2>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 25px;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
 
       <div class="mempelai-card">
-        <img src="images/wed/pria.png" alt="Riyan Ardiansyah" class="mempelai-img">
+        <div class="mempelai-img-wrapper">
+          <img src="images/wed/pria.png" alt="Riyan Ardiansyah" class="mempelai-img">
+        </div>
         <p style="color: var(--soft-mocha); font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;">THE GROOM</p>
         <h3 class="font-serif" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Riyan Ardiansyah</h3>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Putra dari Bpk. Sunarya & Ibu Huriyah</p>
@@ -473,7 +545,9 @@
       <div class="font-serif" style="font-size: 2.2rem; color: var(--soft-mocha); margin: 15px 0;">&</div>
 
       <div class="mempelai-card">
-        <img src="images/wed/wanita.png" alt="Amelia Dita Yanti" class="mempelai-img">
+        <div class="mempelai-img-wrapper">
+          <img src="images/wed/wanita.png" alt="Amelia Dita Yanti" class="mempelai-img">
+        </div>
         <p style="color: var(--soft-mocha); font-size: 0.75rem; letter-spacing: 1px; font-weight: 600;">THE BRIDE</p>
         <h3 class="font-serif" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Amelia Dita Yanti</h3>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Putri dari Bpk. Tarmidi & Ibu Triyanti</p>
@@ -509,7 +583,7 @@
       </div>
     </section>
 
-    <!-- FRAME 6: GALERI FOTO MASONRY -->
+    <!-- FRAME 6: GALERI FOTO (DIBUAT LEBIH BESAR & TIDAK KEPOTONG) -->
     <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--dusty-rose-dark);">Gallery</h2>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Klik foto untuk memperbesar</p>
@@ -536,7 +610,7 @@
       <img id="lightbox-img" src="" alt="Zoom Foto">
     </div>
 
-    <!-- FRAME 7: LOVE STORY 4 BAGIAN DENGAN FOTO -->
+    <!-- FRAME 7: LOVE STORY (PERSEGI PANJANG DIPANJANGIN) -->
     <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2.2rem; color: var(--dusty-rose-dark);">Love Story</h2>
       <p class="font-serif" style="font-size: 1.1rem; color: var(--soft-mocha); margin-top: -5px;">Riyan & Amelia</p>
