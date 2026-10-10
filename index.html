@@ -163,6 +163,37 @@
       box-shadow: 0 4px 18px rgba(140, 109, 87, 0.35); transition: all 0.3s ease;
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     }
+    /* ANIMASI CAHAYA KILAU PADA TOMBOL */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+  animation: shineSweep 3s infinite;
+}
+
+@keyframes shineSweep {
+  0% {
+    left: -60%;
+  }
+  20% {
+    left: 120%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
 
     .btn-open-container.fade-btn { opacity: 0; transform: translateY(20px); pointer-events: none; }
     .envelope-card-insert.step-1-up { transform: translateY(-110px); z-index: 5; }
