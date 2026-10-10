@@ -194,12 +194,12 @@
     }
 
     /* ========================================================= */
-    /* DESAIN HERO HEADER (HERO 1 DI-ZOOM SETENGAH BADAN)        */
+    /* DESAIN HERO HEADER (HERO UTUH TIDAK KEPOTONG)             */
     /* ========================================================= */
     .hero-header-custom {
       position: relative;
-      padding: 50px 20px 40px;
-      min-height: 92vh;
+      padding: 30px 15px;
+      min-height: auto; /* Dibuat fleksibel agar frame utuh */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -211,19 +211,20 @@
     }
 
     .hero-arch-frame {
-      width: 88%;
-      height: 90%;
+      width: 92%;
+      max-width: 420px;
       border: 2px solid var(--dusty-rose-main);
-      border-radius: 120px 120px 0 0;
-      padding: 40px 15px 30px;
+      border-radius: 180px 180px 30px 30px; /* Frame tertutup sempurna bawahnya */
+      padding: 35px 20px 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: inset 0 0 0 3px rgba(216, 180, 180, 0.15);
+      box-shadow: 0 10px 30px rgba(140, 98, 98, 0.12), inset 0 0 0 3px rgba(216, 180, 180, 0.15);
       position: relative;
-      background-color: rgba(255, 255, 255, 0.88) !important;
-      backdrop-filter: blur(3px);
+      background-color: rgba(255, 255, 255, 0.92) !important;
+      backdrop-filter: blur(5px);
+      margin: 10px 0;
     }
 
     /* BINGKAI HERO DENGAN EFEK ZOOM SETENGAH BADAN */
@@ -233,7 +234,7 @@
       border-radius: 85px;
       overflow: hidden;
       border: 3px solid #FFFFFF;
-      box-shadow: 0 10px 25px rgba(216, 180, 180, 0.3);
+      box-shadow: 0 10px 25px rgba(216, 180, 180, 0.35);
       margin-bottom: 22px;
       background-color: #FFFFFF;
     }
@@ -242,12 +243,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%; /* Fokus ke dada/wajah (setengah badan) */
-      transform: scale(1.28);        /* Efek Zoom */
+      object-position: center 15%; /* Fokus area setengah badan */
+      transform: scale(1.25);
     }
 
     .hero-subtitle {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted) !important;
       letter-spacing: 2px;
       margin-bottom: 8px;
@@ -255,7 +256,7 @@
     }
 
     .hero-title-names {
-      font-size: 2.6rem;
+      font-size: 2.5rem;
       color: var(--dusty-rose-dark) !important;
       font-weight: 600;
       line-height: 1.2;
@@ -269,10 +270,10 @@
     }
 
     .hero-date-badge {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: var(--dusty-rose-dark) !important;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       border-top: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
@@ -281,9 +282,9 @@
     }
 
     /* ========================================================= */
-    /* STRUKTUR CARD ISI UNDANGAN                                */
+    /* STRUKTUR CARD ISI UNDANGAN & MEMPELAI ELEGAN               */
     /* ========================================================= */
-    .section-card { padding: 40px 20px; text-align: center; position: relative; }
+    .section-card { padding: 35px 20px; text-align: center; position: relative; }
 
     .quote-card {
       background-color: #FFFFFF !important; 
@@ -291,28 +292,50 @@
       box-shadow: 0 4px 20px rgba(216, 180, 180, 0.12); font-size: 0.9rem; color: var(--text-dark) !important; border: 1px solid var(--border-color);
     }
 
+    /* KARTU MEMPELAI DENGAN SHADOW & BACKGROUND GLOW TEKSTUR */
     .mempelai-card {
       background-color: #FFFFFF !important; 
-      border-radius: 20px; padding: 24px 20px; margin: 15px 20px; box-shadow: 0 4px 20px rgba(216, 180, 180, 0.12); border: 1px solid var(--border-color);
+      border-radius: 24px; 
+      padding: 26px 20px; 
+      margin: 15px 15px; 
+      box-shadow: 0 12px 30px rgba(140, 98, 98, 0.12), 0 2px 8px rgba(0,0,0,0.04); 
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mempelai-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(216, 180, 180, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
     
-    /* BINGKAI MEMPELAI PRIA & WANITA BENTUK OVAL (SAMA KAYA HERO & TANPA ZOOM) */
+    /* BINGKAI MEMPELAI PRIA & WANITA OVAL ELEGANT SHADOW */
     .mempelai-img-wrapper {
       width: 170px;
       height: 230px;
-      border-radius: 85px; /* Bentuk Oval / Kapsul */
+      border-radius: 85px;
       overflow: hidden;
-      margin: 0 auto 16px;
-      border: 3px solid var(--dusty-rose-soft);
-      box-shadow: 0 8px 20px rgba(216, 180, 180, 0.25);
-      background-color: #FAF6F0;
+      margin: 0 auto 18px;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 10px 22px rgba(140, 98, 98, 0.2), inset 0 0 0 1px var(--dusty-rose-main);
+      background-color: var(--dusty-rose-soft);
+      position: relative;
+      z-index: 1;
     }
 
     .mempelai-img { 
       width: 100%; 
       height: 100%; 
       object-fit: cover; 
-      object-position: center; /* Tampil pas proporsional tanpa zoom */
+      object-position: center;
     }
 
     .time-box { 
@@ -334,41 +357,44 @@
     }
 
     /* ========================================================= */
-    /* GALERI FOTO (DIBUAT LEBIH BESAR & TIDAK TERPOTONG)        */
+    /* GALERI FOTO (PAS PRESISI TANPA SPACE PUTIH / BORDER KOSONG)*/
     /* ========================================================= */
     .gallery-masonry {
       display: grid; 
       grid-template-columns: repeat(2, 1fr); 
-      gap: 12px; 
+      gap: 10px; 
       margin-top: 18px;
     }
     
     .gallery-item {
       position: relative; 
       overflow: hidden; 
-      border-radius: 16px; 
+      border-radius: 14px; 
       cursor: pointer; 
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
+      box-shadow: 0 4px 14px rgba(140, 98, 98, 0.1); 
       border: 1px solid var(--border-color);
-      background-color: #FFFFFF;
+      background-color: var(--dusty-rose-soft);
     }
     
     .gallery-item img {
       width: 100%; 
       height: 100%; 
-      object-fit: contain; /* Foto utuh tidak akan terpotong */
-      background-color: #FAF6F0;
+      object-fit: cover !important; /* Foto mengisi penuh frame tanpa ada space/pinggiran putih */
       transition: transform 0.4s ease; 
       display: block;
     }
     
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
     .gallery-item.item-large { 
       grid-column: span 2; 
-      height: 260px; /* Ukuran lebih besar */
+      height: 240px; 
     }
     
     .gallery-item.item-tall { 
-      height: 240px; /* Ukuran lebih besar */
+      height: 210px; 
     }
 
     /* Lightbox Modal */
@@ -383,10 +409,10 @@
     .lightbox-close { position: absolute; top: 20px; right: 25px; color: #FFF; font-size: 2rem; cursor: pointer; }
 
     /* ========================================================= */
-    /* LOVE STORY (FOTO DIPANJANGIN PERSEGI PANJANG)             */
+    /* LOVE STORY (FOTO FULL COVER PENUH TANPA SPACE PUTIH)     */
     /* ========================================================= */
     .story-timeline-wrapper {
-      position: relative; margin: 30px 10px 10px; text-align: center;
+      position: relative; margin: 30px 5px 10px; text-align: center;
     }
     .story-curved-line {
       position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
@@ -397,24 +423,25 @@
     .story-node {
       position: relative; z-index: 2; margin-bottom: 35px; width: 100%;
       background-color: #FFFFFF !important; 
-      padding: 18px; border-radius: 16px; border: 1px solid var(--border-color);
-      box-shadow: 0 4px 20px rgba(216, 180, 180, 0.12); margin-left: auto; margin-right: auto;
+      padding: 18px; border-radius: 20px; border: 1px solid var(--border-color);
+      box-shadow: 0 8px 24px rgba(140, 98, 98, 0.1); margin-left: auto; margin-right: auto;
     }
     
-    /* DIMENSI FOTO DIPANJANGIN PERSEGI PANJANG (ASPECT-RATIO 16:9) */
+    /* FOTO LOVE STORY FIT COVER TANPA SPACE PUTIH */
     .story-img-container {
       width: 100%; 
-      aspect-ratio: 16 / 9; 
-      border-radius: 12px; 
+      height: 180px; 
+      border-radius: 14px; 
       overflow: hidden; 
       margin-bottom: 14px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      background-color: var(--dusty-rose-soft);
     }
     
     .story-img-container img {
       width: 100%; 
       height: 100%; 
-      object-fit: cover;
+      object-fit: cover !important; /* Foto penuh mengisi penuh wadahnya */
       object-position: center;
     }
 
@@ -504,7 +531,7 @@
   <!-- MAIN CONTENT -->
   <main id="main-content">
 
-    <!-- FRAME 2: HERO HEADER (HERO 1 ZOOM SETENGAH BADAN) -->
+    <!-- FRAME 2: HERO HEADER (LENGKUNG TERLINDUNG UTUH) -->
     <section id="hero-section" class="hero-header-custom reveal-section">
       <div class="hero-arch-frame">
         <div class="hero-capsule-wrapper">
@@ -528,10 +555,10 @@
       </p>
     </section>
 
-    <!-- FRAME 4: MEMPELAI (BENTUK OVAL SAMA KAYA HERO & TIDAK DI-ZOOM) -->
+    <!-- FRAME 4: MEMPELAI (SHADOW ELEGAN & BACKGROUND GLOW TEKSTUR) -->
     <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--dusty-rose-dark);">We Are Getting Married!</h2>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 25px;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
 
       <div class="mempelai-card">
         <div class="mempelai-img-wrapper">
@@ -542,7 +569,7 @@
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Putra dari Bpk. Sunarya & Ibu Huriyah</p>
       </div>
 
-      <div class="font-serif" style="font-size: 2.2rem; color: var(--soft-mocha); margin: 15px 0;">&</div>
+      <div class="font-serif" style="font-size: 2.2rem; color: var(--soft-mocha); margin: 10px 0;">&</div>
 
       <div class="mempelai-card">
         <div class="mempelai-img-wrapper">
@@ -583,7 +610,7 @@
       </div>
     </section>
 
-    <!-- FRAME 6: GALERI FOTO (DIBUAT LEBIH BESAR & TIDAK KEPOTONG) -->
+    <!-- FRAME 6: GALERI FOTO (PAS PENUH TANPA SPACE PUTIH) -->
     <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2rem; color: var(--dusty-rose-dark);">Gallery</h2>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Klik foto untuk memperbesar</p>
@@ -610,7 +637,7 @@
       <img id="lightbox-img" src="" alt="Zoom Foto">
     </div>
 
-    <!-- FRAME 7: LOVE STORY (PERSEGI PANJANG DIPANJANGIN) -->
+    <!-- FRAME 7: LOVE STORY (FOTO FULL COVER PENUH TANPA SPACE PUTIH) -->
     <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 2.2rem; color: var(--dusty-rose-dark);">Love Story</h2>
       <p class="font-serif" style="font-size: 1.1rem; color: var(--soft-mocha); margin-top: -5px;">Riyan & Amelia</p>
