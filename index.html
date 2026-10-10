@@ -50,7 +50,7 @@
 
     html, body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
-      background-color: #EFE7E7 !important; /* Latar luar untuk tablet/laptop */
+      background-color: #EFE7E7 !important;
       color: var(--text-dark) !important; 
       line-height: 1.6; 
       overflow-x: hidden; 
@@ -63,7 +63,7 @@
     /* CONTAINER RESPONSIVE MULTI-DEVICE */
     .app-viewport {
       width: 100%;
-      max-width: 450px; /* Lebar maksimal tampilan mobile */
+      max-width: 450px;
       margin: 0 auto;
       background-color: var(--dusty-rose-soft) !important;
       min-height: 100vh;
@@ -155,6 +155,7 @@
 
     .btn-open-container { position: relative; z-index: 999; }
 
+    /* TOMBOL UTAMA & ANIMASI KILAU CAHAYA */
     .btn-primary {
       background: linear-gradient(135deg, #B3927A 0%, #8C6D57 100%) !important; 
       color: #FFFFFF !important; border: none;
@@ -162,38 +163,28 @@
       border-radius: 30px; cursor: pointer;
       box-shadow: 0 4px 18px rgba(140, 109, 87, 0.35); transition: all 0.3s ease;
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative;
+      overflow: hidden;
     }
-    /* ANIMASI CAHAYA KILAU PADA TOMBOL */
-.btn-primary {
-  position: relative;
-  overflow: hidden;
-}
 
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 20%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.45);
-  transform: rotate(30deg);
-  transition: all 0.6s ease;
-  animation: shineSweep 3s infinite;
-}
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 25%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.45);
+      transform: rotate(30deg);
+      transition: all 0.6s ease;
+      animation: shineSweep 3s infinite;
+    }
 
-@keyframes shineSweep {
-  0% {
-    left: -60%;
-  }
-  20% {
-    left: 120%;
-  }
-  100% {
-    left: 120%;
-  }
-}
-
+    @keyframes shineSweep {
+      0% { left: -60%; }
+      20% { left: 130%; }
+      100% { left: 130%; }
+    }
 
     .btn-open-container.fade-btn { opacity: 0; transform: translateY(20px); pointer-events: none; }
     .envelope-card-insert.step-1-up { transform: translateY(-110px); z-index: 5; }
@@ -457,6 +448,88 @@
       margin-top: 20px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.2);
       font-size: 0.75rem; opacity: 0.9;
     }
+
+    /* ========================================================= */
+    /* CUSTOM POP-UP MODAL TERSTYLING SESUAI TEMA DUSTY ROSE     */
+    /* ========================================================= */
+    .custom-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(61, 43, 43, 0.65);
+      backdrop-filter: blur(5px);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .custom-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .custom-modal-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 28px 22px;
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(140, 98, 98, 0.25);
+      border: 1px solid var(--dusty-rose-main);
+      transform: scale(0.85);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .custom-modal-overlay.active .custom-modal-card {
+      transform: scale(1);
+    }
+
+    .custom-modal-icon {
+      width: 54px;
+      height: 54px;
+      background: var(--dusty-rose-soft);
+      color: var(--dusty-rose-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 14px;
+      border: 1px solid var(--dusty-rose-main);
+    }
+
+    .custom-modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dusty-rose-dark);
+      margin-bottom: 6px;
+    }
+
+    .custom-modal-message {
+      font-size: 0.83rem;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.45;
+    }
+
+    .custom-modal-btn {
+      background: linear-gradient(135deg, #B3927A 0%, #8C6D57 100%);
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(140, 109, 87, 0.3);
+    }
   </style>
 </head>
 <body>
@@ -548,7 +621,7 @@
       </div>
     </section>
 
-    <!-- FRAME 5: COUNTDOWN & SESI ACAARA (DIPISAH SESI AKAD & RESEPSI) -->
+    <!-- FRAME 5: COUNTDOWN & SESI ACAARA -->
     <section class="section-card reveal-section">
       <h2 class="font-serif" style="font-size: 1.8rem; color: var(--dusty-rose-dark);">Save The Date</h2>
       
@@ -737,7 +810,31 @@
 
 </div>
 
+<!-- CUSTOM POP-UP MODAL PENGGANTI ALERT BROWSER -->
+<div id="custom-modal" class="custom-modal-overlay">
+  <div class="custom-modal-card">
+    <div id="custom-modal-icon" class="custom-modal-icon">
+      <i class="fa-solid fa-heart"></i>
+    </div>
+    <div id="custom-modal-title" class="custom-modal-title">Pemberitahuan</div>
+    <div id="custom-modal-msg" class="custom-modal-message">Pesan di sini...</div>
+    <button class="custom-modal-btn" onclick="closeCustomModal()">Tutup</button>
+  </div>
+</div>
+
 <script>
+  // FUNGSI CUSTOM MODAL POP-UP (MENGGANTIKAN ALERT BROWSER)
+  function showCustomModal(title, message, iconClass = "fa-solid fa-heart") {
+    document.getElementById('custom-modal-title').innerText = title;
+    document.getElementById('custom-modal-msg').innerText = message;
+    document.getElementById('custom-modal-icon').innerHTML = `<i class="${iconClass}"></i>`;
+    document.getElementById('custom-modal').classList.add('active');
+  }
+
+  function closeCustomModal() {
+    document.getElementById('custom-modal').classList.remove('active');
+  }
+
   // URL Parameter Nama Tamu
   const urlParams = new URLSearchParams(window.location.search);
   const guestName = urlParams.get('to');
@@ -772,7 +869,7 @@
         musicIcon.classList.add('music-spin');
         isPlaying = true;
       }).catch(err => {
-        alert("File kekal.mp3 tidak ditemukan.");
+        showCustomModal("Audio Error", "File kekal.mp3 tidak ditemukan.", "fa-solid fa-circle-exclamation");
       });
     }
   }
@@ -841,17 +938,17 @@
     }
   }, 1000);
 
-  // Salin Norek
+  // SALIN REKENING (MENGGUNAKAN CUSTOM MODAL)
   function copyText(elementId) {
     const text = document.getElementById(elementId).innerText;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(() => {
-        alert("Nomor rekening berhasil disalin: " + text);
+        showCustomModal("Tanda Kasih", `Nomor rekening berhasil disalin:\n${text}`, "fa-solid fa-copy");
       }).catch(() => {
-        prompt("Salin nomor rekening:", text);
+        showCustomModal("Salin Norek", `Nomor rekening: ${text}`, "fa-solid fa-copy");
       });
     } else {
-      prompt("Salin nomor rekening:", text);
+      showCustomModal("Salin Norek", `Nomor rekening: ${text}`, "fa-solid fa-copy");
     }
   }
 
@@ -912,10 +1009,10 @@
       });
       
       document.getElementById('input-ucapan').value = '';
-      alert('Terima kasih! Ucapan Anda telah tersimpan.');
+      showCustomModal("Terima Kasih", "Ucapan & doa Anda telah tersimpan.", "fa-solid fa-heart");
       loadWishesFromGoogleSheet();
     } catch (e) {
-      alert('Gagal mengirim ucapan, coba lagi nanti.');
+      showCustomModal("Gagal Mengirim", "Gagal mengirim ucapan, coba lagi nanti.", "fa-solid fa-triangle-exclamation");
     }
 
     btnSubmit.innerText = 'Kirim Ucapan';
