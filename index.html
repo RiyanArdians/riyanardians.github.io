@@ -40,9 +40,11 @@
       --text-dark: #3D2B2B;           
       --text-muted: #735757;          
       --border-color: rgba(216, 180, 180, 0.4);
-      --envelope-base: #6B4343;
-      --envelope-flap: #805050;
-      --envelope-pocket: #5B3838;
+      --envelope-base: #523535;
+      --envelope-flap: #7A4E4E;
+      --envelope-left: #633E3E;
+      --envelope-right: #5A3737;
+      --envelope-pocket: #4A2E2E;
     }
 
     * { 
@@ -115,28 +117,28 @@
       padding: 20px;
     }
 
-    /* BENTUK AMPLOP V2 DENGAN HIGHLIGHT BORDER ELEGAN */
+    /* BENTUK AMPLOP REALISTIS DENGAN DETAIL PINGGIRAN DIAGONAL */
     .envelope-box {
       position: relative; 
       width: 320px; 
-      height: 195px;
+      height: 200px;
       background-color: var(--envelope-base) !important; 
-      border-radius: 8px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.35); 
+      border-radius: 10px;
+      box-shadow: 0 18px 40px rgba(35, 20, 20, 0.45); 
       margin-bottom: 25px;
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       cursor: pointer;
       perspective: 1000px;
       overflow: hidden;
     }
 
-    /* KARTU UNDANGAN DI DALAM AMPLOP (AWALNYA OPACITY 0 AGAR TIDAK BOCOR PADA CELAH) */
+    /* KARTU UNDANGAN DI DALAM AMPLOP */
     .envelope-card-insert {
       position: absolute; 
-      top: 15px; 
+      top: 18px; 
       left: 15px;
       width: 290px; 
-      height: 165px;
+      height: 164px;
       background-color: #FFFFFF !important;
       border: 1px solid var(--dusty-rose-main);
       border-radius: 8px;
@@ -151,45 +153,61 @@
       transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
     }
 
-    /* KANTONG BAWAH AMPLOP V2 REALISTIS */
-    .envelope-pocket {
-      position: absolute; 
-      bottom: 0; 
-      left: 0;
-      width: 100%; 
-      height: 100%;
-      background: linear-gradient(135deg, var(--envelope-pocket) 0%, var(--envelope-base) 100%);
-      clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
-      z-index: 3;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    /* LIPATAN DIAGONAL KIRI */
+    .envelope-pocket-left {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--envelope-left) 0%, var(--envelope-base) 100%);
+      clip-path: polygon(0 0, 50% 52%, 0 100%);
+      z-index: 2;
     }
 
-    /* FLAP ATAS AMPLOP V2 */
+    /* LIPATAN DIAGONAL KANAN */
+    .envelope-pocket-right {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(225deg, var(--envelope-right) 0%, var(--envelope-base) 100%);
+      clip-path: polygon(100% 0, 50% 52%, 100% 100%);
+      z-index: 2;
+    }
+
+    /* LIPATAN DIAGONAL BAWAH (PINGGIRAN REALISTIS MEMBENTUK HURUF V DI BAWAH) */
+    .envelope-pocket-bottom {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(180deg, var(--envelope-pocket) 0%, var(--envelope-base) 100%);
+      clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+      z-index: 3;
+      filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.25));
+    }
+
+    /* FLAP ATAS DENGAN SHADOW REALISTIS */
     .envelope-top-flap {
       position: absolute; 
-      top: 0; 
-      left: 0;
-      width: 100%; 
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: linear-gradient(180deg, var(--envelope-flap) 0%, var(--envelope-base) 100%);
       clip-path: polygon(0 0, 100% 0, 50% 53%);
       transform-origin: top center;
       transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 10;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 5px 8px rgba(0,0,0,0.35));
     }
 
-    /* SEGEL LILIN EMAS DENGAN INISIAL R&A */
+    /* SEGEL EMAS R&A */
     .envelope-seal {
       position: absolute;
-      top: 102px;
+      top: 105px;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 46px;
       height: 46px;
-      background: linear-gradient(135deg, #EAD08B 0%, #B3927A 100%);
+      background: radial-gradient(circle at 30% 30%, #FFE8A3 0%, #B3927A 70%, #8C6D57 100%);
       border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.8);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.45), inset 0 2px 4px rgba(255,255,255,0.8);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -666,7 +684,7 @@
 
 <div class="app-viewport">
 
-  <!-- FRAME 1: AMPLOP POP-UP OVERLAY (DESAIN DARI V2 YANG PRESISI) -->
+  <!-- FRAME 1: AMPLOP POP-UP OVERLAY -->
   <div id="cover-overlay" class="cover-overlay">
     
     <div id="envelope-box" class="envelope-box" onclick="triggerOpenInvitation()">
@@ -682,7 +700,10 @@
         <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
       </div>
 
-      <div class="envelope-pocket"></div>
+      <!-- STRUKTUR PINGGIRAN DIAGONAL REALISTIS -->
+      <div class="envelope-pocket-left"></div>
+      <div class="envelope-pocket-right"></div>
+      <div class="envelope-pocket-bottom"></div>
     </div>
 
     <!-- TOMBOL BUKA UNDANGAN TERSTYLING -->
