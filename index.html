@@ -117,7 +117,7 @@
       padding: 20px;
     }
 
-    /* BOX AMPLOP UTAMACSS GEOMETRI PRESISI 310px x 200px */
+    /* BOX AMPLOP UTAMA */
     .envelope-box {
       position: relative; 
       width: 310px; 
@@ -132,13 +132,13 @@
       overflow: hidden;
     }
 
-    /* KARTU UNDANGAN DI DALAM AMPLOP */
+    /* KARTU UNDANGAN DI DALAM AMPLOP (AWALNYA DISEMBUNYIKAN 100%) */
     .envelope-card-insert {
       position: absolute; 
-      top: 18px; 
+      top: 20px; 
       left: 15px;
       width: 280px; 
-      height: 165px;
+      height: 160px;
       background-color: #FFFFFF !important;
       border: 1px solid var(--dusty-rose-main);
       border-radius: 10px;
@@ -146,13 +146,14 @@
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       z-index: 1; 
+      opacity: 0;
       display: flex; 
       flex-direction: column; 
       justify-content: center;
-      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
     }
 
-    /* KANTONG SAMPING KIRI AMPLOP (SUPAYA KIRI TERTUTUP RAPAT) */
+    /* KANTONG SAMPING KIRI AMPLOP */
     .envelope-side-left {
       position: absolute;
       top: 0;
@@ -165,7 +166,7 @@
       z-index: 2;
     }
 
-    /* KANTONG SAMPING KANAN AMPLOP (SUPAYA KANAN TERTUTUP RAPAT) */
+    /* KANTONG SAMPING KANAN AMPLOP */
     .envelope-side-right {
       position: absolute;
       top: 0;
@@ -192,7 +193,7 @@
       z-index: 3;
     }
 
-    /* FLAP ATAS AMPLOP (MENUTUP DARI ATAS SAMPAI TENGAH) */
+    /* FLAP ATAS AMPLOP (PANJANG 140px & Z-INDEX 10 AGAR MENUTUP DI PINGGIR PALING DEPAN) */
     .envelope-top-flap {
       position: absolute; 
       top: 0; 
@@ -201,17 +202,17 @@
       height: 0;
       border-left: 155px solid transparent; 
       border-right: 155px solid transparent;
-      border-top: 118px solid var(--envelope-flap); 
+      border-top: 140px solid var(--envelope-flap); 
       transform-origin: top center;
       transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 5;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+      z-index: 10;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
     }
 
-    /* SEGEL LILIN EMAS BERUBAH DARI F MENJADI R&A */
+    /* SEGEL LILIN EMAS R&A (Z-INDEX 11) */
     .envelope-seal {
       position: absolute;
-      top: 102px;
+      top: 122px;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 48px;
@@ -227,7 +228,7 @@
       font-weight: 700;
       font-size: 0.88rem;
       letter-spacing: -0.5px;
-      z-index: 6;
+      z-index: 11;
       border: 1.5px solid #FFFFFF;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
@@ -301,16 +302,20 @@
       transform: translate(-50%, -50%) scale(0.4);
     }
 
+    .envelope-box.open-flap .envelope-card-insert {
+      opacity: 1;
+    }
+
     /* LANGKAH 1: KARTU NAIK DARI DALAM AMPLOP */
     .envelope-card-insert.step-1-up { 
       transform: translateY(-145px); 
-      z-index: 10; 
+      z-index: 20; 
     }
     
-    /* LANGKAH 2: KARTU BERADA DI TENGAH (DELAYS UNTUK BACA NAMA) */
+    /* LANGKAH 2: KARTU BERADA DI TENGAH (JEDA UNTUK BACA NAMA) */
     .envelope-card-insert.step-2-center { 
       transform: translateY(15px) scale(1.08); 
-      z-index: 20; 
+      z-index: 30; 
       box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
     }
     
