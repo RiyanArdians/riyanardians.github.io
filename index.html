@@ -43,6 +43,7 @@
       --envelope-base: #5A3B3B;
       --envelope-flap: #8C6262;
       --envelope-pocket: #734C4C;
+      --envelope-side: #6B4444;
       --gold-accent: #B3927A;
     }
 
@@ -116,7 +117,7 @@
       padding: 20px;
     }
 
-    /* BOX AMPLOP DENGAN UKURAN PERSISI */
+    /* BOX AMPLOP UTAMACSS GEOMETRI PRESISI 310px x 200px */
     .envelope-box {
       position: relative; 
       width: 310px; 
@@ -128,10 +129,70 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
       perspective: 1000px;
-      overflow: hidden; /* Mengunci agar kartu tidak meluber sebelum dibuka */
+      overflow: hidden;
     }
 
-    /* FLAP ATAS AMPLOP DIBUAT DENGAN TINGGI CUKUP UTK NUTUP RAPAT */
+    /* KARTU UNDANGAN DI DALAM AMPLOP */
+    .envelope-card-insert {
+      position: absolute; 
+      top: 18px; 
+      left: 15px;
+      width: 280px; 
+      height: 165px;
+      background-color: #FFFFFF !important;
+      border: 1px solid var(--dusty-rose-main);
+      border-radius: 10px;
+      padding: 14px 10px; 
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      z-index: 1; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
+    }
+
+    /* KANTONG SAMPING KIRI AMPLOP (SUPAYA KIRI TERTUTUP RAPAT) */
+    .envelope-side-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-top: 100px solid transparent;
+      border-bottom: 100px solid transparent;
+      border-left: 155px solid var(--envelope-side);
+      z-index: 2;
+    }
+
+    /* KANTONG SAMPING KANAN AMPLOP (SUPAYA KANAN TERTUTUP RAPAT) */
+    .envelope-side-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-top: 100px solid transparent;
+      border-bottom: 100px solid transparent;
+      border-right: 155px solid var(--envelope-side);
+      z-index: 2;
+    }
+
+    /* KANTONG BAWAH AMPLOP */
+    .envelope-pocket {
+      position: absolute; 
+      bottom: 0; 
+      left: 0;
+      width: 0; 
+      height: 0;
+      border-left: 155px solid var(--envelope-pocket); 
+      border-right: 155px solid var(--envelope-pocket);
+      border-top: 115px solid transparent; 
+      border-radius: 0 0 12px 12px;
+      z-index: 3;
+    }
+
+    /* FLAP ATAS AMPLOP (MENUTUP DARI ATAS SAMPAI TENGAH) */
     .envelope-top-flap {
       position: absolute; 
       top: 0; 
@@ -140,7 +201,7 @@
       height: 0;
       border-left: 155px solid transparent; 
       border-right: 155px solid transparent;
-      border-top: 130px solid var(--envelope-flap); 
+      border-top: 118px solid var(--envelope-flap); 
       transform-origin: top center;
       transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 5;
@@ -150,7 +211,7 @@
     /* SEGEL LILIN EMAS BERUBAH DARI F MENJADI R&A */
     .envelope-seal {
       position: absolute;
-      top: 115px;
+      top: 102px;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 48px;
@@ -169,40 +230,6 @@
       z-index: 6;
       border: 1.5px solid #FFFFFF;
       transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    /* KARTU UNDANGAN DIMASUKKAN LEBIH DALAM SUPAYA TERTUTUP 100% */
-    .envelope-card-insert {
-      position: absolute; 
-      top: 35px; 
-      left: 15px;
-      width: 280px; 
-      height: 155px;
-      background-color: #FFFFFF !important;
-      border: 1px solid var(--dusty-rose-main);
-      border-radius: 10px;
-      padding: 14px 10px; 
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      z-index: 1; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center;
-      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
-    }
-
-    /* KANTONG BAWAH AMPLOP DIPERBESAR SUPAYA KARTU TERTUTUP RAPAT */
-    .envelope-pocket {
-      position: absolute; 
-      bottom: 0; 
-      left: 0;
-      width: 0; 
-      height: 0;
-      border-left: 155px solid var(--envelope-pocket); 
-      border-right: 155px solid var(--envelope-pocket);
-      border-top: 130px solid transparent; 
-      border-radius: 0 0 12px 12px;
-      z-index: 3;
     }
 
     .guest-name-box {
@@ -261,7 +288,7 @@
     .btn-open-container.fade-btn { opacity: 0; transform: translateY(20px); pointer-events: none; }
     
     .envelope-box.open-flap {
-      overflow: visible; /* Buka overflow agar kartu bisa naik ke luar */
+      overflow: visible;
     }
 
     .envelope-box.open-flap .envelope-top-flap {
@@ -664,7 +691,7 @@
 
 <div class="app-viewport">
 
-  <!-- FRAME 1: AMPLOP POP-UP OVERLAY (TERTUTUP RAPI & SEGEL R&A) -->
+  <!-- FRAME 1: AMPLOP POP-UP OVERLAY (TERTUTUP SEMPURNA DARI SEMUA SISI) -->
   <div id="cover-overlay" class="cover-overlay">
     
     <div id="envelope-box" class="envelope-box" onclick="triggerOpenInvitation()">
@@ -680,6 +707,9 @@
         <div id="guest-name" class="guest-name-box">Tamu Undangan</div>
       </div>
 
+      <!-- KANTONG KIRI, KANAN, & BAWAH TERGABUNG MENUTUPI 100% -->
+      <div class="envelope-side-left"></div>
+      <div class="envelope-side-right"></div>
       <div class="envelope-pocket"></div>
     </div>
 
