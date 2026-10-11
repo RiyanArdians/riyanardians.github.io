@@ -40,7 +40,7 @@
       --text-dark: #3D2B2B;           
       --text-muted: #735757;          
       --border-color: rgba(216, 180, 180, 0.4);
-      --envelope-base: #614141;
+      --envelope-base: #5A3B3B;
       --envelope-flap: #8C6262;
       --envelope-pocket: #734C4C;
       --gold-accent: #B3927A;
@@ -103,7 +103,7 @@
     .music-spin { animation: spin 3s linear infinite; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* AMPLOP OVERLAY DENGAN STYLE V2 & TERTUTUP AWAL */
+    /* AMPLOP OVERLAY RESPONSIVE */
     .cover-overlay {
       position: fixed;
       top: 0; left: 50%; 
@@ -119,17 +119,18 @@
     .envelope-box {
       position: relative; 
       width: 310px; 
-      height: 200px;
+      height: 205px;
       background-color: var(--envelope-base) !important; 
       border-radius: 12px;
-      box-shadow: 0 20px 45px rgba(61, 43, 43, 0.4); 
+      box-shadow: 0 20px 45px rgba(61, 43, 43, 0.45); 
       margin-bottom: 25px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
       perspective: 1000px;
+      overflow: visible;
     }
 
-    /* FLAP ATAS AMPLOP DENGAN TRANSISI BUKA (V2) */
+    /* FLAP ATAS AMPLOP (NUTUP SEMPURNA SAMPAI BAWAH) */
     .envelope-top-flap {
       position: absolute; 
       top: 0; 
@@ -138,57 +139,58 @@
       height: 0;
       border-left: 155px solid transparent; 
       border-right: 155px solid transparent;
-      border-top: 108px solid var(--envelope-flap); 
+      border-top: 122px solid var(--envelope-flap); 
       transform-origin: top center;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 4;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 5;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
     }
 
     /* SEGEL LILIN EMAS BERUBAH DARI F MENJADI R&A */
     .envelope-seal {
       position: absolute;
-      top: 92px;
+      top: 108px;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       background: linear-gradient(135deg, #E2C275 0%, #B3927A 100%);
       border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.35), inset 0 2px 4px rgba(255,255,255,0.6);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.7);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #3D2B2B;
       font-family: 'Cormorant Garamond', serif;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       letter-spacing: -0.5px;
-      z-index: 5;
+      z-index: 6;
       border: 1.5px solid #FFFFFF;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    /* KARTU UNDANGAN DI DALAM AMPLOP */
+    /* KARTU UNDANGAN TERSIMPANDAN TERTUTUP SEMPURNA DI DALAM */
     .envelope-card-insert {
       position: absolute; 
-      top: 10px; 
+      top: 25px; 
       left: 15px;
       width: 280px; 
-      height: 180px;
+      height: 165px;
       background-color: #FFFFFF !important;
       border: 1px solid var(--dusty-rose-main);
       border-radius: 10px;
       padding: 16px 12px; 
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      z-index: 2; 
+      z-index: 1; 
       display: flex; 
       flex-direction: column; 
       justify-content: center;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
     }
 
+    /* KANTONG BAWAH AMPLOP */
     .envelope-pocket {
       position: absolute; 
       bottom: 0; 
@@ -197,7 +199,7 @@
       height: 0;
       border-left: 155px solid var(--envelope-pocket); 
       border-right: 155px solid var(--envelope-pocket);
-      border-top: 102px solid transparent; 
+      border-top: 112px solid transparent; 
       border-radius: 0 0 12px 12px;
       z-index: 3;
     }
@@ -254,7 +256,7 @@
       100% { left: 130%; }
     }
 
-    /* TAHAPAN ANIMASI AMPLOP (PULL & ZOOM DARI V2) */
+    /* ANIMASI TAHAPAN BUKA AMPLOP */
     .btn-open-container.fade-btn { opacity: 0; transform: translateY(20px); pointer-events: none; }
     
     .envelope-box.open-flap .envelope-top-flap {
@@ -264,22 +266,25 @@
 
     .envelope-box.open-flap .envelope-seal {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.5);
+      transform: translate(-50%, -50%) scale(0.4);
     }
 
+    /* LANGKAH 1: KARTU NAIK DARI DALAM AMPLOP */
     .envelope-card-insert.step-1-up { 
-      transform: translateY(-120px); 
-      z-index: 5; 
-    }
-    
-    .envelope-card-insert.step-2-center { 
-      transform: translateY(15px); 
+      transform: translateY(-135px); 
       z-index: 10; 
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25); 
     }
     
+    /* LANGKAH 2: KARTU BERADA DI TENGAH (DIBERIKAN DELAY BACA NAMA) */
+    .envelope-card-insert.step-2-center { 
+      transform: translateY(15px) scale(1.08); 
+      z-index: 20; 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
+    }
+    
+    /* LANGKAH 3: ZOOM MASUK KE DALAM ISI UNDANGAN */
     .envelope-card-insert.step-3-zoom { 
-      transform: translateY(15px) scale(3.5); 
+      transform: translateY(15px) scale(3.8); 
       opacity: 0; 
     }
     
@@ -654,7 +659,7 @@
 
 <div class="app-viewport">
 
-  <!-- FRAME 1: AMPLOP POP-UP OVERLAY (STYLING V2 & SEGEL R&A TERTUTUP) -->
+  <!-- FRAME 1: AMPLOP POP-UP OVERLAY (TERTUTUP RAPI & SEGEL R&A) -->
   <div id="cover-overlay" class="cover-overlay">
     
     <div id="envelope-box" class="envelope-box" onclick="triggerOpenInvitation()">
@@ -936,7 +941,7 @@
 </div>
 
 <script>
-  // FUNGSI CUSTOM MODAL POP-UP (MENGGANTIKAN ALERT BROWSER)
+  // FUNGSI CUSTOM MODAL POP-UP
   function showCustomModal(title, message, iconClass = "fa-solid fa-heart") {
     document.getElementById('custom-modal-title').innerText = title;
     document.getElementById('custom-modal-msg').innerText = message;
@@ -987,7 +992,7 @@
     }
   }
 
-  // LOGIKA DAN ANIMASI PEMBUKAAN AMPLOP V2
+  // ANIMASI PEMBUKAAN AMPLOP DENGAN JEDA BACA NAMA TAMU
   let isEnvelopeOpened = false;
 
   function triggerOpenInvitation() {
@@ -1002,27 +1007,27 @@
     const cardInsert = document.getElementById('card-insert');
     const coverOverlay = document.getElementById('cover-overlay');
 
-    // 1. Lipatan atas membukakan animasi rotateX & segel emas menghilang
+    // 1. Lipatan atas terkelupas terbuka & tombol hilang
     envelopeBox.classList.add('open-flap');
     btnContainer.classList.add('fade-btn');
 
     // 2. Kartu tertarik naik ke atas keluar dari dalam amplop
     setTimeout(() => {
       cardInsert.classList.add('step-1-up');
-    }, 400);
+    }, 450);
 
-    // 3. Kartu berpindah posisi meluncur ke tengah
+    // 3. Kartu meluncur ke tengah layar (Diberikan waktu jeda agar tamu membaca nama)
     setTimeout(() => {
       cardInsert.classList.remove('step-1-up');
       cardInsert.classList.add('step-2-center');
-    }, 1000);
+    }, 1100);
 
-    // 4. Zoom masuk ke dalam konten utama undangan
+    // 4. Setelah tamu membaca nama di tengah (Delay 1.8 detik), barulah melakukan Zoom In
     setTimeout(() => {
       cardInsert.classList.add('step-3-zoom');
       coverOverlay.classList.add('fade-out');
       initScrollReveal();
-    }, 1600);
+    }, 2900); // 1100ms + 1800ms jeda baca = 2900ms
   }
 
   // Scroll Reveal
